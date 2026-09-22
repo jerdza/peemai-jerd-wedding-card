@@ -1,5 +1,5 @@
 (function () {
-  const LINE_OA_URL = "https://line.me/R/ti/p/%40210dgcif";
+  const LINE_OA_URL = "https://lin.ee/sxbG25o3";
   const STORAGE = {
     rsvp: "peemai-jerd-rsvp",
     book: "peemai-jerd-guestbook",
