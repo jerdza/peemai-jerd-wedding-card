@@ -502,9 +502,7 @@
 
         <a
           id="rsvp-link"
-          href="https://line.me/R/ti/p/@210dgcif"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="https://line.me/R/ti/p/%40210dgcif"
           class="mt-8 inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-leaf px-8 py-4 text-base font-medium text-petal shadow-lg shadow-leaf/30 hover:bg-[#7e8d75] transition"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -656,9 +654,15 @@
         });
       }
 
-      const LINE_OA_URL = "https://line.me/R/ti/p/@210dgcif";
+      const LINE_OA_URL = "https://line.me/R/ti/p/%40210dgcif";
       const rsvpLink = document.getElementById("rsvp-link");
-      if (rsvpLink) rsvpLink.href = LINE_OA_URL;
+      if (rsvpLink) {
+        rsvpLink.href = LINE_OA_URL;
+        rsvpLink.addEventListener("click", function (event) {
+          event.preventDefault();
+          window.location.href = LINE_OA_URL;
+        });
+      }
 
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");

@@ -1,5 +1,5 @@
 (function () {
-  const LINE_OA_URL = "https://line.me/R/ti/p/@210dgcif";
+  const LINE_OA_URL = "https://line.me/R/ti/p/%40210dgcif";
   const STORAGE = {
     rsvp: "peemai-jerd-rsvp",
     book: "peemai-jerd-guestbook",
@@ -144,8 +144,14 @@
     });
   }
 
-  document.querySelectorAll("[data-line-oa]").forEach(function (el) {
+  function openLineOa(event) {
+    if (event) event.preventDefault();
+    window.location.href = LINE_OA_URL;
+  }
+
+  document.querySelectorAll("[data-line-oa], #rsvp-link").forEach(function (el) {
     el.setAttribute("href", LINE_OA_URL);
+    el.addEventListener("click", openLineOa);
   });
 
   const lightbox = document.getElementById("lightbox");
