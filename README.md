@@ -1,1 +1,1 @@
-# peemai-jerd-my-wedding-card
+# peemai-jerd-wedding-card
