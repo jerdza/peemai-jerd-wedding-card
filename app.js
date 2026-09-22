@@ -1,5 +1,5 @@
 (function () {
-  const LINE_OA_WEB = "https://lin.ee/sxbG25o3";
+  const LINE_OA_WEB = "https://lin.ee/weqj9YO";
   const LINE_OA_ID = "@389twmwk";
   const STORAGE = {
     rsvp: "peemai-jerd-rsvp",
