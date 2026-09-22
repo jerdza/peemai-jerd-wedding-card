@@ -1,5 +1,7 @@
 (function () {
-  const LINE_OA_URL = "https://lin.ee/sxbG25o3";
+  const LINE_OA_WEB = "https://lin.ee/sxbG25o3";
+  const LINE_OA_SCHEME = "line://ti/p/@389twmwk";
+  const LINE_OA_HTTPS = "https://line.me/R/ti/p/@389twmwk";
   const STORAGE = {
     rsvp: "peemai-jerd-rsvp",
     book: "peemai-jerd-guestbook",
@@ -144,13 +146,24 @@
     });
   }
 
+  function isLineInAppBrowser() {
+    return /Line\//i.test(navigator.userAgent);
+  }
+
   function openLineOa(event) {
     if (event) event.preventDefault();
-    window.location.href = LINE_OA_URL;
+    if (isLineInAppBrowser()) {
+      window.location.href = LINE_OA_SCHEME;
+      setTimeout(function () {
+        window.location.href = LINE_OA_HTTPS;
+      }, 700);
+      return;
+    }
+    window.location.href = LINE_OA_WEB;
   }
 
   document.querySelectorAll("[data-line-oa], #rsvp-link").forEach(function (el) {
-    el.setAttribute("href", LINE_OA_URL);
+    el.setAttribute("href", LINE_OA_WEB);
     el.addEventListener("click", openLineOa);
   });
 

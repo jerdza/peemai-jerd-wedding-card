@@ -654,14 +654,30 @@
         });
       }
 
-      const LINE_OA_URL = "https://lin.ee/sxbG25o3";
+      const LINE_OA_WEB = "https://lin.ee/sxbG25o3";
+      const LINE_OA_SCHEME = "line://ti/p/@389twmwk";
+      const LINE_OA_HTTPS = "https://line.me/R/ti/p/@389twmwk";
       const rsvpLink = document.getElementById("rsvp-link");
+
+      function isLineInAppBrowser() {
+        return /Line\//i.test(navigator.userAgent);
+      }
+
+      function openLineOa(event) {
+        if (event) event.preventDefault();
+        if (isLineInAppBrowser()) {
+          window.location.href = LINE_OA_SCHEME;
+          setTimeout(function () {
+            window.location.href = LINE_OA_HTTPS;
+          }, 700);
+          return;
+        }
+        window.location.href = LINE_OA_WEB;
+      }
+
       if (rsvpLink) {
-        rsvpLink.href = LINE_OA_URL;
-        rsvpLink.addEventListener("click", function (event) {
-          event.preventDefault();
-          window.location.href = LINE_OA_URL;
-        });
+        rsvpLink.href = LINE_OA_WEB;
+        rsvpLink.addEventListener("click", openLineOa);
       }
 
       const lightbox = document.getElementById("lightbox");
