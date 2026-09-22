@@ -1,7 +1,6 @@
 (function () {
   const LINE_OA_WEB = "https://lin.ee/sxbG25o3";
-  const LINE_OA_SCHEME = "line://ti/p/@389twmwk";
-  const LINE_OA_HTTPS = "https://line.me/R/ti/p/@389twmwk";
+  const LINE_OA_ID = "@389twmwk";
   const STORAGE = {
     rsvp: "peemai-jerd-rsvp",
     book: "peemai-jerd-guestbook",
@@ -151,12 +150,10 @@
   }
 
   function openLineOa(event) {
-    if (event) event.preventDefault();
     if (isLineInAppBrowser()) {
-      window.location.href = LINE_OA_SCHEME;
-      setTimeout(function () {
-        window.location.href = LINE_OA_HTTPS;
-      }, 700);
+      event.preventDefault();
+      const box = document.getElementById("rsvp");
+      if (box) box.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
     window.location.href = LINE_OA_WEB;
@@ -166,6 +163,18 @@
     el.setAttribute("href", LINE_OA_WEB);
     el.addEventListener("click", openLineOa);
   });
+
+  const copyOaId = document.getElementById("copy-oa-id");
+  if (copyOaId) {
+    copyOaId.addEventListener("click", function () {
+      navigator.clipboard.writeText(LINE_OA_ID).then(function () {
+        copyOaId.textContent = "คัดลอกแล้ว";
+        setTimeout(function () {
+          copyOaId.textContent = "คัดลอกไอดี";
+        }, 1400);
+      });
+    });
+  }
 
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
