@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v11</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v12</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <p id="line-wait" class="px-6 pt-16 text-center text-sm text-moss">กำลังเปิดฟอร์มจาก LINE...</p>
       <section id="line-gate" class="hidden px-6 pt-8 text-center">
@@ -157,6 +157,7 @@
       let plan = "";
       let editToken = "";
       let saveId = "";
+      let saving = false;
 
       function createSaveId() {
         if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -196,7 +197,14 @@
         if (!attending) missing.push("เลือกสะดวกหรือไม่สะดวก");
         else if (coming && !plan) missing.push("เลือกวันงาน");
         const hint = document.getElementById("need-hint");
-        hint.textContent = missing.join(" · ");
+        hint.textContent = saving ? "" : missing.join(" · ");
+        if (saving) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "กรุณารอข้อความตอบรับ";
+          submitBtn.classList.remove("opacity-40");
+          return;
+        }
+        submitBtn.textContent = "บันทึก";
         submitBtn.disabled = !ready;
         submitBtn.classList.toggle("opacity-40", !ready);
       }
@@ -275,8 +283,11 @@
 
       form.addEventListener("submit", async function (event) {
         event.preventDefault();
+        if (saving) return;
         const name = document.getElementById("name").value.trim();
         const phone = document.getElementById("phone").value.trim();
+        const guests = attending === "yes" ? document.getElementById("guests").value.trim() || "1" : "0";
+        const note = document.getElementById("message").value.trim();
         if (!name || phone.replace(/\D/g, "").length < 9 || !attending || (attending === "yes" && !plan)) {
           errorEl.textContent = "กรอกชื่อ เบอร์ติดต่อ เลือกความสะดวก และวันงานให้ครบนะคะ";
           errorEl.classList.remove("hidden");
@@ -284,8 +295,10 @@
         }
 
         errorEl.classList.add("hidden");
+        saving = true;
         submitBtn.disabled = true;
-        submitBtn.textContent = "กำลังบันทึก...";
+        submitBtn.textContent = "กรุณารอข้อความตอบรับ";
+        submitBtn.classList.remove("opacity-40");
 
         try {
           const response = await fetch(RSVP_API, {
@@ -299,8 +312,8 @@
               phone: phone,
               attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
               plan: attending === "yes" ? plan : "-",
-              guests: attending === "yes" ? document.getElementById("guests").value.trim() || "1" : "0",
-              note: document.getElementById("message").value.trim() || "-",
+              guests: guests,
+              note: note || "-",
             }),
           });
           const data = await response.json().catch(function () {
@@ -309,19 +322,20 @@
           if (!response.ok || data.ok === false) {
             throw new Error(data.error || "บันทึกไม่สำเร็จ");
           }
+          saving = false;
           showDone({
             token: data.token || "",
             name: name,
             phone: phone,
             coming: attending === "yes",
             plan: plan,
-            guests: document.getElementById("guests").value.trim() || "1",
-            note: document.getElementById("message").value.trim(),
+            guests: guests,
+            note: note,
           });
         } catch (error) {
+          saving = false;
           errorEl.textContent = error && error.message ? error.message : "บันทึกไม่สำเร็จ ลองกดบันทึกอีกครั้งนะคะ";
           errorEl.classList.remove("hidden");
-          submitBtn.textContent = "บันทึก";
           renderChoices();
         }
       });
