@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v12</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v13</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <p id="line-wait" class="px-6 pt-16 text-center text-sm text-moss">กำลังเปิดฟอร์มจาก LINE...</p>
       <section id="line-gate" class="hidden px-6 pt-8 text-center">
@@ -202,15 +202,27 @@
           submitBtn.disabled = true;
           submitBtn.textContent = "กรุณารอข้อความตอบรับ";
           submitBtn.classList.remove("opacity-40");
+          lockForm(true);
           return;
         }
+        lockForm(false);
         submitBtn.textContent = "บันทึก";
         submitBtn.disabled = !ready;
         submitBtn.classList.toggle("opacity-40", !ready);
       }
 
+      function lockForm(locked) {
+        ["name", "phone", "guests", "message"].forEach(function (id) {
+          document.getElementById(id).disabled = locked;
+        });
+        document.querySelectorAll(".attend-btn, .plan-btn").forEach(function (btn) {
+          btn.disabled = locked;
+        });
+      }
+
       document.querySelectorAll(".attend-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
+          if (saving) return;
           attending = btn.getAttribute("data-attending");
           if (attending !== "yes") plan = "";
           renderChoices();
@@ -219,6 +231,7 @@
 
       document.querySelectorAll(".plan-btn").forEach(function (btn) {
         btn.addEventListener("click", function () {
+          if (saving) return;
           plan = btn.getAttribute("data-plan");
           renderChoices();
         });
@@ -264,6 +277,7 @@
       document.getElementById("edit-page").addEventListener("click", function () {
         document.getElementById("done-view").classList.add("hidden");
         document.getElementById("form-view").classList.remove("hidden");
+        saving = false;
         submitBtn.textContent = "บันทึก";
         renderChoices();
         window.scrollTo(0, 0);
@@ -296,6 +310,7 @@
 
         errorEl.classList.add("hidden");
         saving = true;
+        lockForm(true);
         submitBtn.disabled = true;
         submitBtn.textContent = "กรุณารอข้อความตอบรับ";
         submitBtn.classList.remove("opacity-40");
