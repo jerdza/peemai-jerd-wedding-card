@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v10</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v11</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <p id="line-wait" class="px-6 pt-16 text-center text-sm text-moss">กำลังเปิดฟอร์มจาก LINE...</p>
       <section id="line-gate" class="hidden px-6 pt-8 text-center">
@@ -262,9 +262,15 @@
       });
 
       document.getElementById("close-page").addEventListener("click", function () {
-        window.open("", "_self");
-        window.close();
-        document.getElementById("close-hint").classList.remove("hidden");
+        if (window.liff && liff.isInClient()) {
+          liff.closeWindow();
+        } else {
+          window.open("", "_self");
+          window.close();
+        }
+        window.setTimeout(function () {
+          document.getElementById("close-hint").classList.remove("hidden");
+        }, 400);
       });
 
       form.addEventListener("submit", async function (event) {
