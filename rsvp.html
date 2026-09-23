@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v3</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v4</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <section id="form-view">
         <header class="px-5 pb-2 pt-8 text-center">
@@ -51,6 +51,19 @@
               name="name"
               required
               placeholder="ชื่อของคุณ"
+              class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none placeholder:text-sage focus:border-leaf"
+            />
+          </div>
+
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <label class="mb-2 block text-xs font-semibold text-moss" for="phone">เบอร์ติดต่อ</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputmode="tel"
+              required
+              placeholder="08xxxxxxxx"
               class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none placeholder:text-sage focus:border-leaf"
             />
           </div>
@@ -152,7 +165,8 @@
         planCard.classList.toggle("hidden", !coming);
         guestsCard.classList.toggle("hidden", !coming);
         const nameOk = Boolean(document.getElementById("name").value.trim());
-        const ready = nameOk && attending && (!coming || plan);
+        const phoneOk = document.getElementById("phone").value.replace(/\D/g, "").length >= 9;
+        const ready = nameOk && phoneOk && attending && (!coming || plan);
         submitBtn.disabled = !ready;
         submitBtn.classList.toggle("opacity-40", !ready);
       }
@@ -173,6 +187,7 @@
       });
 
       document.getElementById("name").addEventListener("input", renderChoices);
+      document.getElementById("phone").addEventListener("input", renderChoices);
 
       function summaryRow(label, value) {
         const row = document.createElement("div");
@@ -193,7 +208,11 @@
           : "ขอบคุณที่บอกนะ เสียดายจังที่ไม่ได้เจอ";
         const summary = document.getElementById("done-summary");
         summary.replaceChildren();
-        summary.append(summaryRow("ชื่อ", entry.name), summaryRow("สถานะ", entry.coming ? "สะดวกมา" : "มาไม่ได้"));
+        summary.append(
+          summaryRow("ชื่อ", entry.name),
+          summaryRow("เบอร์", entry.phone),
+          summaryRow("สถานะ", entry.coming ? "สะดวกมา" : "มาไม่ได้")
+        );
         if (entry.coming) {
           summary.append(summaryRow("งาน", entry.plan), summaryRow("จำนวน", entry.guests + " คน"));
         }
@@ -211,8 +230,9 @@
       form.addEventListener("submit", async function (event) {
         event.preventDefault();
         const name = document.getElementById("name").value.trim();
-        if (!name || !attending || (attending === "yes" && !plan)) {
-          errorEl.textContent = "กรอกชื่อ เลือกความสะดวก และวันงานให้ครบนะคะ";
+        const phone = document.getElementById("phone").value.trim();
+        if (!name || phone.replace(/\D/g, "").length < 9 || !attending || (attending === "yes" && !plan)) {
+          errorEl.textContent = "กรอกชื่อ เบอร์ติดต่อ เลือกความสะดวก และวันงานให้ครบนะคะ";
           errorEl.classList.remove("hidden");
           return;
         }
@@ -227,6 +247,7 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               name: name,
+              phone: phone,
               attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
               plan: attending === "yes" ? plan : "-",
               guests: attending === "yes" ? document.getElementById("guests").value.trim() || "1" : "0",
@@ -241,6 +262,7 @@
           }
           showDone({
             name: name,
+            phone: phone,
             coming: attending === "yes",
             plan: plan,
             guests: document.getElementById("guests").value.trim() || "1",
