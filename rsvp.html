@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v8</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v9</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <section id="form-view">
         <header class="px-5 pb-2 pt-8 text-center">
@@ -148,6 +148,16 @@
       let attending = "";
       let plan = "";
       let editToken = "";
+      let saveId = "";
+
+      function createSaveId() {
+        if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (char) {
+          const rand = (Math.random() * 16) | 0;
+          const value = char === "x" ? rand : (rand & 0x3) | 0x8;
+          return value.toString(16);
+        });
+      }
 
       function selectedClass(on) {
         return on
@@ -269,6 +279,7 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               token: editToken,
+              saveId: saveId,
               name: name,
               phone: phone,
               attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
@@ -300,6 +311,7 @@
         }
       });
 
+      saveId = createSaveId();
       renderChoices();
     </script>
   </body>
