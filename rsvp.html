@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v7</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v8</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <section id="form-view">
         <header class="px-5 pb-2 pt-8 text-center">
@@ -118,7 +118,7 @@
           <p id="need-hint" class="text-center text-xs text-moss"></p>
 
           <button id="submit-btn" type="submit" disabled class="w-full rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white opacity-40">
-            ยืนยัน
+            บันทึก
           </button>
         </form>
       </section>
@@ -127,45 +127,10 @@
         <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-leaf text-2xl text-white">✓</div>
         <h2 class="mt-5 font-serif text-2xl">ขอบคุณที่ตอบรับ</h2>
         <p id="done-note" class="mt-3 text-sm leading-relaxed text-moss"></p>
-        <p class="mt-1 text-xs text-moss">แก้ได้ตรงนี้ก่อนปิดหน้า แล้วกดบันทึกการแก้ไข</p>
-        <form id="edit-form" class="mx-auto mt-6 max-w-sm space-y-3 text-left">
-          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
-            <label class="mb-2 block text-xs font-semibold text-moss" for="edit-name">ชื่อ</label>
-            <input id="edit-name" class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
-          </div>
-          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
-            <label class="mb-2 block text-xs font-semibold text-moss" for="edit-phone">เบอร์</label>
-            <input id="edit-phone" type="tel" inputmode="tel" class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
-          </div>
-          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
-            <p class="mb-3 text-xs font-semibold text-moss">สถานะ</p>
-            <div class="flex gap-2">
-              <button type="button" data-edit-attending="yes" class="edit-attend flex-1 rounded-xl border-2 border-sage py-2.5 text-sm font-semibold text-moss">สะดวก</button>
-              <button type="button" data-edit-attending="no" class="edit-attend flex-1 rounded-xl border-2 border-sage py-2.5 text-sm font-semibold text-moss">ไม่สะดวก</button>
-            </div>
-          </div>
-          <div id="edit-plan-card" class="rounded-2xl bg-white px-4 py-4 shadow-sm">
-            <p class="mb-3 text-xs font-semibold text-moss">งาน</p>
-            <div class="grid gap-2">
-              <button type="button" data-edit-plan="นครสวรรค์" class="edit-plan rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">นครสวรรค์</button>
-              <button type="button" data-edit-plan="กรุงเทพฯ" class="edit-plan rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">กรุงเทพฯ</button>
-              <button type="button" data-edit-plan="ทั้งสองวัน" class="edit-plan rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">ทั้งสองวัน</button>
-            </div>
-          </div>
-          <div id="edit-guests-card" class="rounded-2xl bg-white px-4 py-4 shadow-sm">
-            <label class="mb-2 block text-xs font-semibold text-moss" for="edit-guests">จำนวนคน</label>
-            <input id="edit-guests" type="number" min="1" class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
-          </div>
-          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
-            <label class="mb-2 block text-xs font-semibold text-moss" for="edit-message">ข้อความ</label>
-            <textarea id="edit-message" rows="3" class="w-full resize-none rounded-xl bg-petal/70 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-leaf/40"></textarea>
-          </div>
-          <p id="edit-error" class="hidden text-center text-xs text-blush"></p>
-          <p id="edit-saved" class="hidden text-center text-xs text-moss">บันทึกแล้ว ปิดหน้านี้ได้เลย</p>
-          <button id="save-edit" type="submit" class="w-full rounded-xl border-2 border-leaf bg-white py-3.5 text-sm font-semibold text-ink">
-            บันทึกการแก้ไข
-          </button>
-        </form>
+        <div id="done-summary" class="mx-auto mt-6 max-w-sm rounded-2xl bg-white px-4 py-4 text-left text-sm shadow-sm"></div>
+        <button id="edit-page" type="button" class="mt-8 w-full rounded-xl border-2 border-leaf bg-white py-3.5 text-sm font-semibold text-ink">
+          แก้ไขข้อมูล
+        </button>
         <button id="close-page" type="button" class="mt-3 w-full rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white">
           ปิดหน้านี้
         </button>
@@ -183,8 +148,6 @@
       let attending = "";
       let plan = "";
       let editToken = "";
-      let editAttending = "";
-      let editPlan = "";
 
       function selectedClass(on) {
         return on
@@ -238,106 +201,46 @@
       document.getElementById("name").addEventListener("input", renderChoices);
       document.getElementById("phone").addEventListener("input", renderChoices);
 
-      function renderEdit() {
-        const coming = editAttending === "yes";
-        document.querySelectorAll(".edit-attend").forEach(function (btn) {
-          btn.className =
-            "edit-attend flex-1 rounded-xl border-2 py-2.5 text-sm font-semibold transition " +
-            selectedClass(btn.getAttribute("data-edit-attending") === editAttending);
-        });
-        document.querySelectorAll(".edit-plan").forEach(function (btn) {
-          btn.className =
-            "edit-plan rounded-xl border-2 px-3 py-2.5 text-left text-sm font-semibold transition " +
-            selectedClass(btn.getAttribute("data-edit-plan") === editPlan);
-        });
-        document.getElementById("edit-plan-card").classList.toggle("hidden", !coming);
-        document.getElementById("edit-guests-card").classList.toggle("hidden", !coming);
-        document.getElementById("done-note").textContent = coming
-          ? "ดีใจมากเลยที่มาได้ เจอกันในงานนะ"
-          : "ขอบคุณที่บอกนะ เสียดายจังที่ไม่ได้เจอ";
+      function summaryRow(label, value) {
+        const row = document.createElement("div");
+        row.className = "flex gap-3 border-b border-petal py-2 last:border-0";
+        const name = document.createElement("span");
+        name.className = "w-24 shrink-0 text-moss";
+        name.textContent = label;
+        const detail = document.createElement("span");
+        detail.className = "font-medium";
+        detail.textContent = value;
+        row.append(name, detail);
+        return row;
       }
 
       function showDone(entry) {
-        editToken = entry.token || "";
-        editAttending = entry.coming ? "yes" : "no";
-        editPlan = entry.coming ? entry.plan : "";
-        document.getElementById("edit-name").value = entry.name;
-        document.getElementById("edit-phone").value = entry.phone;
-        document.getElementById("edit-guests").value = entry.guests || "1";
-        document.getElementById("edit-message").value = entry.note || "";
-        document.getElementById("edit-error").classList.add("hidden");
-        document.getElementById("edit-saved").classList.add("hidden");
-        renderEdit();
+        if (entry.token) editToken = entry.token;
+        document.getElementById("done-note").textContent = entry.coming
+          ? "ดีใจมากเลยที่มาได้ เจอกันในงานนะ"
+          : "ขอบคุณที่บอกนะ เสียดายจังที่ไม่ได้เจอ";
+        const summary = document.getElementById("done-summary");
+        summary.replaceChildren();
+        summary.append(
+          summaryRow("ชื่อ", entry.name),
+          summaryRow("เบอร์", entry.phone),
+          summaryRow("สถานะ", entry.coming ? "สะดวกมา" : "มาไม่ได้")
+        );
+        if (entry.coming) {
+          summary.append(summaryRow("งาน", entry.plan), summaryRow("จำนวน", entry.guests + " คน"));
+        }
+        if (entry.note) summary.append(summaryRow("ข้อความ", entry.note));
         document.getElementById("form-view").classList.add("hidden");
         document.getElementById("done-view").classList.remove("hidden");
+        window.scrollTo(0, 0);
       }
 
-      document.querySelectorAll(".edit-attend").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          editAttending = btn.getAttribute("data-edit-attending");
-          if (editAttending !== "yes") editPlan = "";
-          document.getElementById("edit-saved").classList.add("hidden");
-          renderEdit();
-        });
-      });
-
-      document.querySelectorAll(".edit-plan").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          editPlan = btn.getAttribute("data-edit-plan");
-          document.getElementById("edit-saved").classList.add("hidden");
-          renderEdit();
-        });
-      });
-
-      document.getElementById("edit-form").addEventListener("submit", async function (event) {
-        event.preventDefault();
-        const saveBtn = document.getElementById("save-edit");
-        const editError = document.getElementById("edit-error");
-        const name = document.getElementById("edit-name").value.trim();
-        const phone = document.getElementById("edit-phone").value.trim();
-        const coming = editAttending === "yes";
-        if (!editToken) {
-          editError.textContent = "รายการนี้แก้จากหน้านี้ไม่ได้แล้ว ปิดหน้าแล้วตอบรับใหม่ได้";
-          editError.classList.remove("hidden");
-          return;
-        }
-        if (!name || phone.replace(/\D/g, "").length < 9 || !editAttending || (coming && !editPlan)) {
-          editError.textContent = "กรอกชื่อ เบอร์ และวันที่มาให้ครบก่อนบันทึกนะคะ";
-          editError.classList.remove("hidden");
-          return;
-        }
-
-        editError.classList.add("hidden");
-        document.getElementById("edit-saved").classList.add("hidden");
-        saveBtn.disabled = true;
-        saveBtn.textContent = "กำลังบันทึก...";
-        try {
-          const response = await fetch(RSVP_API, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              token: editToken,
-              name: name,
-              phone: phone,
-              attending: coming ? "สะดวก" : "ไม่สะดวก",
-              plan: coming ? editPlan : "-",
-              guests: coming ? document.getElementById("edit-guests").value.trim() || "1" : "0",
-              note: document.getElementById("edit-message").value.trim() || "-",
-            }),
-          });
-          const data = await response.json().catch(function () {
-            return {};
-          });
-          if (!response.ok || data.ok === false) {
-            throw new Error(data.error || "บันทึกไม่สำเร็จ");
-          }
-          document.getElementById("edit-saved").classList.remove("hidden");
-        } catch (error) {
-          editError.textContent = error && error.message ? error.message : "บันทึกไม่สำเร็จ ลองอีกครั้งนะคะ";
-          editError.classList.remove("hidden");
-        }
-        saveBtn.disabled = false;
-        saveBtn.textContent = "บันทึกการแก้ไข";
+      document.getElementById("edit-page").addEventListener("click", function () {
+        document.getElementById("done-view").classList.add("hidden");
+        document.getElementById("form-view").classList.remove("hidden");
+        submitBtn.textContent = "บันทึก";
+        renderChoices();
+        window.scrollTo(0, 0);
       });
 
       document.getElementById("close-page").addEventListener("click", function () {
@@ -365,6 +268,7 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
+              token: editToken,
               name: name,
               phone: phone,
               attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
@@ -389,9 +293,9 @@
             note: document.getElementById("message").value.trim(),
           });
         } catch (error) {
-          errorEl.textContent = error && error.message ? error.message : "บันทึกไม่สำเร็จ ลองกดยืนยันอีกครั้งนะคะ";
+          errorEl.textContent = error && error.message ? error.message : "บันทึกไม่สำเร็จ ลองกดบันทึกอีกครั้งนะคะ";
           errorEl.classList.remove("hidden");
-          submitBtn.textContent = "ยืนยัน";
+          submitBtn.textContent = "บันทึก";
           renderChoices();
         }
       });
