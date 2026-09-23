@@ -111,19 +111,16 @@
       <section id="done-view" class="hidden px-6 pt-16 text-center">
         <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-leaf text-2xl text-white">✓</div>
         <h2 class="mt-5 font-serif text-2xl">ขอบคุณที่ตอบรับ</h2>
-        <p class="mt-2 text-sm leading-relaxed text-moss">กดปุ่มด้านล่างเพื่อกลับไปแชท ข้อความจะถูกใส่ให้แล้ว จากนั้นกดส่งใน LINE อีกครั้ง</p>
-        <a
-          id="send-line"
-          class="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white"
-          href="#"
-        >
-          ส่งคำตอบเข้า LINE
-        </a>
+        <p class="mt-2 text-sm leading-relaxed text-moss">บันทึกคำตอบให้ปีใหม่และเจิดแล้ว หน้านี้จะค้างไว้ กดปุ่มด้านล่างเมื่อต้องการปิด</p>
+        <button id="close-page" type="button" class="mt-8 w-full rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white">
+          ปิดหน้านี้
+        </button>
+        <p id="close-hint" class="mt-4 hidden text-xs leading-relaxed text-moss">ถ้าหน้านี้ยังไม่ปิด ให้กดเครื่องหมาย X มุมบนของ LINE</p>
       </section>
     </main>
 
     <script>
-      const LINE_OA_ID = "@389twmwk";
+      const RSVP_API = "https://peemai-jerd-wedding-line-bot.onrender.com/api/rsvp";
       const form = document.getElementById("rsvp-form");
       const submitBtn = document.getElementById("submit-btn");
       const errorEl = document.getElementById("error");
@@ -175,27 +172,13 @@
 
       document.getElementById("name").addEventListener("input", renderChoices);
 
-      function payloadText() {
-        const name = document.getElementById("name").value.trim();
-        const guests = document.getElementById("guests").value.trim() || "1";
-        const message = document.getElementById("message").value.trim() || "-";
-        return [
-          "RSVP",
-          "ชื่อ: " + name,
-          "สถานะ: " + (attending === "yes" ? "สะดวก" : "ไม่สะดวก"),
-          "งาน: " + (attending === "yes" ? plan : "-"),
-          "จำนวน: " + (attending === "yes" ? guests : "0"),
-          "ข้อความ: " + message,
-        ].join("\n");
-      }
+      document.getElementById("close-page").addEventListener("click", function () {
+        window.open("", "_self");
+        window.close();
+        document.getElementById("close-hint").classList.remove("hidden");
+      });
 
-      function lineUrl(text) {
-        const inLineApp = /Line\//i.test(navigator.userAgent);
-        const base = inLineApp ? "line://oaMessage/" : "https://line.me/R/oaMessage/";
-        return base + LINE_OA_ID + "/?" + encodeURIComponent(text);
-      }
-
-      form.addEventListener("submit", function (event) {
+      form.addEventListener("submit", async function (event) {
         event.preventDefault();
         const name = document.getElementById("name").value.trim();
         if (!name || !attending || (attending === "yes" && !plan)) {
@@ -203,11 +186,37 @@
           errorEl.classList.remove("hidden");
           return;
         }
-        const text = payloadText();
-        const url = lineUrl(text);
-        document.getElementById("send-line").href = url;
-        document.getElementById("form-view").classList.add("hidden");
-        document.getElementById("done-view").classList.remove("hidden");
+
+        errorEl.classList.add("hidden");
+        submitBtn.disabled = true;
+        submitBtn.textContent = "กำลังบันทึก...";
+
+        try {
+          const response = await fetch(RSVP_API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: name,
+              attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
+              plan: attending === "yes" ? plan : "-",
+              guests: attending === "yes" ? document.getElementById("guests").value.trim() || "1" : "0",
+              note: document.getElementById("message").value.trim() || "-",
+            }),
+          });
+          const data = await response.json().catch(function () {
+            return {};
+          });
+          if (!response.ok || data.ok === false) {
+            throw new Error(data.error || "บันทึกไม่สำเร็จ");
+          }
+          document.getElementById("form-view").classList.add("hidden");
+          document.getElementById("done-view").classList.remove("hidden");
+        } catch (error) {
+          errorEl.textContent = "บันทึกไม่สำเร็จ ลองกดยืนยันอีกครั้งนะคะ";
+          errorEl.classList.remove("hidden");
+          submitBtn.textContent = "ยืนยัน";
+          renderChoices();
+        }
       });
 
       renderChoices();
