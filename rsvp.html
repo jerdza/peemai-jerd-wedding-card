@@ -111,7 +111,7 @@
       <section id="done-view" class="hidden px-6 pt-16 text-center">
         <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-leaf text-2xl text-white">✓</div>
         <h2 class="mt-5 font-serif text-2xl">ขอบคุณที่ตอบรับ</h2>
-        <p class="mt-2 text-sm leading-relaxed text-moss">กำลังส่งคำตอบเข้าแชท LINE ให้ปีใหม่และเจิดนะคะ</p>
+        <p class="mt-2 text-sm leading-relaxed text-moss">กดปุ่มด้านล่างเพื่อกลับไปแชท ข้อความจะถูกใส่ให้แล้ว จากนั้นกดส่งใน LINE อีกครั้ง</p>
         <a
           id="send-line"
           class="mt-8 inline-flex w-full items-center justify-center rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white"
@@ -190,7 +190,9 @@
       }
 
       function lineUrl(text) {
-        return "https://line.me/R/oaMessage/" + encodeURIComponent(LINE_OA_ID) + "/?text=" + encodeURIComponent(text);
+        const inLineApp = /Line\//i.test(navigator.userAgent);
+        const base = inLineApp ? "line://oaMessage/" : "https://line.me/R/oaMessage/";
+        return base + LINE_OA_ID + "/?" + encodeURIComponent(text);
       }
 
       form.addEventListener("submit", function (event) {
@@ -206,7 +208,6 @@
         document.getElementById("send-line").href = url;
         document.getElementById("form-view").classList.add("hidden");
         document.getElementById("done-view").classList.remove("hidden");
-        window.location.href = url;
       });
 
       renderChoices();
