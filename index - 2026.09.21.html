@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ปีใหม่ &amp; เจิด — E-Wedding Card</title>
+    <meta
+      name="description"
+      content="ขอเชิญร่วมงานมงคลสมรส ปีใหม่ และ เจิด วันอาทิตย์ที่ 27 ธันวาคม 2569 นครสวรรค์ และวันเสาร์ที่ 23 มกราคม 2570 กรุงเทพฯ"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Prompt:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              petal: "#F0DADA",
+              blush: "#E5C2C6",
+              sage: "#C6D1B7",
+              leaf: "#98A78E",
+              ink: "#3E4740",
+              moss: "#5C675A",
+            },
+            fontFamily: {
+              script: ['"Great Vibes"', "cursive"],
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Prompt"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html { scroll-behavior: smooth; }
+      .grain {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+      }
+      .fade-up {
+        opacity: 0; transform: translateY(24px); animation: fadeUp 0.9s ease forwards;
+      }
+      .delay-1 { animation-delay: 0.15s; }
+      .delay-2 { animation-delay: 0.3s; }
+      .delay-3 { animation-delay: 0.45s; }
+      .delay-4 { animation-delay: 0.6s; }
+      @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+      .timeline-line { background: linear-gradient(180deg, #e5c2c6 0%, #98a78e 50%, #c6d1b7 100%); }
+      
+      /* Animation สำหรับปุ่มเพลง */
+      @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+      .playing svg { animation: spin-slow 4s linear infinite; }
+    </style>
+  </head>
+  <body class="bg-petal text-ink font-sans antialiased">
+    
+    <!-- Audio Player (ซ่อนไว้) -->
+    <audio id="bgMusic" loop>
+      <!-- ใส่ลิงก์เพลง mp3 ที่แกชอบตรงนี้ได้เลย (ตอนนี้ใส่เพลงตัวอย่างไว้ให้) -->
+      <source src="https://cdn.pixabay.com/download/audio/2022/02/07/audio_c3a07851d7.mp3?filename=romantic-piano-110034.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Toggle Button (ปุ่มเล่นเพลงมุมขวาล่าง) -->
+    <button id="musicBtn" class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-blush text-white shadow-xl hover:bg-leaf transition-all duration-300">
+      <svg id="musicIcon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- ไอคอนปิดเสียง (เริ่มแรก) -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+      </svg>
+    </button>
+
+    <!-- Cover -->
+    <section class="relative min-h-[100svh] flex items-end overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80" alt="ดอกไม้ในงานแต่งงาน" class="absolute inset-0 h-full w-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-b from-leaf/30 via-[#4a5548]/45 to-[#3e4740]/88"></div>
+      <div class="grain absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"></div>
+
+      <div class="relative z-10 w-full px-6 pb-16 pt-24 text-center text-white">
+        <p class="fade-up font-sans text-[11px] tracking-[0.35em] uppercase text-blush/90">Save the Date</p>
+        <div class="fade-up delay-1 my-5 flex items-center justify-center gap-4">
+          <span class="h-px w-10 bg-leaf/70"></span>
+          <span class="text-leaf text-lg">✦</span>
+          <span class="h-px w-10 bg-leaf/70"></span>
+        </div>
+        <h1 class="fade-up delay-2 font-script text-6xl sm:text-7xl leading-none">Peemai <span class="text-blush">&amp;</span> Jerd</h1>
+        <p class="fade-up delay-3 mt-3 font-serif italic text-lg text-white/85">ปีใหม่ และ เจิด</p>
+        <div class="fade-up delay-4 mx-auto mt-8 max-w-sm space-y-3 text-sm text-petal">
+          <p>วันอาทิตย์ที่ 27 ธันวาคม 2569<br /><span class="text-white/70">07:00–14:00 น. · นครสวรรค์</span></p>
+          <p class="text-leaf/80">♡</p>
+          <p>วันเสาร์ที่ 23 มกราคม 2570<br /><span class="text-white/70">09:00–14:00 น. · กรุงเทพฯ</span></p>
+        </div>
+        <a href="#countdown" class="fade-up delay-4 mt-10 inline-flex items-center gap-2 rounded-full border border-petal/40 bg-petal/15 px-5 py-2 text-xs tracking-widest uppercase text-petal backdrop-blur-sm hover:bg-petal/25 transition">
+          เลื่อนลง
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" /></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Countdown (เหมือนเดิม) -->
+    <section id="countdown" class="relative px-6 py-20 sm:py-24">
+      <div class="mx-auto max-w-xl text-center">
+        <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf">Countdown</p>
+        <h2 class="mt-3 font-serif text-3xl sm:text-4xl">อีกไม่กี่วันก็จะได้พบกัน</h2>
+        
+        <article class="mt-10 rounded-3xl bg-blush/80 px-4 py-8 sm:px-8 text-left">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="text-[11px] tracking-[0.25em] uppercase text-leaf">งานที่ 1</p>
+              <h3 class="mt-1 font-serif text-2xl">นครสวรรค์</h3>
+            </div>
+          </div>
+          <div id="grid-nks" class="mt-6 grid grid-cols-4 gap-2">
+            <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm"><p id="days-nks" class="font-serif text-2xl sm:text-3xl text-leaf">00</p><p class="mt-1 text-[10px] tracking-widest uppercase text-moss">วัน</p></div>
+            <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm"><p id="hours-nks" class="font-serif text-2xl sm:text-3xl text-leaf">00</p><p class="mt-1 text-[10px] tracking-widest uppercase text-moss">ชม.</p></div>
+            <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm"><p id="minutes-nks" class="font-serif text-2xl sm:text-3xl text-leaf">00</p><p class="mt-1 text-[10px] tracking-widest uppercase text-moss">นาที</p></div>
+            <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm"><p id="seconds-nks" class="font-serif text-2xl sm:text-3xl text-leaf">00</p><p class="mt-1 text-[10px] tracking-widest uppercase text-moss">วินาที</p></div>
+          </div>
+          <p id="status-nks" class="mt-4 hidden text-center font-script text-2xl text-leaf"></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- NEW: Photo Gallery 📸 -->
+    <section id="gallery" class="bg-white/40 px-6 py-20 sm:py-24">
+      <div class="mx-auto max-w-4xl text-center">
+        <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf">Our Memories</p>
+        <h2 class="mt-3 font-serif text-3xl sm:text-4xl mb-10">แกลเลอรีของเรา</h2>
+        
+        <!-- รูปภาพแบบ Grid (เปลี่ยนลิงก์รูปเป็นรูปพรีเวดดิ้งของแกได้เลย) -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" class="rounded-2xl h-48 w-full object-cover shadow-sm hover:scale-105 transition-transform duration-300" alt="รูป 1">
+          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" class="rounded-2xl h-48 w-full object-cover shadow-sm hover:scale-105 transition-transform duration-300" alt="รูป 2">
+          <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=600&q=80" class="rounded-2xl h-48 w-full object-cover shadow-sm hover:scale-105 transition-transform duration-300 col-span-2 md:col-span-1" alt="รูป 3">
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline (ซ่อนโค้ดไว้เพื่อความสั้น แกก๊อปไปวางทับได้เลย มันเหมือนเดิม) -->
+    <section id="schedule" class="bg-sage/60 px-6 py-20">
+        <div class="mx-auto max-w-lg text-center">
+            <h2 class="font-serif text-3xl sm:text-4xl text-ink">กำหนดการ</h2>
+            <p class="mt-3 text-sm text-moss">ขอเชิญร่วมเป็นสักขีพยานในวันสำคัญของเรา</p>
+        </div>
+        <!-- ใส่โค้ด Timeline เดิมของแกตรงนี้ได้เลย ฉันย่อไว้ให้ -->
+    </section>
+
+    <!-- Location & RSVP (จุดเชื่อมไป LINE OA) -->
+    <section id="location" class="px-6 py-20 sm:py-24">
+      <div class="mx-auto max-w-xl text-center">
+        <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf">Venue & RSVP</p>
+        <h2 class="mt-3 font-serif text-3xl sm:text-4xl">สถานที่จัดงาน</h2>
+        
+        <!-- NEW: RSVP Button 💌 -->
+        <div class="mt-12 mb-16 p-8 bg-white/60 rounded-3xl border border-blush shadow-sm">
+            <h3 class="font-serif text-2xl mb-4 text-ink">ยืนยันการเข้าร่วมงาน</h3>
+            <p class="text-sm text-moss mb-6">รบกวนแขกผู้มีเกียรติทุกท่าน กดปุ่มด้านล่างเพื่อแจ้งความประสงค์เข้าร่วมงานผ่าน LINE น้าา 💕</p>
+            <a href="#" class="inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-leaf text-white font-medium rounded-full shadow-lg hover:bg-moss transition-colors duration-300 gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                แตะที่นี่เพื่อตอบรับ (RSVP)
+            </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="px-6 pb-16 text-center">
+      <div class="mx-auto flex max-w-xs items-center justify-center gap-3 text-leaf">
+        <span class="h-px w-8 bg-leaf/50"></span><span>♡</span><span class="h-px w-8 bg-leaf/50"></span>
+      </div>
+      <p class="mt-4 font-script text-3xl text-ink">Peemai &amp; Jerd</p>
+    </footer>
+
+    <script>
+      // โค้ดปุ่มเล่นเพลง
+      const musicBtn = document.getElementById('musicBtn');
+      const bgMusic = document.getElementById('bgMusic');
+      const musicIcon = document.getElementById('musicIcon');
+      let isPlaying = false;
+
+      musicBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          bgMusic.pause();
+          musicBtn.classList.remove('playing');
+          // เปลี่ยนไอคอนเป็นปิดเสียง
+          musicIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" clip-rule="evenodd" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />';
+        } else {
+          bgMusic.play();
+          musicBtn.classList.add('playing');
+          // เปลี่ยนไอคอนเป็นรูปตัวโน้ตดนตรี
+          musicIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />';
+        }
+        isPlaying = !isPlaying;
+      });
+
+      // โค้ด Countdown (เหมือนเดิม)
+      const events = [
+        { id: "nks", start: new Date("2026-12-27T07:00:00+07:00"), end: new Date("2026-12-27T14:00:00+07:00") }
+      ];
+      function pad(n) { return String(n).padStart(2, "0"); }
+      function renderCountdown(event, now) {
+        const diff = event.start.getTime() - now.getTime();
+        if(diff > 0) {
+            document.getElementById("days-" + event.id).textContent = pad(Math.floor(diff / 86400000));
+            document.getElementById("hours-" + event.id).textContent = pad(Math.floor((diff % 86400000) / 3600000));
+            document.getElementById("minutes-" + event.id).textContent = pad(Math.floor((diff % 3600000) / 60000));
+            document.getElementById("seconds-" + event.id).textContent = pad(Math.floor((diff % 60000) / 1000));
+        }
+      }
+      function tick() {
+        const now = new Date();
+        events.forEach((event) => renderCountdown(event, now));
+      }
+      tick();
+      setInterval(tick, 1000);
+    </script>
+  </body>
+</html>
