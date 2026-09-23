@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v4</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v5</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <section id="form-view">
         <header class="px-5 pb-2 pt-8 text-center">
@@ -115,6 +115,7 @@
           </div>
 
           <p id="error" class="hidden text-center text-xs text-blush"></p>
+          <p id="need-hint" class="text-center text-xs text-moss"></p>
 
           <button id="submit-btn" type="submit" disabled class="w-full rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white opacity-40">
             ยืนยัน
@@ -167,6 +168,13 @@
         const nameOk = Boolean(document.getElementById("name").value.trim());
         const phoneOk = document.getElementById("phone").value.replace(/\D/g, "").length >= 9;
         const ready = nameOk && phoneOk && attending && (!coming || plan);
+        const missing = [];
+        if (!nameOk) missing.push("ใส่ชื่อ");
+        if (!phoneOk) missing.push("ใส่เบอร์อย่างน้อย 9 หลัก");
+        if (!attending) missing.push("เลือกสะดวกหรือไม่สะดวก");
+        else if (coming && !plan) missing.push("เลือกวันงาน");
+        const hint = document.getElementById("need-hint");
+        hint.textContent = missing.join(" · ");
         submitBtn.disabled = !ready;
         submitBtn.classList.toggle("opacity-40", !ready);
       }
