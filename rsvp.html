@@ -33,7 +33,21 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v13</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v14</p>
+    <style>
+      @keyframes wait-blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.45;
+        }
+      }
+      .is-waiting {
+        animation: wait-blink 1.2s ease-in-out infinite;
+      }
+    </style>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <p id="line-wait" class="px-6 pt-16 text-center text-sm text-moss">กำลังเปิดฟอร์มจาก LINE...</p>
       <section id="line-gate" class="hidden px-6 pt-8 text-center">
@@ -202,10 +216,12 @@
           submitBtn.disabled = true;
           submitBtn.textContent = "กรุณารอข้อความตอบรับ";
           submitBtn.classList.remove("opacity-40");
+          submitBtn.classList.add("is-waiting");
           lockForm(true);
           return;
         }
         lockForm(false);
+        submitBtn.classList.remove("is-waiting");
         submitBtn.textContent = "บันทึก";
         submitBtn.disabled = !ready;
         submitBtn.classList.toggle("opacity-40", !ready);
@@ -314,6 +330,7 @@
         submitBtn.disabled = true;
         submitBtn.textContent = "กรุณารอข้อความตอบรับ";
         submitBtn.classList.remove("opacity-40");
+        submitBtn.classList.add("is-waiting");
 
         try {
           const response = await fetch(RSVP_API, {
