@@ -33,9 +33,14 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v9</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v10</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
-      <section id="form-view">
+      <p id="line-wait" class="px-6 pt-16 text-center text-sm text-moss">กำลังเปิดฟอร์มจาก LINE...</p>
+      <section id="line-gate" class="hidden px-6 pt-8 text-center">
+        <h1 class="font-serif text-2xl">เปิดจากใน LINE</h1>
+        <p class="mt-3 text-sm leading-relaxed text-moss">ฟอร์มนี้กรอกได้จากเมนู RSVP ในแชทปีใหม่และเจิดเท่านั้น</p>
+      </section>
+      <section id="form-view" class="hidden">
         <header class="px-5 pb-2 pt-8 text-center">
           <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-leaf/20 text-2xl text-leaf">♡</div>
           <h1 class="mt-4 font-serif text-2xl">ตอบรับเข้าร่วมงาน</h1>
@@ -138,8 +143,11 @@
       </section>
     </main>
 
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script>
       const RSVP_API = "https://peemai-jerd-wedding-line-bot.onrender.com/api/rsvp";
+      const LIFF_ID = "2011707656-R7Z7Hn5y";
+      let lineAccessToken = "";
       const form = document.getElementById("rsvp-form");
       const submitBtn = document.getElementById("submit-btn");
       const errorEl = document.getElementById("error");
@@ -280,6 +288,7 @@
             body: JSON.stringify({
               token: editToken,
               saveId: saveId,
+              lineAccessToken: lineAccessToken,
               name: name,
               phone: phone,
               attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
@@ -313,6 +322,26 @@
 
       saveId = createSaveId();
       renderChoices();
+
+      async function openInLine() {
+        const wait = document.getElementById("line-wait");
+        const gate = document.getElementById("line-gate");
+        const formView = document.getElementById("form-view");
+        try {
+          await liff.init({ liffId: LIFF_ID });
+          if (!liff.isInClient()) throw new Error("not in line");
+          lineAccessToken = liff.getAccessToken() || "";
+          if (!lineAccessToken) throw new Error("no token");
+          wait.classList.add("hidden");
+          formView.classList.remove("hidden");
+        } catch (error) {
+          wait.classList.add("hidden");
+          formView.classList.add("hidden");
+          gate.classList.remove("hidden");
+        }
+      }
+
+      openInLine();
     </script>
   </body>
 </html>
