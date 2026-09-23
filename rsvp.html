@@ -33,7 +33,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v5</p>
+    <p class="fixed right-3 top-3 z-10 text-[11px] tracking-wide text-moss/80">v6</p>
     <main class="mx-auto min-h-screen max-w-md pb-10">
       <section id="form-view">
         <header class="px-5 pb-2 pt-8 text-center">
@@ -277,7 +277,7 @@
             note: document.getElementById("message").value.trim(),
           });
         } catch (error) {
-          errorEl.textContent = "บันทึกไม่สำเร็จ ลองกดยืนยันอีกครั้งนะคะ";
+          errorEl.textContent = error && error.message ? error.message : "บันทึกไม่สำเร็จ ลองกดยืนยันอีกครั้งนะคะ";
           errorEl.classList.remove("hidden");
           submitBtn.textContent = "ยืนยัน";
           renderChoices();
