@@ -77,6 +77,10 @@
         background: linear-gradient(180deg, #e5c2c6 0%, #98a78e 50%, #c6d1b7 100%);
       }
 
+      .timeline-nks {
+        background: linear-gradient(180deg, #e6c97a 0%, #7eae78 36%, #f0a04a 68%, #ce8596 100%);
+      }
+
       .masonry {
         column-count: 2;
         column-gap: 0.75rem;
@@ -159,9 +163,9 @@
     <section id="invite" class="px-6 py-20 sm:py-24">
       <div class="mx-auto max-w-xl text-center">
         <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf" data-i18n="invite.eyebrow">คำเชิญ</p>
-        <div class="mt-10 flex flex-col items-center gap-6 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:items-start sm:gap-x-8">
+        <div class="mt-10 flex flex-col items-center gap-6">
           <p class="text-base leading-relaxed text-ink" data-i18n="invite.bride.parent">นางศิริกาญจน์ แพ่งเกษม</p>
-          <p class="font-serif text-sm text-leaf sm:pt-0.5" data-i18n="invite.and">และ</p>
+          <p class="font-serif text-sm text-leaf" data-i18n="invite.and">และ</p>
           <div class="space-y-2 text-base leading-relaxed text-ink">
             <p data-i18n="invite.groom.parent1">นายบุญเลิศ ลิขิตธรรมานุกูล</p>
             <p data-i18n="invite.groom.parent2">นางลีเซียม แซ่ชิ้ง</p>
@@ -265,57 +269,47 @@
           </div>
 
           <ol class="relative pl-2">
-            <span class="timeline-line absolute left-[27px] top-3 bottom-3 w-px"></span>
+            <span class="timeline-nks absolute left-[45px] top-4 bottom-4 w-px"></span>
 
-            <li class="relative mb-10 flex gap-5">
-              <div class="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-petal border border-blush text-leaf shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <li class="relative mb-8 flex gap-5">
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#e6c97a] bg-[#fff6d6]">
+                <img src="icons/schedule-monk.png" alt="" class="h-14 w-14 object-contain" />
               </div>
-              <div class="pt-2">
-                <p class="text-xs tracking-widest text-leaf" data-i18n="t.nks.1.time">07:00 น.</p>
+              <div class="pt-3">
+                <p class="text-xs tracking-widest text-[#b8893a]" data-i18n="t.nks.1.time">07:00 น.</p>
                 <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.1.title">พิธีสงฆ์</h4>
-                <p class="mt-1 text-sm text-moss leading-relaxed" data-i18n="t.nks.1.body">ทำบุญตักบาตรและสวดมนต์เพื่อความเป็นสิริมงคล</p>
               </div>
             </li>
 
-            <li class="relative mb-10 flex gap-5">
-              <div class="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-petal border border-blush text-leaf shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
+            <li class="relative mb-8 flex gap-5">
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#8fb58a] bg-[#eef6e8]">
+                <img src="icons/schedule-khanmak.png" alt="" class="h-14 w-14 object-contain" />
               </div>
-              <div class="pt-2">
-                <p class="text-xs tracking-widest text-leaf" data-i18n="t.nks.2.time">09:00 น.</p>
-                <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.2.title">พิธีหมั้น และรดน้ำสังข์</h4>
-                <p class="mt-1 text-sm text-moss leading-relaxed" data-i18n="t.nks.2.body">สู่ขอ รดน้ำสังข์ และรับพรจากญาติผู้ใหญ่</p>
+              <div class="pt-3">
+                <p class="text-xs tracking-widest text-[#3f7a4c]" data-i18n="t.nks.2.time">08:19 น.</p>
+                <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.2.title">แห่ขันหมาก</h4>
               </div>
             </li>
 
-            <li class="relative mb-10 flex gap-5">
-              <div class="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-petal border border-blush text-leaf shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+            <li class="relative mb-8 flex gap-5">
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0b070] bg-[#fff0e0]">
+                <img src="icons/schedule-rings.png" alt="" class="h-12 w-14 object-contain" />
               </div>
-              <div class="pt-2">
-                <p class="text-xs tracking-widest text-leaf" data-i18n="t.nks.3.time">11:00 น.</p>
-                <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.3.title">ฉลองมงคลสมรส</h4>
-                <p class="mt-1 text-sm text-moss leading-relaxed" data-i18n="t.nks.3.body">ร่วมรับประทานอาหารและอวยพรคู่บ่าวสาว</p>
+              <div class="pt-3">
+                <p class="text-xs tracking-widest text-[#e08a32]" data-i18n="t.nks.3.time">08:59 น.</p>
+                <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.3.title">พิธีหมั้น</h4>
+                <p class="mt-1 text-sm text-moss leading-relaxed" data-i18n="t.nks.3.body">ล่องแพ</p>
               </div>
             </li>
 
             <li class="relative flex gap-5">
-              <div class="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-leaf text-petal shadow-sm">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
-                </svg>
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center overflow-hidden rounded-full">
+                <img src="icons/schedule-meal.png?v=2" alt="" class="h-full w-full object-contain" />
               </div>
-              <div class="pt-2">
-                <p class="text-xs tracking-widest text-leaf" data-i18n="t.nks.4.time">14:00 น.</p>
-                <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.4.title">ปิดงาน</h4>
-                <p class="mt-1 text-sm text-moss leading-relaxed" data-i18n="t.nks.4.body">ขอบคุณแขกผู้มีเกียรติที่มาร่วมงานในวันนี้</p>
+              <div class="pt-3">
+                <p class="text-xs tracking-widest text-[#c4788c]" data-i18n="t.nks.4.time">11:30 น.</p>
+                <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.4.title">รับประทานอาหาร</h4>
+                <p class="mt-1 text-sm text-moss leading-relaxed" data-i18n="t.nks.4.body">หลังล่องแพ</p>
               </div>
             </li>
           </ol>
@@ -401,40 +395,22 @@
         <p class="mt-3 text-sm text-moss" data-i18n="venue.sub">สองจังหวัด สองวันแห่งความสุข</p>
 
         <div class="mt-10 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
-          <div id="nks-video" class="relative aspect-video w-full overflow-hidden bg-ink/20">
-            <button
-              type="button"
-              id="nks-play"
-              class="group absolute inset-0"
-              aria-label="เล่นวิดีโอบรรยากาศงาน นครสวรรค์"
-              data-i18n-aria="venue.play"
-            >
-              <img
-                src="https://img.youtube.com/vi/ULi50yOWMuE/hqdefault.jpg"
-                alt="วิดีโอบรรยากาศงาน นครสวรรค์"
-                data-i18n-alt="venue.video"
-                class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-              />
-              <span class="absolute inset-0 bg-ink/25"></span>
-              <span class="absolute inset-0 flex items-center justify-center">
-                <span class="flex h-14 w-14 items-center justify-center rounded-full bg-petal/95 text-leaf shadow-lg ring-1 ring-leaf/30 transition group-hover:scale-105">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="ml-0.5 h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5.14v13.72L19 12 8 5.14z" />
-                  </svg>
-                </span>
-              </span>
-            </button>
-          </div>
+          <img
+            src="phae-si-khwae.jpg"
+            alt="แพสี่แคว นครสวรรค์"
+            data-i18n-alt="venue.nks.photo"
+            class="h-52 w-full object-cover sm:h-64"
+          />
           <div class="px-6 py-7">
             <p class="text-[11px] tracking-[0.25em] uppercase text-leaf" data-i18n="day.label1">วันที่ 1</p>
-            <p class="place-script mt-2 font-script text-4xl text-leaf" data-i18n="place.nks">นครสวรรค์</p>
+            <p class="venue-brand mt-2 font-script-th text-4xl leading-snug text-leaf" data-i18n="venue.nks.name">แพสี่แคว สาขา 1</p>
             <p class="mt-1 font-serif text-lg" data-i18n="date.nks.long">วันอาทิตย์ที่ 27 ธันวาคม 2569</p>
             <p class="mt-3 text-sm leading-relaxed text-moss" data-i18n-html="venue.nks.detail">
               เวลา 07:00–14:00 น.<br />
-              จังหวัดนครสวรรค์
+              นครสวรรค์
             </p>
             <a
-              href="https://www.google.com/maps/search/?api=1&query=นครสวรรค์"
+              href="https://maps.app.goo.gl/FrosBUxFHFye94wh7"
               target="_blank"
               rel="noopener noreferrer"
               class="mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
@@ -443,7 +419,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span data-i18n="venue.nks.map">เปิดแผนที่นครสวรรค์</span>
+              <span data-i18n="venue.nks.map">เปิดแผนที่แพสี่แคว</span>
             </a>
           </div>
         </div>
@@ -535,28 +511,37 @@
 
         <div class="mx-auto mt-8 max-w-sm rounded-3xl bg-blush/70 px-5 py-6">
           <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=https%3A%2F%2Flin.ee%2FV26qbDC"
+            src="line-oa-qr.png"
             alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
             data-i18n-alt="rsvp.qr"
-            width="180"
-            height="180"
-            class="mx-auto rounded-2xl bg-petal p-2"
+            width="220"
+            height="220"
+            class="mx-auto rounded-2xl bg-white p-2"
           />
           <p class="mt-4 text-sm text-moss" data-i18n="rsvp.scan">ใน LINE ให้สแกน QR นี้ หรือค้นหาไอดี</p>
           <p class="mt-1 font-serif text-2xl">@389twmwk</p>
           <button type="button" id="copy-oa-id" class="mt-3 rounded-full bg-leaf px-5 py-2 text-sm text-petal" data-i18n="rsvp.copy">คัดลอกไอดี</button>
         </div>
-        <a
-          id="rsvp-link"
-          href="https://lin.ee/V26qbDC"
+        <button
+          type="button"
+          id="share-line-open"
           class="mt-5 inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-leaf px-8 py-4 text-base font-medium text-petal shadow-lg shadow-leaf/30 hover:bg-[#7e8d75] transition"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 3C6.48 3 2 6.94 2 11.74c0 2.3 1.18 4.37 3.03 5.8-.08.64-.5 2.3-.57 2.63-.08.4.15.4.32.29.14-.09 2.22-1.51 3.12-2.12A13.6 13.6 0 0 0 12 18.48c5.52 0 10-3.94 10-8.74S17.52 3 12 3z" />
           </svg>
-          <span data-i18n="rsvp.open">เปิด LINE OA จากเบราว์เซอร์อื่น</span>
-        </a>
-        <p class="mt-4 text-xs text-moss" data-i18n="rsvp.note">ปุ่มด้านบนใช้ได้เมื่อเปิดเว็บจาก Chrome / Safari นอก LINE</p>
+          <span data-i18n="rsvp.open">แชร์ลิงค์เพื่อกดแอดไลน์</span>
+        </button>
+        <div id="line-share-panel" class="mx-auto mt-4 hidden max-w-sm rounded-3xl bg-blush/70 px-5 py-5">
+          <p class="break-all font-sans text-sm leading-relaxed text-ink">https://line.me/R/ti/p/@389twmwk</p>
+          <button
+            type="button"
+            id="line-share-btn"
+            class="mt-4 inline-flex items-center justify-center rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
+          >
+            <span data-i18n="rsvp.share">แชร์</span>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -566,11 +551,6 @@
         <span>♡</span>
         <span class="h-px w-8 bg-leaf/50"></span>
       </div>
-      <p id="footer-names" class="mt-4 font-script-th text-4xl leading-snug text-ink">ปีใหม่ และ เจิด</p>
-      <p class="mt-2 text-xs tracking-[0.18em] text-moss" data-i18n-html="footer.dates">
-        27.12.2569 · นครสวรรค์<br />
-        23.01.2570 · กรุงเทพฯ
-      </p>
     </footer>
 
     <div
@@ -659,16 +639,14 @@
           "time.nks": "07:00–14:00 น.",
           "t.nks.1.time": "07:00 น.",
           "t.nks.1.title": "พิธีสงฆ์",
-          "t.nks.1.body": "ทำบุญตักบาตรและสวดมนต์เพื่อความเป็นสิริมงคล",
-          "t.nks.2.time": "09:00 น.",
-          "t.nks.2.title": "พิธีหมั้น และรดน้ำสังข์",
-          "t.nks.2.body": "สู่ขอ รดน้ำสังข์ และรับพรจากญาติผู้ใหญ่",
-          "t.nks.3.time": "11:00 น.",
-          "t.nks.3.title": "ฉลองมงคลสมรส",
-          "t.nks.3.body": "ร่วมรับประทานอาหารและอวยพรคู่บ่าวสาว",
-          "t.nks.4.time": "14:00 น.",
-          "t.nks.4.title": "ปิดงาน",
-          "t.nks.4.body": "ขอบคุณแขกผู้มีเกียรติที่มาร่วมงานในวันนี้",
+          "t.nks.2.time": "08:19 น.",
+          "t.nks.2.title": "แห่ขันหมาก",
+          "t.nks.3.time": "08:59 น.",
+          "t.nks.3.title": "พิธีหมั้น",
+          "t.nks.3.body": "ล่องแพ",
+          "t.nks.4.time": "11:30 น.",
+          "t.nks.4.title": "รับประทานอาหาร",
+          "t.nks.4.body": "หลังล่องแพ",
           "schedule.bkk.label": "วันที่ 2 · กรุงเทพฯ",
           "date.bkk.long": "วันเสาร์ที่ 23 มกราคม 2570",
           "time.bkk": "09:00–14:00 น.",
@@ -688,9 +666,10 @@
           "venue.title": "สถานที่จัดงาน",
           "venue.sub": "สองจังหวัด สองวันแห่งความสุข",
           "venue.video": "วิดีโอบรรยากาศงาน นครสวรรค์",
-          "venue.play": "เล่นวิดีโอบรรยากาศงาน นครสวรรค์",
-          "venue.nks.detail": "เวลา 07:00–14:00 น.<br />จังหวัดนครสวรรค์",
-          "venue.nks.map": "เปิดแผนที่นครสวรรค์",
+          "venue.nks.photo": "แพสี่แคว นครสวรรค์",
+          "venue.nks.name": "แพสี่แคว สาขา 1",
+          "venue.nks.detail": "เวลา 07:00–14:00 น.<br />นครสวรรค์",
+          "venue.nks.map": "เปิดแผนที่แพสี่แคว",
           "venue.bkk.photo": "ลาร์-มูน กรุงเทพฯ",
           "venue.bkk.name": "ลาร์-มูน",
           "venue.bkk.detail": "เวลา 09:00–14:00 น.<br />กรุงเทพฯ",
@@ -706,8 +685,9 @@
           "rsvp.scan": "ใน LINE ให้สแกน QR นี้ หรือค้นหาไอดี",
           "rsvp.copy": "คัดลอกไอดี",
           "rsvp.copied": "คัดลอกแล้ว",
-          "rsvp.open": "เปิด LINE OA จากเบราว์เซอร์อื่น",
-          "rsvp.note": "ปุ่มด้านบนใช้ได้เมื่อเปิดเว็บจาก Chrome / Safari นอก LINE",
+          "rsvp.open": "แชร์ลิงค์เพื่อกดแอดไลน์",
+          "rsvp.share": "แชร์",
+          "rsvp.shared": "คัดลอกลิงก์แล้ว",
           "footer.dates": "27.12.2569 · นครสวรรค์<br />23.01.2570 · กรุงเทพฯ",
           "lightbox.label": "ดูรูปขนาดใหญ่",
           "lightbox.close": "ปิด",
@@ -733,14 +713,14 @@
           footerNames: "Peemai & Jerd",
           "meta.title": "Peemai & Jerd — E-Wedding Card",
           "invite.eyebrow": "Invitation",
-          "invite.bride.parent": "Mrs. Sirikan Phaengkasem",
+          "invite.bride.parent": "Mrs. Sirigarn Phaengkasem",
           "invite.and": "and",
-          "invite.groom.parent1": "Mr. Boonlert Likhitthammanukul",
-          "invite.groom.parent2": "Mrs. Lisiam Sae Ching",
+          "invite.groom.parent1": "Mr. Boonlert Likittammanukul",
+          "invite.groom.parent2": "Mrs. Leesaim Sae-ching",
           "invite.line": "Request the honour of your presence at the marriage ceremony",
           "invite.between": "of",
           "invite.bride": "Miss Samanya Phaengkasem",
-          "invite.groom": "Mr. Bunjerd Likhitthammanukul",
+          "invite.groom": "Mr. Bunjerd Likitthammanukoon",
           "countdown.eyebrow": "Countdown",
           "countdown.title": "We will see you soon",
           "countdown.sub": "Counting down to both celebrations",
@@ -762,16 +742,14 @@
           "time.nks": "07:00–14:00",
           "t.nks.1.time": "07:00",
           "t.nks.1.title": "Buddhist ceremony",
-          "t.nks.1.body": "Morning alms giving and prayers for blessings",
-          "t.nks.2.time": "09:00",
-          "t.nks.2.title": "Engagement and blessing",
-          "t.nks.2.body": "The engagement, water blessing, and blessings from elders",
-          "t.nks.3.time": "11:00",
-          "t.nks.3.title": "Wedding celebration",
-          "t.nks.3.body": "A meal together and blessings for the couple",
-          "t.nks.4.time": "14:00",
-          "t.nks.4.title": "Farewell",
-          "t.nks.4.body": "Thank you for celebrating with us today",
+          "t.nks.2.time": "08:19",
+          "t.nks.2.title": "Khan Mak procession",
+          "t.nks.3.time": "08:59",
+          "t.nks.3.title": "Engagement",
+          "t.nks.3.body": "Raft cruise",
+          "t.nks.4.time": "11:30",
+          "t.nks.4.title": "Lunch",
+          "t.nks.4.body": "After the raft returns",
           "schedule.bkk.label": "Day 2 · Bangkok",
           "date.bkk.long": "Saturday, 23 January 2027",
           "time.bkk": "09:00–14:00",
@@ -791,9 +769,10 @@
           "venue.title": "Where we celebrate",
           "venue.sub": "Two cities, two days of joy",
           "venue.video": "Nakhon Sawan celebration film",
-          "venue.play": "Play the Nakhon Sawan film",
+          "venue.nks.photo": "Phae Si Khwae, Nakhon Sawan",
+          "venue.nks.name": "Phae Si Khwae Branch 1",
           "venue.nks.detail": "07:00–14:00<br />Nakhon Sawan",
-          "venue.nks.map": "Open the Nakhon Sawan map",
+          "venue.nks.map": "Open the Phae Si Khwae map",
           "venue.bkk.photo": "La-moon, Bangkok",
           "venue.bkk.name": "La-moon",
           "venue.bkk.detail": "09:00–14:00<br />Bangkok",
@@ -809,8 +788,9 @@
           "rsvp.scan": "In LINE, scan this QR or search the ID",
           "rsvp.copy": "Copy ID",
           "rsvp.copied": "Copied",
-          "rsvp.open": "Open LINE in another browser",
-          "rsvp.note": "The button works in Chrome or Safari, outside the LINE app",
+          "rsvp.open": "Share the link to add LINE",
+          "rsvp.share": "Share",
+          "rsvp.shared": "Link copied",
           "footer.dates": "27.12.2026 · Nakhon Sawan<br />23.01.2027 · Bangkok",
           "lightbox.label": "View photo",
           "lightbox.close": "Close",
@@ -898,14 +878,16 @@
         });
 
         const footerNames = document.getElementById("footer-names");
-        footerNames.textContent = copy.footerNames;
-        footerFontClasses.forEach(function (cls) {
-          footerNames.classList.remove(cls);
-        });
-        if (lang === "th") {
-          footerNames.classList.add("font-script-th", "text-4xl", "leading-snug");
-        } else {
-          footerNames.classList.add("font-script", "text-3xl");
+        if (footerNames) {
+          footerNames.textContent = copy.footerNames;
+          footerFontClasses.forEach(function (cls) {
+            footerNames.classList.remove(cls);
+          });
+          if (lang === "th") {
+            footerNames.classList.add("font-script-th", "text-4xl", "leading-snug");
+          } else {
+            footerNames.classList.add("font-script", "text-3xl");
+          }
         }
 
         events[0].live = copy["status.nks.live"];
@@ -1030,28 +1012,42 @@
         });
       }
 
-      const LINE_OA_WEB = "https://lin.ee/V26qbDC";
+      const LINE_ADD_URL = "https://line.me/R/ti/p/@389twmwk";
       const LINE_OA_ID = "@389twmwk";
-      const rsvpLink = document.getElementById("rsvp-link");
       const copyOaId = document.getElementById("copy-oa-id");
+      const shareLineOpen = document.getElementById("share-line-open");
+      const lineSharePanel = document.getElementById("line-share-panel");
+      const lineShareBtn = document.getElementById("line-share-btn");
 
-      function isLineInAppBrowser() {
-        return /Line\//i.test(navigator.userAgent);
+      if (shareLineOpen && lineSharePanel) {
+        shareLineOpen.addEventListener("click", function () {
+          lineSharePanel.classList.remove("hidden");
+        });
       }
 
-      function openLineOa(event) {
-        if (isLineInAppBrowser()) {
-          event.preventDefault();
-          const box = document.getElementById("rsvp");
-          if (box) box.scrollIntoView({ behavior: "smooth", block: "center" });
-          return;
-        }
-        window.location.href = LINE_OA_WEB;
+      function markLineLinkCopied() {
+        const label = lineShareBtn && lineShareBtn.querySelector("[data-i18n='rsvp.share']");
+        if (!label) return;
+        label.textContent = strings[cardLang]["rsvp.shared"];
+        clearTimeout(copyTimer);
+        copyTimer = setTimeout(function () {
+          label.textContent = strings[cardLang]["rsvp.share"];
+        }, 1400);
       }
 
-      if (rsvpLink) {
-        rsvpLink.href = LINE_OA_WEB;
-        rsvpLink.addEventListener("click", openLineOa);
+      if (lineShareBtn) {
+        lineShareBtn.addEventListener("click", function () {
+          if (navigator.share) {
+            navigator
+              .share({ url: LINE_ADD_URL })
+              .catch(function (err) {
+                if (err && err.name === "AbortError") return;
+                navigator.clipboard.writeText(LINE_ADD_URL).then(markLineLinkCopied);
+              });
+            return;
+          }
+          navigator.clipboard.writeText(LINE_ADD_URL).then(markLineLinkCopied);
+        });
       }
 
       if (copyOaId) {
