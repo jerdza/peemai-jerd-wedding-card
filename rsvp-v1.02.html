@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Prompt:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Prompt:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,6 +24,8 @@
               moss: "#5C675A",
             },
             fontFamily: {
+              script: ['"Great Vibes"', "cursive"],
+              "script-th": ['"Charmonman"', "cursive"],
               serif: ['"Playfair Display"', "serif"],
               sans: ['"Prompt"', "sans-serif"],
             },
@@ -67,7 +69,11 @@
           <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-leaf/20 text-2xl text-leaf">♡</div>
           <h1 class="mt-4 font-serif text-2xl" data-i18n="form.title">ตอบรับเข้าร่วมงาน</h1>
           <p class="mt-1 text-xs text-moss" data-i18n="form.sub">กรุณากรอกข้อมูลเพื่อยืนยันการเข้าร่วม</p>
-          <p class="mt-1 font-serif text-sm text-leaf" data-i18n="form.names">ปีใหม่ &amp; เจิด</p>
+          <p id="couple-names" class="mt-1 flex items-baseline justify-center gap-2 text-leaf">
+            <span id="couple-left" class="font-script-th text-3xl leading-snug">ปีใหม่</span>
+            <span class="font-serif text-sm">&amp;</span>
+            <span id="couple-right" class="font-script-th text-3xl leading-snug">เจิด</span>
+          </p>
         </header>
 
         <form id="rsvp-form" class="mx-4 mt-4 space-y-3">
@@ -211,7 +217,6 @@
           "gate.body": "ฟอร์มนี้กรอกได้จากเมนู RSVP ในแชทปีใหม่และเจิดเท่านั้น",
           "form.title": "ตอบรับเข้าร่วมงาน",
           "form.sub": "กรุณากรอกข้อมูลเพื่อยืนยันการเข้าร่วม",
-          "form.names": "ปีใหม่ & เจิด",
           "name.label": "ชื่อ-นามสกุล",
           "name.placeholder": "ชื่อ-นามสกุล",
           "known.label": "ชื่อที่รู้จัก",
@@ -265,7 +270,6 @@
           "gate.body": "This form can only be filled from the RSVP menu in the Peemai & Jerd chat.",
           "form.title": "RSVP",
           "form.sub": "Please fill in your details to confirm",
-          "form.names": "Peemai & Jerd",
           "name.label": "Full name",
           "name.placeholder": "Full name",
           "known.label": "Name we know you by",
@@ -338,6 +342,24 @@
         document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
           el.placeholder = t(el.getAttribute("data-i18n-placeholder"));
         });
+        const leftName = document.getElementById("couple-left");
+        const rightName = document.getElementById("couple-right");
+        const nameClasses = ["font-script", "font-script-th", "text-3xl", "text-4xl", "leading-snug", "leading-none"];
+        nameClasses.forEach(function (cls) {
+          leftName.classList.remove(cls);
+          rightName.classList.remove(cls);
+        });
+        if (lang === "th") {
+          leftName.textContent = "ปีใหม่";
+          rightName.textContent = "เจิด";
+          leftName.classList.add("font-script-th", "text-3xl", "leading-snug");
+          rightName.classList.add("font-script-th", "text-3xl", "leading-snug");
+        } else {
+          leftName.textContent = "Peemai";
+          rightName.textContent = "Jerd";
+          leftName.classList.add("font-script", "text-4xl", "leading-none");
+          rightName.classList.add("font-script", "text-4xl", "leading-none");
+        }
         const toggle = document.getElementById("lang-toggle");
         toggle.textContent = t("lang.button");
         toggle.setAttribute("aria-label", t("lang.label"));
