@@ -158,9 +158,9 @@
           มีความยินดีขอเรียนเชิญท่านเพื่อเป็นเกียรติเนื่องในพิธีมงคลสมรส
         </p>
         <p class="mt-4 text-xs tracking-[0.28em] text-leaf" data-i18n="invite.between">ระหว่าง</p>
-        <h2 class="mt-8 font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">นางสาวสมัณญา แพ่งเกษม</h2>
+        <h2 class="couple-name mt-8 font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">นางสาวสมัณญา แพ่งเกษม</h2>
         <p class="mt-6 mb-2 font-script text-5xl leading-none text-blush">&amp;</p>
-        <h2 class="font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">นายบรรเจิด ลิขิตธรรมานุกูล</h2>
+        <h2 class="couple-name font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">นายบรรเจิด ลิขิตธรรมานุกูล</h2>
       </div>
     </section>
 
@@ -630,7 +630,7 @@
         },
         en: {
           names: 'Peemai <span class="text-blush">&amp;</span> Jerd',
-          nameFont: ["font-script", "text-7xl", "sm:text-8xl", "leading-none"],
+          nameFont: ["font-script", "text-5xl", "sm:text-7xl", "leading-none"],
           kicker: "Save the Date",
           nksDate: "Sunday, 27 December 2026",
           nksMeta: "07:00–14:00 · Nakhon Sawan",
@@ -793,6 +793,10 @@
           el.classList.toggle("text-4xl", lang === "th");
           el.classList.toggle("font-serif", lang === "en");
           el.classList.toggle("text-3xl", lang === "en");
+        });
+        document.querySelectorAll(".couple-name").forEach(function (el) {
+          el.classList.toggle("text-2xl", lang === "th");
+          el.classList.toggle("text-xl", lang === "en");
         });
         document.querySelectorAll(".venue-brand").forEach(function (el) {
           el.classList.toggle("font-script-th", lang === "th");
