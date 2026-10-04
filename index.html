@@ -1278,16 +1278,23 @@
         } catch (err) {}
       }
 
+      let restoringScroll = false;
+      let resumeCatcher = null;
+
       function restoreScrollPosition() {
         const y = readSavedScroll();
         if (y <= 0) return;
+        restoringScroll = true;
         const apply = function () {
           window.scrollTo(0, y);
         };
         apply();
         requestAnimationFrame(apply);
         setTimeout(apply, 50);
-        setTimeout(apply, 250);
+        setTimeout(function () {
+          apply();
+          restoringScroll = false;
+        }, 280);
       }
 
       const mapSheet = document.getElementById("map-sheet");
@@ -1296,15 +1303,49 @@
       const mapSheetExternal = document.getElementById("map-sheet-external");
       const mapSheetClose = document.getElementById("map-sheet-close");
 
+      function removeResumeCatcher() {
+        if (!resumeCatcher) return;
+        if (resumeCatcher.parentNode) resumeCatcher.parentNode.removeChild(resumeCatcher);
+        resumeCatcher = null;
+      }
+
+      function armResumeCatcher() {
+        if (!cardUnlocked || !musicOn || resumeCatcher || !bgm.paused) return;
+        resumeCatcher = document.createElement("div");
+        resumeCatcher.setAttribute("aria-hidden", "true");
+        resumeCatcher.style.cssText =
+          "position:fixed;inset:0;z-index:80;touch-action:pan-y;background:transparent;-webkit-tap-highlight-color:transparent;";
+        const unlock = function () {
+          musicOn = true;
+          restoreMusicTime();
+          setMusicUi(true);
+          const playPromise = bgm.play();
+          if (playPromise && playPromise.catch) {
+            playPromise.catch(function () {});
+          }
+          removeResumeCatcher();
+        };
+        // นิ้ววางลงเพื่อเลื่อนหรือแตะ = gesture จริง จะปลดล็อกเสียงใน LINE ได้
+        resumeCatcher.addEventListener("touchstart", unlock, { passive: true });
+        resumeCatcher.addEventListener("pointerdown", unlock, { passive: true });
+        document.body.appendChild(resumeCatcher);
+      }
+
       function playMusic() {
         if (!musicOn) return;
         restoreMusicTime();
         setMusicUi(true);
         const playPromise = bgm.play();
-        if (playPromise && playPromise.catch) {
-          playPromise.catch(function () {
-            setMusicUi(true);
-          });
+        if (playPromise && playPromise.then) {
+          playPromise
+            .then(function () {
+              setMusicUi(true);
+              removeResumeCatcher();
+            })
+            .catch(function () {
+              setMusicUi(true);
+              armResumeCatcher();
+            });
         }
       }
 
@@ -1316,12 +1357,37 @@
       }
 
       function resumeMusicAfterReturn() {
-        if (!cardUnlocked || !musicOn) return;
+        if (!cardUnlocked) return;
+        if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
+          musicOn = true;
+        }
+        if (!musicOn) return;
         restoreScrollPosition();
         playMusic();
         window.setTimeout(function () {
-          if (musicOn && bgm.paused) playMusic();
-        }, 350);
+          if (musicOn && bgm.paused) armResumeCatcher();
+        }, 400);
+      }
+
+      function tryResumeFromUserGesture(event) {
+        if (!cardUnlocked || !bgm.paused) return;
+        if (event && event.target && event.target.closest && event.target.closest("#music-toggle")) {
+          return;
+        }
+        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0" && !musicOn) return;
+        musicOn = true;
+        restoreMusicTime();
+        setMusicUi(true);
+        const playPromise = bgm.play();
+        if (playPromise && playPromise.then) {
+          playPromise
+            .then(function () {
+              removeResumeCatcher();
+            })
+            .catch(function () {
+              armResumeCatcher();
+            });
+        }
       }
 
       function openMapSheet(button) {
@@ -1426,7 +1492,8 @@
         "scroll",
         function () {
           if (!cardUnlocked) return;
-          if (musicOn && bgm.paused) {
+          // เลื่อนด้วยนิ้วหลังกลับมา: ใช้คู่กับ touchmove ด้านล่าง
+          if (!restoringScroll && musicOn && bgm.paused) {
             playMusic();
           }
           if (scrollSaveTick) return;
@@ -1482,14 +1549,12 @@
         resumeMusicAfterReturn();
       });
 
-      document.addEventListener("pointerdown", function (event) {
-        if (!cardUnlocked) return;
-        if (!musicOn || !bgm.paused) return;
-        if (event.target.closest && event.target.closest("#music-toggle")) return;
-        playMusic();
+      // แตะ/เริ่มเลื่อนด้วยนิ้ว เพื่อเล่นเพลงต่อหลังกลับจากแผนที่
+      ["pointerdown", "touchstart", "touchend", "click"].forEach(function (type) {
+        window.addEventListener(type, tryResumeFromUserGesture, { passive: true, capture: true });
       });
 
-      setMusicUi(false);
+      setMusicUi(musicOn && !bgm.paused);
 
       musicToggle.addEventListener("click", function () {
         if (!bgm.paused) {
@@ -1497,6 +1562,7 @@
           bgm.pause();
           saveMusicState();
           setMusicUi(false);
+          removeResumeCatcher();
           return;
         }
         musicOn = true;
