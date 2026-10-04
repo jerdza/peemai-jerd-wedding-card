@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ตอบรับเข้าร่วมงาน | ปีใหม่ &amp; เจิด</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Great+Vibes&family=Playfair+Display:wght@500;600;700&family=Prompt:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              petal: "#F0DADA",
+              blush: "#E5C2C6",
+              sage: "#C6D1B7",
+              leaf: "#98A78E",
+              ink: "#3E4740",
+              moss: "#5C675A",
+            },
+            fontFamily: {
+              script: ['"Great Vibes"', "cursive"],
+              "script-th": ['"Charmonman"', "cursive"],
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Prompt"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen bg-petal font-sans text-ink">
+    <p class="fixed right-5 top-3 z-50 text-[11px] tracking-wide text-blush">v1.05</p>
+    <button
+      type="button"
+      id="lang-toggle"
+      class="fixed right-5 top-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-leaf shadow-lg ring-1 ring-leaf/30 transition hover:bg-petal"
+      aria-label="เปลี่ยนเป็นภาษาอังกฤษ"
+    >
+      EN
+    </button>
+    <style>
+      @keyframes wait-blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.45;
+        }
+      }
+      .is-waiting {
+        animation: wait-blink 1.2s ease-in-out infinite;
+      }
+    </style>
+    <main class="mx-auto min-h-screen max-w-md pb-10">
+      <p id="line-wait" class="px-6 pt-24 text-center text-sm text-moss" data-i18n="wait">กำลังเปิดฟอร์มจาก LINE...</p>
+      <section id="line-gate" class="hidden px-6 pt-24 text-center">
+        <h1 class="font-serif text-2xl" data-i18n="gate.title">เปิดจากใน LINE</h1>
+        <p class="mt-3 text-sm leading-relaxed text-moss" data-i18n="gate.body">ฟอร์มนี้กรอกได้จากเมนู RSVP ในแชทปีใหม่และเจิดเท่านั้น</p>
+      </section>
+      <section id="form-view" class="hidden">
+        <header class="px-5 pb-2 pt-6 text-center">
+          <img src="../assets/logo/logo.png" alt="" width="619" height="621" class="mx-auto h-auto w-32" />
+          <h1 class="mt-4 font-serif text-2xl" data-i18n="form.title">ตอบรับเข้าร่วมงาน</h1>
+          <p class="mt-1 text-xs text-moss" data-i18n="form.sub">กรุณากรอกข้อมูลเพื่อยืนยันการเข้าร่วม</p>
+          <p id="couple-names" class="mt-8 flex items-baseline justify-center gap-2 text-leaf">
+            <span id="couple-left" class="font-script-th text-3xl leading-snug">ปีใหม่</span>
+            <span class="font-serif text-sm">&amp;</span>
+            <span id="couple-right" class="font-script-th text-3xl leading-snug">เจิด</span>
+          </p>
+        </header>
+
+        <form id="rsvp-form" class="mx-4 mt-4 space-y-3">
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <label class="mb-2 block text-xs font-semibold text-moss" for="name" data-i18n="name.label">ชื่อ-นามสกุล</label>
+            <input
+              id="name"
+              name="name"
+              required
+              placeholder="ชื่อ-นามสกุล"
+              data-i18n-placeholder="name.placeholder"
+              class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none placeholder:text-sage focus:border-leaf"
+            />
+          </div>
+
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <label class="mb-2 block text-xs font-semibold text-moss" for="known-name" data-i18n="known.label">ชื่อที่รู้จัก</label>
+            <input
+              id="known-name"
+              name="known-name"
+              required
+              placeholder="ชื่อเรียก ชื่อเล่น ฉายา เป็นต้น"
+              data-i18n-placeholder="known.placeholder"
+              class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none placeholder:text-sage focus:border-leaf"
+            />
+          </div>
+
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <label class="mb-2 block text-xs font-semibold text-moss" for="phone" data-i18n="phone.label">เบอร์ติดต่อ</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              inputmode="tel"
+              required
+              placeholder="08xxxxxxxx"
+              class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none placeholder:text-sage focus:border-leaf"
+            />
+          </div>
+
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <p class="mb-3 text-xs font-semibold text-moss" data-i18n="group.q">กลุ่มของคุณ</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" data-group="ญาติเจ้าสาว" data-i18n="group.brideFamily" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">ญาติเจ้าสาว</button>
+              <button type="button" data-group="ญาติเจ้าบ่าว" data-i18n="group.groomFamily" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">ญาติเจ้าบ่าว</button>
+              <button type="button" data-group="เพื่อนเจ้าสาว" data-i18n="group.brideFriends" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">เพื่อนเจ้าสาว</button>
+              <button type="button" data-group="เพื่อนเจ้าบ่าว" data-i18n="group.groomFriends" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">เพื่อนเจ้าบ่าว</button>
+              <button type="button" data-group="เพื่อนเจ้าบ่าวและเจ้าสาว" data-i18n="group.bothFriends" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">เพื่อนเจ้าบ่าวและเจ้าสาว</button>
+              <button type="button" data-group="อื่นๆ" data-i18n="group.other" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">อื่นๆ</button>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <p class="mb-3 text-xs font-semibold text-moss" data-i18n="attend.q">สะดวกมาร่วมงานไหม?</p>
+            <div class="flex gap-2">
+              <button type="button" data-attending="yes" data-i18n="attend.yes" class="attend-btn flex-1 rounded-xl border-2 border-sage py-2.5 text-sm font-semibold text-moss">สะดวก</button>
+              <button type="button" data-attending="no" data-i18n="attend.no" class="attend-btn flex-1 rounded-xl border-2 border-sage py-2.5 text-sm font-semibold text-moss">ไม่สะดวก</button>
+            </div>
+          </div>
+
+          <div id="plan-card" class="hidden rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <p class="mb-3 text-xs font-semibold text-moss" data-i18n="plan.q">มาวันไหน?</p>
+            <div class="grid gap-2">
+              <div>
+                <button type="button" data-plan="นครสวรรค์" data-i18n="plan.nks" class="plan-btn w-full rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
+                  นครสวรรค์ · อา. 27 ธ.ค. 2569
+                </button>
+                <div id="guests-nks" class="mt-2 hidden rounded-xl bg-petal/70 px-3 py-3">
+                  <label class="mb-2 block text-xs font-semibold text-moss" for="count-nks" data-i18n="guests.nks">จำนวนคนที่มา (รวมตัวเอง) ที่นครสวรรค์</label>
+                  <input id="count-nks" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                </div>
+              </div>
+              <div>
+                <button type="button" data-plan="กรุงเทพฯ" data-i18n="plan.bkk" class="plan-btn w-full rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
+                  กรุงเทพฯ · ส. 23 ม.ค. 2570
+                </button>
+                <div id="guests-bkk" class="mt-2 hidden rounded-xl bg-petal/70 px-3 py-3">
+                  <label class="mb-2 block text-xs font-semibold text-moss" for="count-bkk" data-i18n="guests.bkk">จำนวนคนที่มา (รวมตัวเอง) ที่กรุงเทพฯ</label>
+                  <input id="count-bkk" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                </div>
+              </div>
+              <div>
+                <button type="button" data-plan="ทั้งสองวัน" data-i18n="plan.both" class="plan-btn w-full rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
+                  ทั้งสองวัน
+                </button>
+                <div id="guests-both" class="mt-2 hidden space-y-3 rounded-xl bg-petal/70 px-3 py-3">
+                  <div>
+                    <label class="mb-2 block text-xs font-semibold text-moss" for="count-both-nks" data-i18n="guests.nks">จำนวนคนที่มา (รวมตัวเอง) ที่นครสวรรค์</label>
+                    <input id="count-both-nks" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-white/80 bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                  </div>
+                  <div>
+                    <label class="mb-2 block text-xs font-semibold text-moss" for="count-both-bkk" data-i18n="guests.bkk">จำนวนคนที่มา (รวมตัวเอง) ที่กรุงเทพฯ</label>
+                    <input id="count-both-bkk" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-white/80 bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <label class="mb-2 block text-xs font-semibold text-moss" for="message" data-i18n="message.label">ฝากข้อความถึงเรา (ไม่บังคับ)</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="3"
+              placeholder="ฝากคำอวยพร..."
+              data-i18n-placeholder="message.placeholder"
+              class="w-full resize-none rounded-xl bg-petal/70 px-3 py-2 text-base outline-none focus:ring-2 focus:ring-leaf/40"
+            ></textarea>
+          </div>
+
+          <p id="error" class="hidden text-center text-xs text-blush"></p>
+          <p id="need-hint" class="text-center text-xs text-moss"></p>
+
+          <button id="submit-btn" type="submit" disabled class="w-full rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white opacity-40">
+            บันทึก
+          </button>
+        </form>
+      </section>
+
+      <section id="done-view" class="hidden px-6 pb-10 pt-24 text-center">
+        <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-leaf text-2xl text-white">✓</div>
+        <h2 class="mt-5 font-serif text-2xl" data-i18n="done.title">ขอบคุณที่ตอบรับ</h2>
+        <p id="done-note" class="mt-3 text-sm leading-relaxed text-moss"></p>
+        <div id="done-summary" class="mx-auto mt-6 max-w-sm rounded-2xl bg-white px-4 py-4 text-left text-sm shadow-sm"></div>
+        <button id="edit-page" type="button" class="mt-8 w-full rounded-xl border-2 border-leaf bg-white py-3.5 text-sm font-semibold text-ink" data-i18n="edit">
+          แก้ไขข้อมูล
+        </button>
+        <button id="close-page" type="button" class="mt-3 w-full rounded-xl bg-leaf py-3.5 text-sm font-semibold text-white" data-i18n="close">
+          ปิดหน้านี้
+        </button>
+        <p id="close-hint" class="mt-4 hidden text-xs leading-relaxed text-moss" data-i18n="close.hint">ถ้าหน้านี้ยังไม่ปิด ให้กดเครื่องหมาย X มุมบนของ LINE</p>
+      </section>
+    </main>
+
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <script>
+      const RSVP_API = "https://peemai-jerd-wedding-line-bot.onrender.com/api/rsvp";
+      const LIFF_ID = "2011707656-R7Z7Hn5y";
+      const PREVIEW = true;
+      let lineAccessToken = "";
+      const form = document.getElementById("rsvp-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const errorEl = document.getElementById("error");
+      const planCard = document.getElementById("plan-card");
+      let attending = "";
+      let plan = "";
+      let group = "";
+      let guestsNks = "1";
+      let guestsBkk = "1";
+      let editToken = "";
+      let saveId = "";
+      let saving = false;
+      let lang = "th";
+      let lastEntry = null;
+      try {
+        if (sessionStorage.getItem("rsvp-lang") === "en") lang = "en";
+      } catch (error) {}
+
+      const strings = {
+        th: {
+          title: "ตอบรับเข้าร่วมงาน | ปีใหม่ & เจิด",
+          "lang.button": "EN",
+          "lang.label": "เปลี่ยนเป็นภาษาอังกฤษ",
+          wait: "กำลังเปิดฟอร์มจาก LINE...",
+          "gate.title": "เปิดจากใน LINE",
+          "gate.body": "ฟอร์มนี้กรอกได้จากเมนู RSVP ในแชทปีใหม่และเจิดเท่านั้น",
+          "form.title": "ตอบรับเข้าร่วมงาน",
+          "form.sub": "กรุณากรอกข้อมูลเพื่อยืนยันการเข้าร่วม",
+          "name.label": "ชื่อ-นามสกุล",
+          "name.placeholder": "ชื่อ-นามสกุล",
+          "known.label": "ชื่อที่รู้จัก",
+          "known.placeholder": "ชื่อเรียก ชื่อเล่น ฉายา เป็นต้น",
+          "phone.label": "เบอร์ติดต่อ",
+          "attend.q": "สะดวกมาร่วมงานไหม?",
+          "attend.yes": "สะดวก",
+          "attend.no": "ไม่สะดวก",
+          "group.q": "กลุ่มของคุณ",
+          "group.brideFamily": "ญาติเจ้าสาว",
+          "group.groomFamily": "ญาติเจ้าบ่าว",
+          "group.brideFriends": "เพื่อนเจ้าสาว",
+          "group.groomFriends": "เพื่อนเจ้าบ่าว",
+          "group.bothFriends": "เพื่อนเจ้าบ่าวและเจ้าสาว",
+          "group.other": "อื่นๆ",
+          "plan.q": "มาวันไหน?",
+          "plan.nks": "นครสวรรค์ · อา. 27 ธ.ค. 2569",
+          "plan.bkk": "กรุงเทพฯ · ส. 23 ม.ค. 2570",
+          "plan.both": "ทั้งสองวัน",
+          "guests.nks": "จำนวนคนที่มา (รวมตัวเอง) ที่นครสวรรค์",
+          "guests.bkk": "จำนวนคนที่มา (รวมตัวเอง) ที่กรุงเทพฯ",
+          "message.label": "ฝากข้อความถึงเรา (ไม่บังคับ)",
+          "message.placeholder": "ฝากคำอวยพร...",
+          submit: "บันทึก",
+          waiting: "กรุณารอข้อความตอบรับ",
+          "hint.name": "ใส่ชื่อ-นามสกุล",
+          "hint.known": "ใส่ชื่อที่รู้จัก",
+          "hint.phone": "ใส่เบอร์อย่างน้อย 9 หลัก",
+          "hint.attend": "เลือกสะดวกหรือไม่สะดวก",
+          "hint.group": "เลือกกลุ่มของคุณ",
+          "hint.plan": "เลือกวันงาน",
+          "hint.guestsNks": "ใส่จำนวนคนที่นครสวรรค์",
+          "hint.guestsBkk": "ใส่จำนวนคนที่กรุงเทพฯ",
+          "error.incomplete": "กรอกชื่อ-นามสกุล ชื่อที่รู้จัก เบอร์ติดต่อ เลือกความสะดวก และวันงานให้ครบนะคะ",
+          "error.network": "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ลองอีกครั้งนะคะ",
+          "error.save": "บันทึกไม่สำเร็จ ลองกดบันทึกอีกครั้งนะคะ",
+          "done.title": "ขอบคุณที่ตอบรับ",
+          "done.coming": "ดีใจมากเลยที่มาได้ เจอกันในงานนะ",
+          "done.absent": "ขอบคุณที่บอกนะ เสียดายจังที่ไม่ได้เจอ",
+          "sum.name": "ชื่อ",
+          "sum.known": "ชื่อที่รู้จัก",
+          "sum.phone": "เบอร์",
+          "sum.status": "สถานะ",
+          "sum.group": "กลุ่ม",
+          "sum.yes": "สะดวกมา",
+          "sum.no": "มาไม่ได้",
+          "sum.plan": "งาน",
+          "sum.nks": "นครสวรรค์",
+          "sum.bkk": "กรุงเทพฯ",
+          "sum.both": "ทั้งสองวัน",
+          "sum.guests": "จำนวน",
+          "sum.note": "ข้อความ",
+          edit: "แก้ไขข้อมูล",
+          close: "ปิดหน้านี้",
+          "close.hint": "ถ้าหน้านี้ยังไม่ปิด ให้กดเครื่องหมาย X มุมบนของ LINE",
+        },
+        en: {
+          title: "RSVP | Peemai & Jerd",
+          "lang.button": "TH",
+          "lang.label": "Switch to Thai",
+          wait: "Opening the form from LINE...",
+          "gate.title": "Open in LINE",
+          "gate.body": "This form can only be filled from the RSVP menu in the Peemai & Jerd chat.",
+          "form.title": "RSVP",
+          "form.sub": "Please fill in your details to confirm",
+          "name.label": "Full name",
+          "name.placeholder": "Full name",
+          "known.label": "Name we know you by",
+          "known.placeholder": "Nickname or what we call you",
+          "phone.label": "Phone",
+          "attend.q": "Will you join us?",
+          "attend.yes": "Yes",
+          "attend.no": "No",
+          "group.q": "Your group",
+          "group.brideFamily": "Bride's relatives",
+          "group.groomFamily": "Groom's relatives",
+          "group.brideFriends": "Bride's friends",
+          "group.groomFriends": "Groom's friends",
+          "group.bothFriends": "Friends of the bride and groom",
+          "group.other": "Other",
+          "plan.q": "Which day?",
+          "plan.nks": "Nakhon Sawan · Sun 27 Dec 2026",
+          "plan.bkk": "Bangkok · Sat 23 Jan 2027",
+          "plan.both": "Both days",
+          "guests.nks": "Number of guests in Nakhon Sawan (including you)",
+          "guests.bkk": "Number of guests in Bangkok (including you)",
+          "message.label": "A note for us (optional)",
+          "message.placeholder": "Leave a blessing...",
+          submit: "Save",
+          waiting: "Please wait for a reply",
+          "hint.name": "Enter your full name",
+          "hint.known": "Enter the name we know you by",
+          "hint.phone": "Enter at least 9 digits",
+          "hint.attend": "Choose whether you can attend",
+          "hint.group": "Choose your group",
+          "hint.plan": "Choose the day",
+          "hint.guestsNks": "Enter the Nakhon Sawan guest count",
+          "hint.guestsBkk": "Enter the Bangkok guest count",
+          "error.incomplete": "Please complete your name, the name we know you by, phone, attendance, and the day.",
+          "error.network": "Could not reach the server. Please try again.",
+          "error.save": "Could not save. Please try again.",
+          "done.title": "Thank you",
+          "done.coming": "We're so glad you can come. See you there.",
+          "done.absent": "Thank you for letting us know. We'll miss you.",
+          "sum.name": "Name",
+          "sum.known": "Known as",
+          "sum.phone": "Phone",
+          "sum.status": "Attendance",
+          "sum.group": "Group",
+          "sum.yes": "Coming",
+          "sum.no": "Can't come",
+          "sum.plan": "Day",
+          "sum.nks": "Nakhon Sawan",
+          "sum.bkk": "Bangkok",
+          "sum.both": "Both days",
+          "sum.guests": "Guests",
+          "sum.note": "Note",
+          edit: "Edit details",
+          close: "Close this page",
+          "close.hint": "If this page is still open, tap the X at the top of LINE",
+        },
+      };
+
+      function t(key) {
+        return (strings[lang] && strings[lang][key]) || strings.th[key] || "";
+      }
+
+      function groupLabel(value) {
+        if (value === "ญาติเจ้าสาว") return t("group.brideFamily");
+        if (value === "ญาติเจ้าบ่าว") return t("group.groomFamily");
+        if (value === "เพื่อนเจ้าสาว") return t("group.brideFriends");
+        if (value === "เพื่อนเจ้าบ่าว") return t("group.groomFriends");
+        if (value === "เพื่อนเจ้าบ่าวและเจ้าสาว") return t("group.bothFriends");
+        if (value === "อื่นๆ") return t("group.other");
+        return value;
+      }
+
+      function planLabel(value) {
+        if (value === "นครสวรรค์") return t("sum.nks");
+        if (value === "กรุงเทพฯ") return t("sum.bkk");
+        if (value === "ทั้งสองวัน") return t("sum.both");
+        return value;
+      }
+
+      function guestText(value) {
+        const count = Number(value) || 0;
+        if (lang === "th") return count.toLocaleString("th-TH") + " คน";
+        return count.toLocaleString("en-US") + (count === 1 ? " guest" : " guests");
+      }
+
+      function applyLang() {
+        document.documentElement.lang = lang === "th" ? "th" : "en";
+        document.title = t("title");
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          el.textContent = t(el.getAttribute("data-i18n"));
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+          el.placeholder = t(el.getAttribute("data-i18n-placeholder"));
+        });
+        const leftName = document.getElementById("couple-left");
+        const rightName = document.getElementById("couple-right");
+        const nameClasses = ["font-script", "font-script-th", "text-3xl", "text-4xl", "leading-snug", "leading-none"];
+        nameClasses.forEach(function (cls) {
+          leftName.classList.remove(cls);
+          rightName.classList.remove(cls);
+        });
+        if (lang === "th") {
+          leftName.textContent = "ปีใหม่";
+          rightName.textContent = "เจิด";
+          leftName.classList.add("font-script-th", "text-3xl", "leading-snug");
+          rightName.classList.add("font-script-th", "text-3xl", "leading-snug");
+        } else {
+          leftName.textContent = "Peemai";
+          rightName.textContent = "Jerd";
+          leftName.classList.add("font-script", "text-4xl", "leading-none");
+          rightName.classList.add("font-script", "text-4xl", "leading-none");
+        }
+        const toggle = document.getElementById("lang-toggle");
+        toggle.textContent = t("lang.button");
+        toggle.setAttribute("aria-label", t("lang.label"));
+        const doneOpen = !document.getElementById("done-view").classList.contains("hidden");
+        if (doneOpen && lastEntry) showDone(lastEntry);
+        else renderChoices();
+      }
+
+      function createSaveId() {
+        if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (char) {
+          const rand = (Math.random() * 16) | 0;
+          const value = char === "x" ? rand : (rand & 0x3) | 0x8;
+          return value.toString(16);
+        });
+      }
+
+      function selectedClass(on) {
+        return on
+          ? "bg-leaf text-white border-leaf shadow-sm"
+          : "bg-white text-moss border-sage";
+      }
+
+      function setCount(id, value) {
+        const field = document.getElementById(id);
+        if (document.activeElement === field) return;
+        if (field.value !== value) field.value = value;
+      }
+
+      function countOk(value) {
+        const count = Math.floor(Number(String(value).trim()));
+        return String(value).trim() !== "" && Number.isFinite(count) && count >= 1 && count <= 9999;
+      }
+
+      function needsNks() {
+        return plan === "นครสวรรค์" || plan === "ทั้งสองวัน";
+      }
+
+      function needsBkk() {
+        return plan === "กรุงเทพฯ" || plan === "ทั้งสองวัน";
+      }
+
+      function partyCounts() {
+        const nks = attending === "yes" && needsNks() && countOk(guestsNks) ? String(Math.floor(Number(guestsNks))) : "0";
+        const bkk = attending === "yes" && needsBkk() && countOk(guestsBkk) ? String(Math.floor(Number(guestsBkk))) : "0";
+        return { nks: nks, bkk: bkk, total: String(Number(nks) + Number(bkk)) };
+      }
+
+      function renderChoices() {
+        document.querySelectorAll(".attend-btn").forEach(function (btn) {
+          btn.className =
+            "attend-btn flex-1 rounded-xl border-2 py-2.5 text-sm font-semibold transition " +
+            selectedClass(btn.getAttribute("data-attending") === attending);
+        });
+        document.querySelectorAll(".group-btn").forEach(function (btn) {
+          const compact = btn.getAttribute("data-group") === "เพื่อนเจ้าบ่าวและเจ้าสาว";
+          btn.className =
+            "group-btn rounded-xl border-2 py-2.5 font-semibold transition " +
+            (compact ? "px-2 text-xs leading-snug " : "px-3 text-sm ") +
+            selectedClass(btn.getAttribute("data-group") === group);
+        });
+        document.querySelectorAll(".plan-btn").forEach(function (btn) {
+          btn.className =
+            "plan-btn w-full rounded-xl border-2 px-3 py-2.5 text-left text-sm font-semibold transition " +
+            selectedClass(btn.getAttribute("data-plan") === plan);
+        });
+        const coming = attending === "yes";
+        planCard.classList.toggle("hidden", !coming);
+        document.getElementById("guests-nks").classList.toggle("hidden", !(coming && plan === "นครสวรรค์"));
+        document.getElementById("guests-bkk").classList.toggle("hidden", !(coming && plan === "กรุงเทพฯ"));
+        document.getElementById("guests-both").classList.toggle("hidden", !(coming && plan === "ทั้งสองวัน"));
+        setCount("count-nks", guestsNks);
+        setCount("count-both-nks", guestsNks);
+        setCount("count-bkk", guestsBkk);
+        setCount("count-both-bkk", guestsBkk);
+        const nameOk = Boolean(document.getElementById("name").value.trim());
+        const knownOk = Boolean(document.getElementById("known-name").value.trim());
+        const phoneOk = document.getElementById("phone").value.replace(/\D/g, "").length >= 9;
+        const nksOk = !coming || !needsNks() || countOk(guestsNks);
+        const bkkOk = !coming || !needsBkk() || countOk(guestsBkk);
+        const ready = nameOk && knownOk && phoneOk && attending && group && (!coming || plan) && nksOk && bkkOk;
+        const missing = [];
+        if (!nameOk) missing.push(t("hint.name"));
+        if (!knownOk) missing.push(t("hint.known"));
+        if (!phoneOk) missing.push(t("hint.phone"));
+        if (!attending) missing.push(t("hint.attend"));
+        else if (!group) missing.push(t("hint.group"));
+        else if (coming && !plan) missing.push(t("hint.plan"));
+        else if (coming && needsNks() && !countOk(guestsNks)) missing.push(t("hint.guestsNks"));
+        else if (coming && needsBkk() && !countOk(guestsBkk)) missing.push(t("hint.guestsBkk"));
+        const hint = document.getElementById("need-hint");
+        hint.textContent = saving ? "" : missing.join(" · ");
+        if (saving) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = t("waiting");
+          submitBtn.classList.remove("opacity-40");
+          submitBtn.classList.add("is-waiting");
+          lockForm(true);
+          return;
+        }
+        lockForm(false);
+        submitBtn.classList.remove("is-waiting");
+        submitBtn.textContent = t("submit");
+        submitBtn.disabled = !ready;
+        submitBtn.classList.toggle("opacity-40", !ready);
+      }
+
+      function lockForm(locked) {
+        ["name", "known-name", "phone", "count-nks", "count-bkk", "count-both-nks", "count-both-bkk", "message"].forEach(function (id) {
+          document.getElementById(id).disabled = locked;
+        });
+        document.querySelectorAll(".attend-btn, .plan-btn, .group-btn").forEach(function (btn) {
+          btn.disabled = locked;
+        });
+      }
+
+      document.querySelectorAll(".attend-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (saving) return;
+          attending = btn.getAttribute("data-attending");
+          if (attending !== "yes") plan = "";
+          renderChoices();
+        });
+      });
+
+      document.querySelectorAll(".group-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (saving) return;
+          group = btn.getAttribute("data-group");
+          renderChoices();
+        });
+      });
+
+      document.querySelectorAll(".plan-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (saving) return;
+          plan = btn.getAttribute("data-plan");
+          renderChoices();
+        });
+      });
+
+      document.getElementById("name").addEventListener("input", renderChoices);
+      document.getElementById("known-name").addEventListener("input", renderChoices);
+      document.getElementById("phone").addEventListener("input", renderChoices);
+      document.getElementById("count-nks").addEventListener("input", function (event) {
+        guestsNks = event.target.value;
+        renderChoices();
+      });
+      document.getElementById("count-both-nks").addEventListener("input", function (event) {
+        guestsNks = event.target.value;
+        renderChoices();
+      });
+      document.getElementById("count-bkk").addEventListener("input", function (event) {
+        guestsBkk = event.target.value;
+        renderChoices();
+      });
+      document.getElementById("count-both-bkk").addEventListener("input", function (event) {
+        guestsBkk = event.target.value;
+        renderChoices();
+      });
+
+      function summaryRow(label, value) {
+        const row = document.createElement("div");
+        row.className = "flex gap-3 border-b border-petal py-2 last:border-0";
+        const name = document.createElement("span");
+        name.className = "w-28 shrink-0 text-moss";
+        name.textContent = label;
+        const detail = document.createElement("span");
+        detail.className = "font-medium";
+        detail.textContent = value;
+        row.append(name, detail);
+        return row;
+      }
+
+      function showDone(entry) {
+        lastEntry = entry;
+        if (entry.token) editToken = entry.token;
+        document.getElementById("done-note").textContent = entry.coming ? t("done.coming") : t("done.absent");
+        const summary = document.getElementById("done-summary");
+        summary.replaceChildren();
+        summary.append(
+          summaryRow(t("sum.name"), entry.name),
+          summaryRow(t("sum.known"), entry.knownName),
+          summaryRow(t("sum.phone"), entry.phone),
+          summaryRow(t("sum.status"), entry.coming ? t("sum.yes") : t("sum.no")),
+          summaryRow(t("sum.group"), groupLabel(entry.group))
+        );
+        if (entry.coming) {
+          summary.append(summaryRow(t("sum.plan"), planLabel(entry.plan)));
+          if (entry.plan === "นครสวรรค์" || entry.plan === "ทั้งสองวัน") {
+            summary.append(summaryRow(t("sum.nks"), guestText(entry.guestsNks)));
+          }
+          if (entry.plan === "กรุงเทพฯ" || entry.plan === "ทั้งสองวัน") {
+            summary.append(summaryRow(t("sum.bkk"), guestText(entry.guestsBkk)));
+          }
+        }
+        if (entry.note) summary.append(summaryRow(t("sum.note"), entry.note));
+        document.getElementById("form-view").classList.add("hidden");
+        document.getElementById("done-view").classList.remove("hidden");
+        window.scrollTo(0, 0);
+      }
+
+      document.getElementById("edit-page").addEventListener("click", function () {
+        document.getElementById("done-view").classList.add("hidden");
+        document.getElementById("form-view").classList.remove("hidden");
+        saving = false;
+        submitBtn.textContent = t("submit");
+        renderChoices();
+        window.scrollTo(0, 0);
+      });
+
+      document.getElementById("close-page").addEventListener("click", function () {
+        if (window.liff && liff.isInClient()) {
+          liff.closeWindow();
+        } else {
+          window.open("", "_self");
+          window.close();
+        }
+        window.setTimeout(function () {
+          document.getElementById("close-hint").classList.remove("hidden");
+        }, 400);
+      });
+
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        if (saving) return;
+        const name = document.getElementById("name").value.trim();
+        const knownName = document.getElementById("known-name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const counts = partyCounts();
+        const note = document.getElementById("message").value.trim();
+        const countsReady = attending !== "yes" || (countOk(needsNks() ? guestsNks : "1") && countOk(needsBkk() ? guestsBkk : "1"));
+        if (!name || !knownName || phone.replace(/\D/g, "").length < 9 || !attending || !group || (attending === "yes" && !plan) || !countsReady) {
+          errorEl.textContent = t("error.incomplete");
+          errorEl.classList.remove("hidden");
+          return;
+        }
+
+        errorEl.classList.add("hidden");
+        saving = true;
+        lockForm(true);
+        submitBtn.disabled = true;
+        submitBtn.textContent = t("waiting");
+        submitBtn.classList.remove("opacity-40");
+        submitBtn.classList.add("is-waiting");
+
+        if (PREVIEW) {
+          window.setTimeout(function () {
+            saving = false;
+            showDone({
+              name: name,
+              knownName: knownName,
+              phone: phone,
+              coming: attending === "yes",
+              plan: plan,
+              group: group,
+              guests: counts.total,
+              guestsNks: counts.nks,
+              guestsBkk: counts.bkk,
+              note: note,
+            });
+          }, 700);
+          return;
+        }
+
+        try {
+          const response = await fetch(RSVP_API, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              token: editToken,
+              saveId: saveId,
+              lineAccessToken: lineAccessToken,
+              name: name,
+              knownName: knownName,
+              phone: phone,
+              attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
+              plan: attending === "yes" ? plan : "-",
+              group: group,
+              guests: counts.total,
+              guestsNks: counts.nks,
+              guestsBkk: counts.bkk,
+              note: note || "-",
+            }),
+          });
+          const data = await response.json().catch(function () {
+            return {};
+          });
+          if (!response.ok || data.ok === false) {
+            throw new Error(data.error || t("error.save"));
+          }
+          saving = false;
+          showDone({
+            token: data.token || "",
+            name: name,
+            knownName: knownName,
+            phone: phone,
+            coming: attending === "yes",
+            plan: plan,
+            group: group,
+            guests: counts.total,
+            guestsNks: counts.nks,
+            guestsBkk: counts.bkk,
+            note: note,
+          });
+        } catch (error) {
+          saving = false;
+          errorEl.textContent = error && error.message && error.message !== "Failed to fetch" ? error.message : t("error.network");
+          errorEl.classList.remove("hidden");
+          renderChoices();
+        }
+      });
+
+      saveId = createSaveId();
+      renderChoices();
+
+      async function openInLine() {
+        const wait = document.getElementById("line-wait");
+        const gate = document.getElementById("line-gate");
+        const formView = document.getElementById("form-view");
+        if (PREVIEW) {
+          wait.classList.add("hidden");
+          formView.classList.remove("hidden");
+          return;
+        }
+        try {
+          await liff.init({ liffId: LIFF_ID });
+          if (!liff.isInClient()) throw new Error("not in line");
+          lineAccessToken = liff.getAccessToken() || "";
+          if (!lineAccessToken) throw new Error("no token");
+          wait.classList.add("hidden");
+          formView.classList.remove("hidden");
+          liff.sendMessages([{ type: "text", text: "RSVP" }]).catch(function () {});
+        } catch (error) {
+          wait.classList.add("hidden");
+          formView.classList.add("hidden");
+          gate.classList.remove("hidden");
+        }
+      }
+
+      document.getElementById("lang-toggle").addEventListener("click", function () {
+        lang = lang === "th" ? "en" : "th";
+        try {
+          sessionStorage.setItem("rsvp-lang", lang);
+        } catch (error) {}
+        applyLang();
+      });
+
+      applyLang();
+      openInLine();
+    </script>
+  </body>
+</html>
