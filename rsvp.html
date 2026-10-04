@@ -35,7 +35,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-5 top-3 z-50 text-[11px] tracking-wide text-blush">v1.04</p>
+    <p class="fixed right-5 top-3 z-50 text-[11px] tracking-wide text-blush">v1.05</p>
     <button
       type="button"
       id="lang-toggle"
@@ -112,6 +112,18 @@
               placeholder="08xxxxxxxx"
               class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none placeholder:text-sage focus:border-leaf"
             />
+          </div>
+
+          <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
+            <p class="mb-3 text-xs font-semibold text-moss" data-i18n="group.q">กลุ่มของคุณ</p>
+            <div class="grid grid-cols-2 gap-2">
+              <button type="button" data-group="ญาติเจ้าสาว" data-i18n="group.brideFamily" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">ญาติเจ้าสาว</button>
+              <button type="button" data-group="ญาติเจ้าบ่าว" data-i18n="group.groomFamily" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">ญาติเจ้าบ่าว</button>
+              <button type="button" data-group="เพื่อนเจ้าสาว" data-i18n="group.brideFriends" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">เพื่อนเจ้าสาว</button>
+              <button type="button" data-group="เพื่อนเจ้าบ่าว" data-i18n="group.groomFriends" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">เพื่อนเจ้าบ่าว</button>
+              <button type="button" data-group="เพื่อนเจ้าบ่าวและเจ้าสาว" data-i18n="group.bothFriends" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">เพื่อนเจ้าบ่าวและเจ้าสาว</button>
+              <button type="button" data-group="อื่นๆ" data-i18n="group.other" class="group-btn rounded-xl border-2 border-sage px-3 py-2.5 text-sm font-semibold text-moss">อื่นๆ</button>
+            </div>
           </div>
 
           <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
@@ -209,6 +221,7 @@
       const planCard = document.getElementById("plan-card");
       let attending = "";
       let plan = "";
+      let group = "";
       let guestsNks = "1";
       let guestsBkk = "1";
       let editToken = "";
@@ -238,6 +251,13 @@
           "attend.q": "สะดวกมาร่วมงานไหม?",
           "attend.yes": "สะดวก",
           "attend.no": "ไม่สะดวก",
+          "group.q": "กลุ่มของคุณ",
+          "group.brideFamily": "ญาติเจ้าสาว",
+          "group.groomFamily": "ญาติเจ้าบ่าว",
+          "group.brideFriends": "เพื่อนเจ้าสาว",
+          "group.groomFriends": "เพื่อนเจ้าบ่าว",
+          "group.bothFriends": "เพื่อนเจ้าบ่าวและเจ้าสาว",
+          "group.other": "อื่นๆ",
           "plan.q": "มาวันไหน?",
           "plan.nks": "นครสวรรค์ · อา. 27 ธ.ค. 2569",
           "plan.bkk": "กรุงเทพฯ · ส. 23 ม.ค. 2570",
@@ -252,6 +272,7 @@
           "hint.known": "ใส่ชื่อที่รู้จัก",
           "hint.phone": "ใส่เบอร์อย่างน้อย 9 หลัก",
           "hint.attend": "เลือกสะดวกหรือไม่สะดวก",
+          "hint.group": "เลือกกลุ่มของคุณ",
           "hint.plan": "เลือกวันงาน",
           "hint.guestsNks": "ใส่จำนวนคนที่นครสวรรค์",
           "hint.guestsBkk": "ใส่จำนวนคนที่กรุงเทพฯ",
@@ -265,6 +286,7 @@
           "sum.known": "ชื่อที่รู้จัก",
           "sum.phone": "เบอร์",
           "sum.status": "สถานะ",
+          "sum.group": "กลุ่ม",
           "sum.yes": "สะดวกมา",
           "sum.no": "มาไม่ได้",
           "sum.plan": "งาน",
@@ -294,6 +316,13 @@
           "attend.q": "Will you join us?",
           "attend.yes": "Yes",
           "attend.no": "No",
+          "group.q": "Your group",
+          "group.brideFamily": "Bride's relatives",
+          "group.groomFamily": "Groom's relatives",
+          "group.brideFriends": "Bride's friends",
+          "group.groomFriends": "Groom's friends",
+          "group.bothFriends": "Friends of the bride and groom",
+          "group.other": "Other",
           "plan.q": "Which day?",
           "plan.nks": "Nakhon Sawan · Sun 27 Dec 2026",
           "plan.bkk": "Bangkok · Sat 23 Jan 2027",
@@ -308,6 +337,7 @@
           "hint.known": "Enter the name we know you by",
           "hint.phone": "Enter at least 9 digits",
           "hint.attend": "Choose whether you can attend",
+          "hint.group": "Choose your group",
           "hint.plan": "Choose the day",
           "hint.guestsNks": "Enter the Nakhon Sawan guest count",
           "hint.guestsBkk": "Enter the Bangkok guest count",
@@ -321,6 +351,7 @@
           "sum.known": "Known as",
           "sum.phone": "Phone",
           "sum.status": "Attendance",
+          "sum.group": "Group",
           "sum.yes": "Coming",
           "sum.no": "Can't come",
           "sum.plan": "Day",
@@ -337,6 +368,16 @@
 
       function t(key) {
         return (strings[lang] && strings[lang][key]) || strings.th[key] || "";
+      }
+
+      function groupLabel(value) {
+        if (value === "ญาติเจ้าสาว") return t("group.brideFamily");
+        if (value === "ญาติเจ้าบ่าว") return t("group.groomFamily");
+        if (value === "เพื่อนเจ้าสาว") return t("group.brideFriends");
+        if (value === "เพื่อนเจ้าบ่าว") return t("group.groomFriends");
+        if (value === "เพื่อนเจ้าบ่าวและเจ้าสาว") return t("group.bothFriends");
+        if (value === "อื่นๆ") return t("group.other");
+        return value;
       }
 
       function planLabel(value) {
@@ -433,6 +474,13 @@
             "attend-btn flex-1 rounded-xl border-2 py-2.5 text-sm font-semibold transition " +
             selectedClass(btn.getAttribute("data-attending") === attending);
         });
+        document.querySelectorAll(".group-btn").forEach(function (btn) {
+          const compact = btn.getAttribute("data-group") === "เพื่อนเจ้าบ่าวและเจ้าสาว";
+          btn.className =
+            "group-btn rounded-xl border-2 py-2.5 font-semibold transition " +
+            (compact ? "px-2 text-xs leading-snug " : "px-3 text-sm ") +
+            selectedClass(btn.getAttribute("data-group") === group);
+        });
         document.querySelectorAll(".plan-btn").forEach(function (btn) {
           btn.className =
             "plan-btn w-full rounded-xl border-2 px-3 py-2.5 text-left text-sm font-semibold transition " +
@@ -452,12 +500,13 @@
         const phoneOk = document.getElementById("phone").value.replace(/\D/g, "").length >= 9;
         const nksOk = !coming || !needsNks() || countOk(guestsNks);
         const bkkOk = !coming || !needsBkk() || countOk(guestsBkk);
-        const ready = nameOk && knownOk && phoneOk && attending && (!coming || plan) && nksOk && bkkOk;
+        const ready = nameOk && knownOk && phoneOk && attending && group && (!coming || plan) && nksOk && bkkOk;
         const missing = [];
         if (!nameOk) missing.push(t("hint.name"));
         if (!knownOk) missing.push(t("hint.known"));
         if (!phoneOk) missing.push(t("hint.phone"));
         if (!attending) missing.push(t("hint.attend"));
+        else if (!group) missing.push(t("hint.group"));
         else if (coming && !plan) missing.push(t("hint.plan"));
         else if (coming && needsNks() && !countOk(guestsNks)) missing.push(t("hint.guestsNks"));
         else if (coming && needsBkk() && !countOk(guestsBkk)) missing.push(t("hint.guestsBkk"));
@@ -482,7 +531,7 @@
         ["name", "known-name", "phone", "count-nks", "count-bkk", "count-both-nks", "count-both-bkk", "message"].forEach(function (id) {
           document.getElementById(id).disabled = locked;
         });
-        document.querySelectorAll(".attend-btn, .plan-btn").forEach(function (btn) {
+        document.querySelectorAll(".attend-btn, .plan-btn, .group-btn").forEach(function (btn) {
           btn.disabled = locked;
         });
       }
@@ -492,6 +541,14 @@
           if (saving) return;
           attending = btn.getAttribute("data-attending");
           if (attending !== "yes") plan = "";
+          renderChoices();
+        });
+      });
+
+      document.querySelectorAll(".group-btn").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          if (saving) return;
+          group = btn.getAttribute("data-group");
           renderChoices();
         });
       });
@@ -547,7 +604,8 @@
           summaryRow(t("sum.name"), entry.name),
           summaryRow(t("sum.known"), entry.knownName),
           summaryRow(t("sum.phone"), entry.phone),
-          summaryRow(t("sum.status"), entry.coming ? t("sum.yes") : t("sum.no"))
+          summaryRow(t("sum.status"), entry.coming ? t("sum.yes") : t("sum.no")),
+          summaryRow(t("sum.group"), groupLabel(entry.group))
         );
         if (entry.coming) {
           summary.append(summaryRow(t("sum.plan"), planLabel(entry.plan)));
@@ -594,7 +652,7 @@
         const counts = partyCounts();
         const note = document.getElementById("message").value.trim();
         const countsReady = attending !== "yes" || (countOk(needsNks() ? guestsNks : "1") && countOk(needsBkk() ? guestsBkk : "1"));
-        if (!name || !knownName || phone.replace(/\D/g, "").length < 9 || !attending || (attending === "yes" && !plan) || !countsReady) {
+        if (!name || !knownName || phone.replace(/\D/g, "").length < 9 || !attending || !group || (attending === "yes" && !plan) || !countsReady) {
           errorEl.textContent = t("error.incomplete");
           errorEl.classList.remove("hidden");
           return;
@@ -617,6 +675,7 @@
               phone: phone,
               coming: attending === "yes",
               plan: plan,
+              group: group,
               guests: counts.total,
               guestsNks: counts.nks,
               guestsBkk: counts.bkk,
@@ -639,6 +698,7 @@
               phone: phone,
               attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
               plan: attending === "yes" ? plan : "-",
+              group: group,
               guests: counts.total,
               guestsNks: counts.nks,
               guestsBkk: counts.bkk,
@@ -659,6 +719,7 @@
             phone: phone,
             coming: attending === "yes",
             plan: plan,
+            group: group,
             guests: counts.total,
             guestsNks: counts.nks,
             guestsBkk: counts.bkk,
