@@ -155,7 +155,8 @@
 
       #card-version,
       #lang-toggle,
-      #music-toggle {
+      #music-toggle,
+      #music-resume-hint {
         right: max(1.25rem, calc((100vw - 1170px) / 2 + 1.25rem));
       }
 
@@ -485,16 +486,19 @@
               เวลา 07:00–14:00 น.<br />
               นครสวรรค์
             </p>
-            <a
-              href="https://maps.app.goo.gl/FrosBUxFHFye94wh7"
-              class="js-external-map mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
+            <button
+              type="button"
+              class="js-map-sheet mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
+              data-map-name-key="venue.nks.name"
+              data-map-embed="https://maps.google.com/maps?q=15.6832108,100.1092547&z=17&hl=th&output=embed"
+              data-map-external="https://maps.app.goo.gl/FrosBUxFHFye94wh7"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span data-i18n="venue.nks.map">เปิดแผนที่แพสี่แคว</span>
-            </a>
+            </button>
           </div>
         </div>
 
@@ -513,16 +517,19 @@
               เวลา 09:00–14:00 น.<br />
               กรุงเทพฯ
             </p>
-            <a
-              href="https://maps.app.goo.gl/cLyiqcfe6NTpzGp68"
-              class="js-external-map mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
+            <button
+              type="button"
+              class="js-map-sheet mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
+              data-map-name-key="venue.bkk.name"
+              data-map-embed="https://maps.google.com/maps?q=13.908262,100.5162569&z=17&hl=th&output=embed"
+              data-map-external="https://maps.app.goo.gl/cLyiqcfe6NTpzGp68"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span data-i18n="venue.bkk.map">เปิดแผนที่ลาร์-มูน</span>
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -620,13 +627,55 @@
       <img id="lightbox-img" src="" alt="รูปพรีเวดดิ้ง" data-i18n-alt="gallery.photo" class="max-h-[88vh] max-w-full rounded-2xl object-contain shadow-2xl" />
     </div>
 
+    <div
+      id="map-sheet"
+      class="fixed inset-0 z-[70] hidden items-end justify-center bg-ink/55 p-4 sm:items-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="map-sheet-title"
+    >
+      <div class="w-full max-w-xl overflow-hidden rounded-3xl bg-petal shadow-2xl ring-1 ring-blush">
+        <div class="flex items-center justify-between gap-3 px-5 py-4">
+          <h3 id="map-sheet-title" class="font-serif text-xl text-ink">แผนที่</h3>
+          <button type="button" id="map-sheet-close" class="rounded-full bg-blush/80 px-3 py-1 text-sm text-ink" data-i18n="map.close">ปิด</button>
+        </div>
+        <iframe
+          id="map-sheet-frame"
+          title="แผนที่สถานที่จัดงาน"
+          class="h-[48vh] w-full border-0 bg-white sm:h-[420px]"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen
+        ></iframe>
+        <div class="space-y-3 px-5 py-4">
+          <p class="text-sm text-moss" data-i18n="map.stay">ดูตำแหน่งในหน้านี้ได้เลย เพลงจะไม่สะดุด</p>
+          <a
+            id="map-sheet-external"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-leaf px-5 py-3 text-sm text-petal"
+            data-i18n="map.navigate"
+          >
+            เปิดนำทางใน Google Maps
+          </a>
+        </div>
+      </div>
+    </div>
+
     <audio id="bgm" loop preload="auto">
       <source src="aik-khrueng-khong-hua-jai.mp3" type="audio/mpeg" />
     </audio>
 
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <button
+      type="button"
+      id="music-resume-hint"
+      class="fixed bottom-20 z-50 hidden rounded-full bg-ink px-4 py-2 text-xs tracking-wide text-petal shadow-lg"
+    >
+      แตะเพื่อเล่นเพลงต่อ
+    </button>
 
-    <p id="card-version" class="fixed top-3 z-50 text-[11px] tracking-wide text-blush">v1.10-liff</p>
+    <p id="card-version" class="fixed top-3 z-50 text-[11px] tracking-wide text-blush">v1.10</p>
     <button
       type="button"
       id="lang-toggle"
@@ -750,6 +799,10 @@
           "loader.loading": "กำลังโหลดการ์ด...",
           "loader.ready": "พร้อมแล้ว",
           "loader.tap": "แตะเพื่อเปิดการ์ด",
+          "map.close": "ปิด",
+          "map.stay": "ดูตำแหน่งในหน้านี้ได้เลย เพลงจะไม่สะดุด",
+          "map.navigate": "เปิดนำทางใน Google Maps",
+          "music.resume": "แตะเพื่อเล่นเพลงต่อ",
           "cover.photo": "ดอกไม้ในงานแต่งงาน",
         },
         en: {
@@ -848,6 +901,10 @@
           "loader.loading": "Loading the card...",
           "loader.ready": "Ready",
           "loader.tap": "Tap to open the card",
+          "map.close": "Close",
+          "map.stay": "Preview the place here so the music keeps playing",
+          "map.navigate": "Open directions in Google Maps",
+          "music.resume": "Tap to resume the music",
           "cover.photo": "Wedding flowers",
         },
       };
@@ -977,6 +1034,8 @@
           loaderStatus.textContent = loader.dataset.ready === "true" ? copy["loader.ready"] : copy["loader.loading"];
         }
         if (loaderHint) loaderHint.textContent = copy["loader.tap"];
+        const musicResumeHintLang = document.getElementById("music-resume-hint");
+        if (musicResumeHintLang) musicResumeHintLang.textContent = copy["music.resume"];
       }
 
       document.getElementById("lang-toggle").addEventListener("click", function () {
@@ -1140,12 +1199,6 @@
       const loaderStatus = document.getElementById("loader-status");
       const loaderHint = document.getElementById("loader-hint");
 
-      // สร้าง LIFF ใหม่คนละตัวกับ RSVP ใน LINE Developers
-      // Endpoint URL: https://jerdza.github.io/peemai-jerd-wedding-card/liff.html
-      // แล้วใส่ LIFF ID ด้านล่างนี้
-      const CARD_LIFF_ID = "";
-      let liffReady = false;
-
       function setMusicUi(playing) {
         musicToggle.setAttribute("aria-pressed", playing ? "true" : "false");
         musicToggle.setAttribute("aria-label", playing ? strings[cardLang]["music.off"] : strings[cardLang]["music.on"]);
@@ -1253,15 +1306,33 @@
         setTimeout(apply, 250);
       }
 
+      const musicResumeHint = document.getElementById("music-resume-hint");
+      const mapSheet = document.getElementById("map-sheet");
+      const mapSheetTitle = document.getElementById("map-sheet-title");
+      const mapSheetFrame = document.getElementById("map-sheet-frame");
+      const mapSheetExternal = document.getElementById("map-sheet-external");
+      const mapSheetClose = document.getElementById("map-sheet-close");
+
+      function showMusicResumeHint(show) {
+        if (!musicResumeHint) return;
+        musicResumeHint.textContent = strings[cardLang]["music.resume"];
+        musicResumeHint.classList.toggle("hidden", !show);
+      }
+
       function playMusic() {
         if (!musicOn) return;
         restoreMusicTime();
         setMusicUi(true);
         const playPromise = bgm.play();
-        if (playPromise && playPromise.catch) {
-          playPromise.catch(function () {
-            setMusicUi(true);
-          });
+        if (playPromise && playPromise.then) {
+          playPromise
+            .then(function () {
+              showMusicResumeHint(false);
+            })
+            .catch(function () {
+              setMusicUi(true);
+              showMusicResumeHint(true);
+            });
         }
       }
 
@@ -1276,33 +1347,26 @@
         if (!cardUnlocked || !musicOn) return;
         restoreScrollPosition();
         playMusic();
+        window.setTimeout(function () {
+          if (musicOn && bgm.paused) playMusic();
+        }, 350);
       }
 
-      function openExternalUrl(url) {
-        saveScrollPosition();
-        saveMusicState();
-        markCardOpened();
-        if (liffReady && window.liff && liff.isInClient()) {
-          try {
-            liff.openWindow({ url: url, external: true });
-            return;
-          } catch (err) {}
-        }
-        window.open(url, "_blank", "noopener,noreferrer");
+      function openMapSheet(button) {
+        const nameKey = button.getAttribute("data-map-name-key");
+        const embed = button.getAttribute("data-map-embed") || "";
+        const external = button.getAttribute("data-map-external") || "#";
+        mapSheetTitle.textContent = (nameKey && strings[cardLang][nameKey]) || "แผนที่";
+        mapSheetFrame.src = embed;
+        mapSheetExternal.href = external;
+        mapSheet.classList.remove("hidden");
+        mapSheet.classList.add("flex");
       }
 
-      function initCardLiff() {
-        if (!window.liff || !CARD_LIFF_ID) {
-          return Promise.resolve();
-        }
-        return liff
-          .init({ liffId: CARD_LIFF_ID })
-          .then(function () {
-            liffReady = true;
-          })
-          .catch(function () {
-            liffReady = false;
-          });
+      function closeMapSheet() {
+        mapSheet.classList.add("hidden");
+        mapSheet.classList.remove("flex");
+        mapSheetFrame.src = "";
       }
 
       function loadImage(src) {
@@ -1371,7 +1435,6 @@
       }
 
       Promise.all([
-        initCardLiff(),
         loadImage("cover-cream-08.jpg"),
         loadImage("Logo PJ 2000x2000 - Master v3.png"),
         waitAudio(bgm),
@@ -1409,16 +1472,22 @@
         }, 2000);
       });
 
-      document.addEventListener(
-        "click",
-        function (event) {
-          const link = event.target.closest && event.target.closest("a.js-external-map");
-          if (!link) return;
-          event.preventDefault();
-          openExternalUrl(link.href);
-        },
-        true
-      );
+      document.querySelectorAll(".js-map-sheet").forEach(function (button) {
+        button.addEventListener("click", function () {
+          openMapSheet(button);
+        });
+      });
+
+      mapSheetClose.addEventListener("click", closeMapSheet);
+      mapSheet.addEventListener("click", function (event) {
+        if (event.target === mapSheet) closeMapSheet();
+      });
+
+      mapSheetExternal.addEventListener("click", function () {
+        saveScrollPosition();
+        saveMusicState();
+        markCardOpened();
+      });
 
       document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
@@ -1445,7 +1514,16 @@
         playMusic();
       });
 
+      if (musicResumeHint) {
+        musicResumeHint.addEventListener("click", function () {
+          musicOn = true;
+          saveMusicState();
+          playMusic();
+        });
+      }
+
       setMusicUi(false);
+      showMusicResumeHint(false);
 
       musicToggle.addEventListener("click", function () {
         if (!bgm.paused) {
@@ -1453,6 +1531,7 @@
           bgm.pause();
           saveMusicState();
           setMusicUi(false);
+          showMusicResumeHint(false);
           return;
         }
         musicOn = true;
