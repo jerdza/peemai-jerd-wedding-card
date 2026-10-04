@@ -220,10 +220,26 @@
 
       #scroll-nav button {
         pointer-events: auto;
+        width: 8.75rem;
+        justify-content: center;
       }
 
       #scroll-nav button.invisible {
         pointer-events: none;
+      }
+
+      #invite .invite-line {
+        min-height: 2.75rem;
+      }
+
+      #invite .couple-name {
+        min-height: 2.5rem;
+      }
+
+      @media (min-width: 640px) {
+        #invite .couple-name {
+          min-height: 2.75rem;
+        }
       }
 
       html.card-locked #scroll-nav {
@@ -349,19 +365,19 @@
           </div>
 
           <p
-            class="mx-auto mt-10 max-w-[17rem] break-words text-sm leading-relaxed text-mute sm:max-w-md"
+            class="invite-line mx-auto mt-10 max-w-sm break-words text-sm leading-relaxed text-mute"
             data-i18n="invite.line"
           >
             มีความยินดีขอเรียนเชิญท่านเพื่อเป็นเกียรติเนื่องในพิธีมงคลสมรส
           </p>
 
-          <p class="mt-4 text-xs tracking-[0.28em] text-sage" data-i18n="invite.between">ระหว่าง</p>
+          <p class="mt-4 min-h-4 text-xs tracking-[0.28em] text-sage" data-i18n="invite.between">ระหว่าง</p>
 
-          <h2 class="couple-name mt-8 font-sans text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">
+          <h2 class="couple-name mt-8 flex items-center justify-center font-sans text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">
             นางสาวสมัณญา แพ่งเกษม
           </h2>
-          <p class="mt-6 mb-2 font-script text-5xl leading-none text-blush">&amp;</p>
-          <h2 class="couple-name font-sans text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">
+          <p class="mt-6 mb-2 flex h-12 items-center justify-center font-script text-5xl leading-none text-blush">&amp;</p>
+          <h2 class="couple-name flex items-center justify-center font-sans text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">
             นายบรรเจิด ลิขิตธรรมานุกูล
           </h2>
         </div>
@@ -1153,12 +1169,6 @@
         document.querySelectorAll(".gallery-item img").forEach(function (img, index) {
           img.alt = copy["gallery.photo"] + " " + (index + 1);
         });
-        document.querySelectorAll(".couple-name").forEach(function (el) {
-          el.classList.toggle("text-2xl", lang === "th");
-          el.classList.toggle("sm:text-3xl", lang === "th");
-          el.classList.toggle("text-xl", lang === "en");
-          el.classList.toggle("sm:text-2xl", lang === "en");
-        });
         document.querySelectorAll(".venue-brand").forEach(function (el) {
           el.classList.toggle("font-script-th", lang === "th");
           el.classList.toggle("font-script", lang === "en");
@@ -1847,7 +1857,9 @@
           updateScrollNav();
         }, 850);
 
-        const targetTop = Math.max(0, getWaypointLandY(el));
+        const isLast = next >= SCROLL_WAYPOINTS.length - 1;
+        const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+        const targetTop = isLast ? maxScroll : Math.max(0, getWaypointLandY(el));
         window.scrollTo({ top: targetTop, behavior: "smooth" });
         updateScrollNav();
       }
