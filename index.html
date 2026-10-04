@@ -123,8 +123,7 @@
       }
 
       #card-version,
-      #lang-toggle,
-      #music-toggle {
+      #lang-toggle {
         right: max(1.25rem, calc((100vw - 720px) / 2 + 1.25rem));
       }
 
@@ -209,23 +208,30 @@
       }
 
       #scroll-nav {
-        left: 50%;
+        left: max(1.25rem, calc((100vw - 720px) / 2 + 1.25rem));
         bottom: 1.25rem;
-        transform: translateX(-50%);
-        width: min(100%, 720px);
+        width: auto;
+        max-width: calc(100vw - 2.5rem);
         pointer-events: none;
         z-index: 40;
         transition: opacity 0.3s ease;
       }
 
-      #scroll-nav button {
+      #scroll-nav #scroll-up,
+      #scroll-nav #scroll-down {
         pointer-events: auto;
         width: 8.75rem;
         justify-content: center;
       }
 
-      #scroll-nav button.invisible {
+      #scroll-nav #scroll-up.invisible,
+      #scroll-nav #scroll-down.invisible {
         pointer-events: none;
+      }
+
+      #scroll-nav #music-toggle {
+        pointer-events: auto;
+        flex-shrink: 0;
       }
 
       #invite .invite-line {
@@ -834,24 +840,8 @@
       EN
     </button>
 
-    <button
-      type="button"
-      id="music-toggle"
-      class="fixed bottom-5 z-50 flex h-11 w-11 items-center justify-center border border-line bg-paper text-ink transition hover:border-sage hover:text-sage"
-      aria-label="เปิดเพลงประกอบ"
-      aria-pressed="false"
-    >
-      <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-      </svg>
-      <svg id="icon-mute" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-      </svg>
-    </button>
-
-    <nav id="scroll-nav" class="fixed px-6" aria-label="เลื่อนหน้าการ์ด">
-      <div id="scroll-nav-inner" class="flex w-full items-center justify-center gap-4">
+    <nav id="scroll-nav" class="fixed" aria-label="เลื่อนหน้าการ์ด">
+      <div id="scroll-nav-inner" class="flex items-center justify-start gap-2">
         <button
           type="button"
           id="scroll-up"
@@ -872,6 +862,21 @@
           <span id="scroll-down-label">เลื่อนลง</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          id="music-toggle"
+          class="flex h-11 w-11 items-center justify-center rounded-full bg-blush text-sage shadow-lg ring-1 ring-sage/30 transition hover:bg-blush-soft"
+          aria-label="เปิดเพลงประกอบ"
+          aria-pressed="false"
+        >
+          <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+          </svg>
+          <svg id="icon-mute" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
           </svg>
         </button>
       </div>
