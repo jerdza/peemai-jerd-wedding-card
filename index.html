@@ -245,7 +245,6 @@
           class="h-16 w-16 object-contain opacity-90"
         />
         <p id="resume-title" class="mt-6 font-serif text-xl text-logo">แตะเพื่อเปิดการ์ดต่อ</p>
-        <p id="resume-sub" class="mt-2 font-sans text-sm tracking-wide text-moss">เพลงจะเล่นต่อจากเดิม</p>
       </div>
     </div>
 
@@ -833,7 +832,6 @@
           "loader.ready": "พร้อมแล้ว",
           "loader.tap": "แตะเพื่อเปิดการ์ด",
           "resume.title": "แตะเพื่อเปิดการ์ดต่อ",
-          "resume.sub": "เพลงจะเล่นต่อจากเดิม",
           "map.close": "ปิด",
           "map.navigate": "เปิดนำทางใน Google Maps",
           "cover.photo": "ดอกไม้ในงานแต่งงาน",
@@ -935,7 +933,6 @@
           "loader.ready": "Ready",
           "loader.tap": "Tap to open the card",
           "resume.title": "Tap to continue",
-          "resume.sub": "The music will resume",
           "map.close": "Close",
           "map.navigate": "Open directions in Google Maps",
           "cover.photo": "Wedding flowers",
@@ -1068,9 +1065,7 @@
         }
         if (loaderHint) loaderHint.textContent = copy["loader.tap"];
         const resumeTitle = document.getElementById("resume-title");
-        const resumeSub = document.getElementById("resume-sub");
         if (resumeTitle) resumeTitle.textContent = copy["resume.title"];
-        if (resumeSub) resumeSub.textContent = copy["resume.sub"];
       }
 
       document.getElementById("lang-toggle").addEventListener("click", function () {
@@ -1265,11 +1260,9 @@
 
       const SCROLL_KEY = "pj-wedding-scroll";
       const OPENED_KEY = "pj-wedding-opened";
-      const MUSIC_TIME_KEY = "pj-wedding-music-time";
       const MUSIC_ON_KEY = "pj-wedding-music-on";
       let cardUnlocked = false;
       let scrollSaveTick = 0;
-      let musicTimeTick = 0;
 
       function readStoredMusicOn() {
         try {
@@ -1322,32 +1315,13 @@
       function saveMusicState() {
         try {
           sessionStorage.setItem(MUSIC_ON_KEY, musicOn ? "1" : "0");
-          if (bgm && Number.isFinite(bgm.currentTime)) {
-            sessionStorage.setItem(MUSIC_TIME_KEY, String(bgm.currentTime));
-          }
+          sessionStorage.removeItem("pj-wedding-music-time");
         } catch (err) {}
       }
 
-      function restoreMusicTime() {
+      function resetMusicToStart() {
         try {
-          const saved = parseFloat(sessionStorage.getItem(MUSIC_TIME_KEY) || "");
-          if (!Number.isFinite(saved) || saved <= 0) return;
-          const apply = function () {
-            if (!Number.isFinite(bgm.duration) || bgm.duration <= 0) {
-              if (Math.abs((bgm.currentTime || 0) - saved) >= 1.25) {
-                bgm.currentTime = saved;
-              }
-              return;
-            }
-            const next = Math.min(saved, Math.max(0, bgm.duration - 0.25));
-            if (Math.abs((bgm.currentTime || 0) - next) >= 1.25) {
-              bgm.currentTime = next;
-            }
-          };
-          apply();
-          if (bgm.readyState < 1) {
-            bgm.addEventListener("loadedmetadata", apply, { once: true });
-          }
+          bgm.currentTime = 0;
         } catch (err) {}
       }
 
@@ -1417,22 +1391,24 @@
       function playMusic(options) {
         const opts = options || {};
         if (!musicOn) return;
-        restoreMusicTime();
-        setMusicUi(true);
         let playPromise;
         try {
+          // play() ต้องมาก่อนทุกอย่าง — ห้าม seek/DOM ก่อน เพราะ LINE ทิ้ง gesture แล้วเพลงเงียบ
           playPromise = bgm.play();
         } catch (err) {
+          setMusicUi(true);
           markNeedResume(true);
           if (opts.showFilterOnFail) showResumeFilter();
           return;
         }
+        setMusicUi(true);
         if (playPromise && playPromise.then) {
           playPromise
             .then(function () {
               setMusicUi(true);
               markNeedResume(false);
               hideResumeFilter();
+              saveMusicState();
             })
             .catch(function () {
               setMusicUi(true);
@@ -1447,6 +1423,7 @@
         } else {
           markNeedResume(false);
           hideResumeFilter();
+          saveMusicState();
         }
       }
 
@@ -1454,6 +1431,8 @@
         saveMusicState();
         if (!musicOn) return;
         if (!bgm.paused) bgm.pause();
+        // รีเซ็ตตอนออกจากหน้า — กลับมาแล้วเริ่มใหม่ ไม่ต่อจากเดิม
+        resetMusicToStart();
         markNeedResume(true);
         setMusicUi(true);
       }
@@ -1480,33 +1459,9 @@
           hideResumeFilter();
           return;
         }
+        // เล่นทันทีใน gesture ของการแตะ
         musicOn = true;
-        restoreMusicTime();
-        setMusicUi(true);
-        let playPromise;
-        try {
-          playPromise = bgm.play();
-        } catch (err) {
-          markNeedResume(true);
-          return;
-        }
-        if (playPromise && playPromise.then) {
-          playPromise
-            .then(function () {
-              markNeedResume(false);
-              saveMusicState();
-              hideResumeFilter();
-            })
-            .catch(function () {
-              markNeedResume(true);
-            });
-          return;
-        }
-        if (!bgm.paused) {
-          markNeedResume(false);
-          saveMusicState();
-          hideResumeFilter();
-        }
+        playMusic({ showFilterOnFail: false });
       }
 
       function openMapSheet(button) {
@@ -1576,6 +1531,13 @@
         const opts = options || {};
         if (cardUnlocked || loader.dataset.ready !== "true") return;
         cardUnlocked = true;
+        if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
+          musicOn = true;
+        }
+        // ต้อง play() ก่อนงาน DOM/scroll — ไม่งั้น LINE ทิ้ง user gesture แล้วเพลงเงียบ
+        if (musicOn) {
+          playMusic({ showFilterOnFail: !!opts.fromAuto });
+        }
         markCardOpened();
         document.documentElement.classList.remove("card-locked");
         loader.classList.add("is-gone");
@@ -1583,11 +1545,6 @@
           if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
         }, 500);
         restoreScrollPosition();
-        if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
-          musicOn = true;
-        }
-        // แตะจากหน้าโหลด = gesture จริง / auto จาก session เดิมอาจเล่นไม่ติด
-        playMusic({ showFilterOnFail: !!opts.fromAuto });
         window.setTimeout(function () {
           if (!musicOn || !bgm.paused) return;
           markNeedResume(true);
@@ -1616,9 +1573,14 @@
         }
       });
 
-      loader.addEventListener("pointerdown", function () {
+      function onLoaderOpen(event) {
+        if (loader.dataset.ready !== "true" || cardUnlocked) return;
+        if (event) event.preventDefault();
         unlockCard();
-      });
+      }
+
+      loader.addEventListener("pointerdown", onLoaderOpen, { passive: false });
+      loader.addEventListener("click", onLoaderOpen);
 
       resumeFilter.addEventListener(
         "pointerdown",
@@ -1628,13 +1590,15 @@
         },
         { passive: false }
       );
+      resumeFilter.addEventListener("click", function (event) {
+        event.preventDefault();
+        dismissResumeFilter();
+      });
 
       window.addEventListener(
         "scroll",
         function () {
           if (!cardUnlocked) return;
-          // scroll event อย่างเดียวปลดล็อกเสียงใน LINE ไม่ได้
-          // การเล่นต่อใช้ touchstart/touchend ตอนเริ่มเลื่อนแทน
           if (scrollSaveTick) return;
           scrollSaveTick = requestAnimationFrame(function () {
             scrollSaveTick = 0;
@@ -1643,15 +1607,6 @@
         },
         { passive: true }
       );
-
-      bgm.addEventListener("timeupdate", function () {
-        if (bgm.paused || !musicOn) return;
-        if (musicTimeTick) return;
-        musicTimeTick = window.setTimeout(function () {
-          musicTimeTick = 0;
-          saveMusicState();
-        }, 2000);
-      });
 
       document.querySelectorAll(".js-map-sheet").forEach(function (button) {
         button.addEventListener("click", function () {
