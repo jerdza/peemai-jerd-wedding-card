@@ -14,7 +14,7 @@
     <link rel="preload" as="image" href="../assets/cover/cover-cream-08.jpg" />
     <link rel="preload" as="image" href="../assets/logo/logo-loader.png" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Prompt:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Prompt:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,6 +32,8 @@
               mist: "#EFECE6",
             },
             fontFamily: {
+              script: ['"Great Vibes"', "cursive"],
+              "script-th": ['"Charmonman"', "cursive"],
               serif: ['"Playfair Display"', "Georgia", "serif"],
               sans: ['"Prompt"', "sans-serif"],
             },
@@ -80,7 +82,7 @@
       @keyframes loaderPulse {
         0%,
         100% {
-          opacity: 0.45;
+          opacity: 0.55;
         }
         50% {
           opacity: 1;
@@ -88,7 +90,7 @@
       }
 
       .loader-pulse {
-        animation: loaderPulse 1.5s ease-in-out infinite;
+        animation: loaderPulse 1.4s ease-in-out infinite;
       }
 
       #card-loader {
@@ -98,6 +100,15 @@
       #card-loader.is-gone {
         opacity: 0;
         pointer-events: none;
+      }
+
+      #loader-logo {
+        opacity: 0;
+        transition: opacity 0.45s ease;
+      }
+
+      #loader-logo.is-ready {
+        opacity: 0.9;
       }
 
       #resume-filter {
@@ -171,13 +182,13 @@
           id="loader-logo"
           src="../assets/logo/logo-loader.png"
           alt=""
-          width="160"
-          height="160"
+          width="200"
+          height="200"
           decoding="async"
           fetchpriority="high"
-          class="h-24 w-24 object-contain opacity-0 transition-opacity duration-500 sm:h-28 sm:w-28"
+          class="h-28 w-28 object-contain sm:h-32 sm:w-32"
         />
-        <p id="loader-status" class="loader-pulse mt-8 text-sm tracking-[0.18em] text-mute">
+        <p id="loader-status" class="loader-pulse mt-8 font-sans text-sm tracking-[0.18em] text-mute">
           กำลังโหลดการ์ด...
         </p>
         <p id="loader-hint" class="mt-4 hidden font-serif text-lg text-ink">แตะเพื่อเปิดการ์ด</p>
@@ -186,7 +197,7 @@
 
     <div
       id="resume-filter"
-      class="fixed inset-0 z-[95] hidden items-center justify-center bg-paper/85 px-6 text-center"
+      class="fixed inset-0 z-[95] hidden items-center justify-center bg-paper/80 px-6 text-center backdrop-blur-[2px]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="resume-title"
@@ -212,48 +223,48 @@
           src="../assets/cover/cover-cream-08.jpg"
           alt="ดอกไม้ในงานแต่งงาน"
           data-i18n-alt="cover.photo"
-          class="absolute inset-0 h-full w-full object-cover object-center"
+          class="absolute inset-0 h-full w-full object-cover"
         />
         <div class="cover-veil absolute inset-0"></div>
 
-        <div class="relative z-10 flex min-h-[100svh] flex-col px-6 pb-14 pt-16 text-center sm:px-10">
-          <div class="flex flex-1 items-end justify-center pb-4">
+        <div class="relative z-10 flex min-h-[100svh] w-full flex-col px-6 pb-16 text-center text-ink">
+          <div class="flex flex-1 items-center justify-center">
             <img
+              id="cover-logo"
               src="../assets/logo/logo-master-v3.png"
               alt=""
-              width="200"
-              height="200"
-              class="fade-up w-28 opacity-95 sm:w-32"
+              width="619"
+              height="621"
+              class="fade-up h-auto w-44 -translate-y-[3%] drop-shadow-[0_6px_16px_rgba(30,36,32,0.35)] sm:w-52"
             />
           </div>
-
           <p
             id="cover-kicker"
-            class="fade-up delay-1 mt-6 text-[11px] tracking-[0.32em] uppercase text-sage"
+            class="fade-up delay-1 flex h-8 shrink-0 items-center justify-center font-sans text-base tracking-[0.06em] text-sage"
           >
             โปรดบันทึกวันสำคัญของเรา
           </p>
-
-          <div class="fade-up delay-1 mx-auto my-5 h-px w-12 bg-blush"></div>
-
+          <div class="fade-up delay-1 my-5 flex h-6 shrink-0 items-center justify-center gap-4">
+            <span class="h-px w-10 bg-sage/70"></span>
+            <span class="text-lg leading-none text-sage">✦</span>
+            <span class="h-px w-10 bg-sage/70"></span>
+          </div>
           <h1
             id="cover-names"
-            class="fade-up delay-2 font-serif text-5xl font-medium leading-tight tracking-wide sm:text-6xl"
+            class="fade-up delay-2 flex h-24 shrink-0 items-center justify-center gap-x-4 font-script-th text-6xl leading-none sm:h-28 sm:gap-x-5 sm:text-7xl"
           >
-            <span class="text-ink">ปีใหม่</span>
-            <span class="mx-2 text-blush">&amp;</span>
-            <span class="text-ink">เจิด</span>
+            <span class="text-ink">ปีใหม่ </span> <span class="text-blush">และ</span> <span class="text-ink"> เจิด</span>
           </h1>
 
-          <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-4 text-sm leading-relaxed text-mute">
+          <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-3 text-base text-mute">
             <p>
-              <span id="cover-nks-date" class="block text-ink">วันอาทิตย์ที่ 27 ธันวาคม 2569</span>
-              <span id="cover-nks-meta">07:00–14:00 น. · นครสวรรค์</span>
+              <span id="cover-nks-date">วันอาทิตย์ที่ 27 ธันวาคม 2569</span><br />
+              <span id="cover-nks-meta" class="text-ink/80">07:00–14:00 น. · นครสวรรค์</span>
             </p>
-            <div class="mx-auto h-px w-8 bg-line"></div>
+            <p class="text-blush">♡</p>
             <p>
-              <span id="cover-bkk-date" class="block text-ink">วันเสาร์ที่ 23 มกราคม 2570</span>
-              <span id="cover-bkk-meta">09:00–14:00 น. · กรุงเทพฯ</span>
+              <span id="cover-bkk-date">วันเสาร์ที่ 23 มกราคม 2570</span><br />
+              <span id="cover-bkk-meta" class="text-ink/80">09:00–14:00 น. · กรุงเทพฯ</span>
             </p>
           </div>
 
@@ -271,33 +282,33 @@
 
       <!-- Invitation -->
       <section id="invite" class="px-6 pb-28 pt-16 sm:px-10 sm:pb-32 sm:pt-20">
-        <div class="mx-auto max-w-md text-center">
-          <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="invite.eyebrow">คำเชิญ</p>
+        <div class="mx-auto max-w-xl text-center">
+          <p class="text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="invite.eyebrow">คำเชิญ</p>
           <div class="mx-auto mt-6 accent-rule w-10"></div>
 
-          <div class="mt-10 space-y-3 text-sm leading-relaxed text-ink">
-            <p data-i18n="invite.bride.parent">นางศิริกาญจน์ แพ่งเกษม</p>
-            <p class="text-xs tracking-[0.2em] text-blush" data-i18n="invite.and">และ</p>
-            <p data-i18n="invite.groom.parent1">นายบุญเลิศ ลิขิตธรรมานุกูล</p>
-            <p data-i18n="invite.groom.parent2">นางลีเซียม แซ่ชิ้ง</p>
+          <div class="mt-10 flex flex-col items-center gap-6">
+            <p class="text-base leading-relaxed text-ink" data-i18n="invite.bride.parent">นางศิริกาญจน์ แพ่งเกษม</p>
+            <p class="font-serif text-sm text-sage" data-i18n="invite.and">และ</p>
+            <div class="space-y-2 text-base leading-relaxed text-ink">
+              <p data-i18n="invite.groom.parent1">นายบุญเลิศ ลิขิตธรรมานุกูล</p>
+              <p data-i18n="invite.groom.parent2">นางลีเซียม แซ่ชิ้ง</p>
+            </div>
           </div>
 
           <p
-            class="mx-auto mt-8 max-w-xs text-sm leading-relaxed text-mute"
+            class="mx-auto mt-10 max-w-[17rem] break-words text-sm leading-relaxed text-mute sm:max-w-md"
             data-i18n="invite.line"
           >
             มีความยินดีขอเรียนเชิญท่านเพื่อเป็นเกียรติเนื่องในพิธีมงคลสมรส
           </p>
 
-          <p class="mt-8 text-[11px] tracking-[0.28em] uppercase text-sage" data-i18n="invite.between">
-            ระหว่าง
-          </p>
+          <p class="mt-4 text-xs tracking-[0.28em] text-sage" data-i18n="invite.between">ระหว่าง</p>
 
-          <h2 class="couple-name mt-6 font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">
+          <h2 class="couple-name mt-8 font-sans text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">
             นางสาวสมัณญา แพ่งเกษม
           </h2>
-          <p class="my-4 font-serif text-2xl text-blush">&amp;</p>
-          <h2 class="couple-name font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">
+          <p class="mt-6 mb-2 font-script text-5xl leading-none text-blush">&amp;</p>
+          <h2 class="couple-name font-sans text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">
             นายบรรเจิด ลิขิตธรรมานุกูล
           </h2>
         </div>
@@ -311,10 +322,9 @@
             อีกไม่กี่วันก็จะได้พบกัน
           </h2>
           <p class="mt-3 text-sm text-mute" data-i18n="countdown.sub">นับถอยหลังสู่วันสำคัญทั้งสองงาน</p>
-          <div class="mx-auto mt-8 accent-rule w-10"></div>
 
           <article class="mt-14 text-left">
-            <div class="flex items-baseline justify-between gap-3 border-b border-line pb-4">
+            <div class="flex items-baseline justify-between gap-3">
               <div>
                 <p class="text-[11px] tracking-[0.25em] uppercase text-blush" data-i18n="day.label1">วันที่ 1</p>
                 <h3 class="mt-1 font-serif text-2xl" data-i18n="place.nks">นครสวรรค์</h3>
@@ -344,7 +354,7 @@
           </article>
 
           <article class="mt-12 text-left">
-            <div class="flex items-baseline justify-between gap-3 border-b border-line pb-4">
+            <div class="flex items-baseline justify-between gap-3">
               <div>
                 <p class="text-[11px] tracking-[0.25em] uppercase text-blush" data-i18n="day.label2">วันที่ 2</p>
                 <h3 class="mt-1 font-serif text-2xl" data-i18n="place.bkk">กรุงเทพฯ</h3>
@@ -384,7 +394,6 @@
               กำหนดการทั้งสองวัน
             </h2>
             <p class="mt-3 text-sm text-mute" data-i18n="schedule.sub">ขอเชิญร่วมเป็นสักขีพยานในวันสำคัญของเรา</p>
-            <div class="mx-auto mt-8 accent-rule w-10"></div>
           </div>
 
           <div class="mt-16">
@@ -418,17 +427,17 @@
                   <img src="../assets/icons/schedule-rings.png" alt="" class="h-10 w-12 object-contain" />
                 </div>
                 <div>
-                  <p class="text-xs tracking-[0.18em] text-blush" data-i18n="t.nks.3.time">08:59 น.</p>
+                  <p class="text-xs tracking-[0.18em] text-sage" data-i18n="t.nks.3.time">08:59 น.</p>
                   <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.3.title">พิธีหมั้น</h4>
                   <p class="mt-1 text-sm text-mute" data-i18n="t.nks.3.body">ล่องแพ</p>
                 </div>
               </li>
               <li class="flex items-center gap-5">
                 <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-paper">
-                  <img src="../assets/icons/schedule-meal.png?v=2" alt="" class="h-full w-full object-contain" />
+                  <img src="../assets/icons/schedule-meal-blush.png" alt="" class="h-11 w-11 object-contain" />
                 </div>
                 <div>
-                  <p class="text-xs tracking-[0.18em] text-blush" data-i18n="t.nks.4.time">11:30 น.</p>
+                  <p class="text-xs tracking-[0.18em] text-sage" data-i18n="t.nks.4.time">11:30 น.</p>
                   <h4 class="mt-1 font-serif text-xl" data-i18n="t.nks.4.title">รับประทานอาหาร</h4>
                   <p class="mt-1 text-sm text-mute" data-i18n="t.nks.4.body">หลังล่องแพ</p>
                 </div>
@@ -464,7 +473,7 @@
                   <img src="../assets/icons/schedule-pig.png" alt="" class="h-11 w-14 object-contain" />
                 </div>
                 <div>
-                  <p class="text-xs tracking-[0.18em] text-blush" data-i18n="t.bkk.2.time">11:00 น.</p>
+                  <p class="text-xs tracking-[0.18em] text-sage" data-i18n="t.bkk.2.time">11:00 น.</p>
                   <h4 class="mt-1 font-serif text-xl" data-i18n="t.bkk.2.title">ฉลองมงคลสมรส</h4>
                 </div>
               </li>
@@ -789,8 +798,8 @@
       const strings = {
         th: {
           names:
-            '<span class="text-ink">ปีใหม่</span> <span class="mx-2 text-blush">&amp;</span> <span class="text-ink">เจิด</span>',
-          nameFont: ["font-serif", "text-5xl", "sm:text-6xl", "font-medium", "leading-tight", "tracking-wide"],
+            '<span class="text-ink">ปีใหม่ </span> <span class="text-blush">และ</span> <span class="text-ink"> เจิด</span>',
+          nameFont: ["font-script-th", "text-6xl", "sm:text-7xl", "leading-none"],
           kicker: "โปรดบันทึกวันสำคัญของเรา",
           nksDate: "วันอาทิตย์ที่ 27 ธันวาคม 2569",
           nksMeta: "07:00–14:00 น. · นครสวรรค์",
@@ -894,8 +903,8 @@
         },
         en: {
           names:
-            '<span class="text-ink">Peemai</span> <span class="mx-2 text-blush">&amp;</span> <span class="text-ink">Jerd</span>',
-          nameFont: ["font-serif", "text-5xl", "sm:text-6xl", "font-medium", "leading-tight", "tracking-wide"],
+            '<span class="text-ink">Peemai</span> <span class="text-blush">&amp;</span> <span class="text-ink">Jerd</span>',
+          nameFont: ["font-script", "text-5xl", "sm:text-7xl", "leading-none"],
           kicker: "Save the Date",
           nksDate: "Sunday, 27 December 2026",
           nksMeta: "07:00–14:00 · Nakhon Sawan",
@@ -1000,12 +1009,17 @@
       };
 
       const nameFontClasses = [
+        "font-script",
+        "font-script-th",
         "font-serif",
         "text-5xl",
         "text-6xl",
+        "text-7xl",
         "sm:text-6xl",
+        "sm:text-7xl",
         "font-medium",
         "leading-tight",
+        "leading-none",
         "tracking-wide",
       ];
       let cardLang = "th";
@@ -1028,6 +1042,11 @@
         });
         const kicker = document.getElementById("cover-kicker");
         kicker.textContent = copy.kicker;
+        kicker.classList.toggle("text-base", lang === "th");
+        kicker.classList.toggle("tracking-[0.06em]", lang === "th");
+        kicker.classList.toggle("text-sm", lang === "en");
+        kicker.classList.toggle("uppercase", lang === "en");
+        kicker.classList.toggle("tracking-[0.35em]", lang === "en");
         document.getElementById("cover-nks-date").textContent = copy.nksDate;
         document.getElementById("cover-nks-meta").textContent = copy.nksMeta;
         document.getElementById("cover-bkk-date").textContent = copy.bkkDate;
@@ -1233,8 +1252,7 @@
 
       function revealLoaderLogo() {
         if (!loaderLogo) return;
-        loaderLogo.classList.remove("opacity-0");
-        loaderLogo.classList.add("opacity-90");
+        loaderLogo.classList.add("is-ready");
       }
 
       function prepareLoaderLogo() {
