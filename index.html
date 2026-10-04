@@ -175,6 +175,39 @@
         scroll-margin-bottom: 5.5rem;
       }
 
+      #invite.scroll-waypoint {
+        scroll-margin-top: -0.75rem;
+      }
+
+      #countdown.scroll-waypoint {
+        scroll-margin-top: -0.75rem;
+      }
+
+      /* ระยะหัวโซนให้เท่ากันตอนลงจอด / ตอน sticky */
+      .zone-head-offset {
+        scroll-margin-top: 4rem;
+      }
+
+      .zone-sticky-head {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(253, 251, 247, 0.94);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding-top: 4rem;
+        padding-bottom: 0.75rem;
+      }
+
+      #schedule-nks.scroll-waypoint,
+      #schedule-bkk.scroll-waypoint,
+      #location-nks.scroll-waypoint,
+      #location-bkk.scroll-waypoint,
+      #gallery-top.scroll-waypoint,
+      #gallery-bottom.scroll-waypoint {
+        scroll-margin-top: 10.5rem;
+      }
+
       #scroll-nav {
         left: 50%;
         bottom: 1.25rem;
@@ -408,16 +441,16 @@
       <!-- Timeline -->
       <section id="schedule" class="px-6 py-16 sm:px-10 sm:py-20">
         <div class="mx-auto max-w-md">
-          <div id="schedule-nks" class="scroll-waypoint rounded-3xl bg-sage/45 px-5 py-6">
-            <div class="text-center">
-              <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="schedule.eyebrow">กำหนดการ</p>
-              <h2 class="mt-2 font-serif text-2xl tracking-wide sm:text-3xl" data-i18n="schedule.title">
-                กำหนดการทั้งสองวัน
-              </h2>
-              <p class="mt-1 text-sm text-mute" data-i18n="schedule.sub">ขอเชิญร่วมเป็นสักขีพยานในวันสำคัญของเรา</p>
-            </div>
+          <div class="zone-sticky-head text-center">
+            <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="schedule.eyebrow">กำหนดการ</p>
+            <h2 class="mt-2 font-serif text-2xl tracking-wide sm:text-3xl" data-i18n="schedule.title">
+              กำหนดการทั้งสองวัน
+            </h2>
+            <p class="mt-1 text-sm text-mute" data-i18n="schedule.sub">ขอเชิญร่วมเป็นสักขีพยานในวันสำคัญของเรา</p>
+          </div>
 
-            <p class="mt-6 text-[11px] tracking-[0.25em] uppercase text-ink" data-i18n="schedule.nks.label">
+          <div id="schedule-nks" class="scroll-waypoint mt-4 rounded-3xl bg-sage/45 px-5 py-6">
+            <p class="text-[11px] tracking-[0.25em] uppercase text-ink" data-i18n="schedule.nks.label">
               วันที่ 1 · นครสวรรค์
             </p>
             <h3 class="mt-1 font-serif text-xl sm:text-2xl" data-i18n="date.nks.long">วันอาทิตย์ที่ 27 ธันวาคม 2569</h3>
@@ -499,13 +532,14 @@
       <!-- Location -->
       <section id="location" class="px-6 py-16 sm:px-10 sm:py-20">
         <div class="mx-auto max-w-md text-center">
-          <article id="location-nks" class="scroll-waypoint overflow-hidden rounded-3xl bg-sage/45 text-left">
-            <div class="px-4 pt-6 text-center sm:px-8">
-              <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="venue.eyebrow">สถานที่</p>
-              <h2 class="mt-2 font-serif text-2xl sm:text-3xl" data-i18n="venue.title">สถานที่จัดงาน</h2>
-              <p class="mt-1 text-sm text-mute" data-i18n="venue.sub">สองจังหวัด สองวันแห่งความสุข</p>
-            </div>
-            <div class="mt-5 aspect-[16/10] overflow-hidden">
+          <div class="zone-sticky-head text-center">
+            <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="venue.eyebrow">สถานที่</p>
+            <h2 class="mt-2 font-serif text-2xl sm:text-3xl" data-i18n="venue.title">สถานที่จัดงาน</h2>
+            <p class="mt-1 text-sm text-mute" data-i18n="venue.sub">สองจังหวัด สองวันแห่งความสุข</p>
+          </div>
+
+          <article id="location-nks" class="scroll-waypoint mt-4 overflow-hidden rounded-3xl bg-sage/45 text-left">
+            <div class="aspect-[16/10] overflow-hidden">
               <img
                 src="assets/venue/phae-si-khwae.jpg"
                 alt="แพสี่แคว นครสวรรค์"
@@ -604,34 +638,32 @@
       </section>
 
       <!-- Gallery -->
-      <section id="gallery" class="px-6 py-20 sm:px-10 sm:py-24">
+      <section id="gallery" class="px-6 py-16 sm:px-10 sm:py-20">
         <div class="mx-auto max-w-4xl">
-          <div id="gallery-top" class="scroll-waypoint">
-            <div class="text-center">
-              <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="gallery.eyebrow">แกลเลอรี</p>
-              <h2 class="mt-3 font-serif text-3xl tracking-wide sm:text-4xl" data-i18n="gallery.title">
-                ความทรงจำของเรา
-              </h2>
-              <p class="mt-2 text-sm text-mute" data-i18n="gallery.sub">ช่วงเวลาเล็ก ๆ ที่อยากเก็บไว้ด้วยกัน</p>
-            </div>
+          <div class="zone-sticky-head text-center">
+            <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="gallery.eyebrow">แกลเลอรี</p>
+            <h2 class="mt-2 font-serif text-2xl tracking-wide sm:text-3xl" data-i18n="gallery.title">
+              ความทรงจำของเรา
+            </h2>
+            <p class="mt-1 text-sm text-mute" data-i18n="gallery.sub">ช่วงเวลาเล็ก ๆ ที่อยากเก็บไว้ด้วยกัน</p>
+          </div>
 
-            <div class="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-              <figure>
-                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/01-engagement.jpg">
-                  <img src="assets/gallery/01-engagement-thumb.jpg" alt="ความทรงจำของเรา 1" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
-                </button>
-              </figure>
-              <figure>
-                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/06-garden.jpg">
-                  <img src="assets/gallery/06-garden-thumb.jpg" alt="ความทรงจำของเรา 2" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover object-top transition duration-300 hover:scale-105" />
-                </button>
-              </figure>
-              <figure>
-                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/05-lake.jpg">
-                  <img src="assets/gallery/05-lake-thumb.jpg" alt="ความทรงจำของเรา 3" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
-                </button>
-              </figure>
-            </div>
+          <div id="gallery-top" class="scroll-waypoint mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
+            <figure>
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/01-engagement.jpg">
+                <img src="assets/gallery/01-engagement-thumb.jpg" alt="ความทรงจำของเรา 1" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
+              </button>
+            </figure>
+            <figure>
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/06-garden.jpg">
+                <img src="assets/gallery/06-garden-thumb.jpg" alt="ความทรงจำของเรา 2" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover object-top transition duration-300 hover:scale-105" />
+              </button>
+            </figure>
+            <figure>
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/05-lake.jpg">
+                <img src="assets/gallery/05-lake-thumb.jpg" alt="ความทรงจำของเรา 3" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+              </button>
+            </figure>
           </div>
 
           <div id="gallery-bottom" class="scroll-waypoint mt-3 grid grid-cols-2 gap-3 md:mt-4 md:grid-cols-3 md:gap-4">
@@ -654,27 +686,27 @@
         </div>
       </section>
 
-      <!-- RSVP -->
-      <section id="rsvp" class="scroll-waypoint px-6 py-20 sm:px-10 sm:py-24">
+      <!-- RSVP + Footer -->
+      <section id="rsvp" class="zone-head-offset scroll-waypoint px-6 pb-20 pt-16 sm:px-10">
         <div class="mx-auto max-w-xl text-center">
           <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="rsvp.eyebrow">ตอบรับ</p>
-          <h2 class="mt-3 font-serif text-3xl sm:text-4xl" data-i18n="rsvp.title">ตอบรับเข้าร่วมงาน</h2>
-          <p class="mt-3 text-sm leading-relaxed text-mute" data-i18n-html="rsvp.sub">
+          <h2 class="mt-2 font-serif text-2xl sm:text-3xl" data-i18n="rsvp.title">ตอบรับเข้าร่วมงาน</h2>
+          <p class="mt-2 text-sm leading-relaxed text-mute" data-i18n-html="rsvp.sub">
             กรุณาแจ้งกลับผ่าน LINE OA<br />เพื่อให้เราได้จัดเตรียมที่นั่งและความสะดวกให้ครบ
           </p>
 
-          <div class="mx-auto mt-8 max-w-sm rounded-3xl bg-blush-soft px-5 py-6">
+          <div class="mx-auto mt-5 max-w-sm rounded-3xl bg-blush-soft px-5 py-5">
             <img
               src="assets/qr/line-oa-qr.png"
               alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
               data-i18n-alt="rsvp.qr"
-              width="220"
-              height="220"
-              class="mx-auto rounded-2xl bg-white p-2"
+              width="200"
+              height="200"
+              class="mx-auto h-[200px] w-[200px] rounded-2xl bg-white p-2"
             />
-            <p class="mt-4 text-sm text-mute" data-i18n="rsvp.scan">ใน LINE ให้สแกน QR นี้ หรือค้นหาไอดี</p>
+            <p class="mt-3 text-sm text-mute" data-i18n="rsvp.scan">ใน LINE ให้สแกน QR นี้ หรือค้นหาไอดี</p>
             <p class="mt-1 font-serif text-2xl text-ink">@389twmwk</p>
-            <div class="mt-5 grid grid-cols-2 gap-3">
+            <div class="mt-4 grid grid-cols-2 gap-3">
               <button
                 type="button"
                 id="copy-oa-id"
@@ -693,16 +725,16 @@
               </button>
             </div>
           </div>
+
+          <footer class="mt-5 text-center">
+            <div class="mx-auto flex max-w-xs items-center justify-center gap-3 text-sage">
+              <span class="h-px w-8 bg-sage/50"></span>
+              <span>♡</span>
+              <span class="h-px w-8 bg-sage/50"></span>
+            </div>
+          </footer>
         </div>
       </section>
-
-      <footer class="px-6 pb-24 text-center">
-        <div class="mx-auto flex max-w-xs items-center justify-center gap-3 text-sage">
-          <span class="h-px w-8 bg-sage/50"></span>
-          <span>♡</span>
-          <span class="h-px w-8 bg-sage/50"></span>
-        </div>
-      </footer>
     </div>
 
     <div
@@ -1769,20 +1801,21 @@
       let scrollNavLockIndex = null;
       let scrollNavLockTimer = null;
 
+      function getWaypointLandY(el) {
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        const marginTop = parseFloat(window.getComputedStyle(el).scrollMarginTop) || 0;
+        return top - marginTop;
+      }
+
       function getScrollWaypointIndex() {
         if (scrollNavLockIndex != null) return scrollNavLockIndex;
 
-        const marker = window.scrollY + Math.min(120, window.innerHeight * 0.2);
+        const marker = window.scrollY + 48;
         let idx = 0;
-        let bestTop = -Infinity;
         SCROLL_WAYPOINTS.forEach(function (id, i) {
           const el = document.getElementById(id);
           if (!el) return;
-          const top = el.getBoundingClientRect().top + window.scrollY;
-          if (top <= marker + 2 && top >= bestTop) {
-            bestTop = top;
-            idx = i;
-          }
+          if (getWaypointLandY(el) <= marker) idx = i;
         });
         return idx;
       }
@@ -1803,26 +1836,29 @@
       function goToScrollWaypoint(index) {
         const next = Math.max(0, Math.min(SCROLL_WAYPOINTS.length - 1, index));
         const el = document.getElementById(SCROLL_WAYPOINTS[next]);
-        if (!el || next === scrollNavIndex) return;
+        if (!el) return;
 
         scrollNavLockIndex = next;
+        scrollNavIndex = next;
         if (scrollNavLockTimer) window.clearTimeout(scrollNavLockTimer);
         scrollNavLockTimer = window.setTimeout(function () {
           scrollNavLockIndex = null;
           scrollNavLockTimer = null;
           updateScrollNav();
-        }, 700);
+        }, 850);
 
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        scrollNavIndex = next;
+        const targetTop = Math.max(0, getWaypointLandY(el));
+        window.scrollTo({ top: targetTop, behavior: "smooth" });
         updateScrollNav();
       }
 
       scrollUpBtn.addEventListener("click", function () {
-        goToScrollWaypoint(getScrollWaypointIndex() - 1);
+        const from = scrollNavLockIndex != null ? scrollNavLockIndex : scrollNavIndex;
+        goToScrollWaypoint(from - 1);
       });
       scrollDownBtn.addEventListener("click", function () {
-        goToScrollWaypoint(getScrollWaypointIndex() + 1);
+        const from = scrollNavLockIndex != null ? scrollNavLockIndex : scrollNavIndex;
+        goToScrollWaypoint(from + 1);
       });
 
       let scrollNavTick = null;
