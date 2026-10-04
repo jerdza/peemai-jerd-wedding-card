@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" class="card-locked">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -141,13 +141,77 @@
       #rsvp {
         background-image: url("7.png");
       }
+
+      /* เปิดบนจอกว้างแล้วการ์ดกว้างไม่เกิน 1170px */
+      html {
+        background-color: #f0dada;
+      }
+
+      html.card-locked,
+      html.card-locked body {
+        overflow: hidden;
+        height: 100%;
+      }
+
+      #card-version,
+      #lang-toggle,
+      #music-toggle {
+        right: max(1.25rem, calc((100vw - 1170px) / 2 + 1.25rem));
+      }
+
+      #card-loader {
+        transition: opacity 0.45s ease;
+      }
+
+      #card-loader.is-gone {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @keyframes loaderPulse {
+        0%,
+        100% {
+          opacity: 0.55;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .loader-pulse {
+        animation: loaderPulse 1.4s ease-in-out infinite;
+      }
     </style>
   </head>
   <body class="bg-petal text-ink font-sans antialiased">
+    <div
+      id="card-loader"
+      class="fixed inset-0 z-[100] flex items-center justify-center bg-petal px-6 text-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="loader-status"
+    >
+      <div class="mx-auto flex w-full max-w-sm flex-col items-center">
+        <img
+          src="../assets/logo/logo-master-v3.png"
+          alt=""
+          width="200"
+          height="200"
+          class="h-28 w-28 object-contain opacity-90 sm:h-32 sm:w-32"
+        />
+        <p id="loader-status" class="loader-pulse mt-8 font-sans text-sm tracking-[0.18em] text-moss">
+          กำลังโหลดการ์ด...
+        </p>
+        <p id="loader-hint" class="mt-4 hidden font-serif text-lg text-logo">แตะเพื่อเปิดการ์ด</p>
+      </div>
+    </div>
+
+    <div class="mx-auto w-full max-w-[1170px]">
     <!-- Cover -->
     <section class="relative flex min-h-[100svh] flex-col overflow-hidden">
       <img
-        src="cover-cream-08.jpg"
+        id="cover-photo"
+        src="../assets/cover/cover-cream-08.jpg"
         alt="ดอกไม้ในงานแต่งงาน"
         data-i18n-alt="cover.photo"
         class="absolute inset-0 h-full w-full object-cover"
@@ -156,7 +220,8 @@
       <div class="relative z-10 flex min-h-[100svh] w-full flex-col px-6 pb-16 text-center text-ink">
         <div class="flex flex-1 items-center justify-center">
           <img
-            src="Logo PJ 2000x2000 - Master v3.png"
+            id="cover-logo"
+            src="../assets/logo/logo-master-v3.png"
             alt=""
             width="619"
             height="621"
@@ -313,7 +378,7 @@
 
             <li class="relative mb-8 flex items-center gap-5">
               <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#e6c97a] bg-[#fff6d6]">
-                <img src="icons/schedule-monk.png" alt="" class="h-14 w-14 object-contain" />
+                <img src="../assets/icons/schedule-monk.png" alt="" class="h-14 w-14 object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#b8893a]" data-i18n="t.nks.1.time">07:00 น.</p>
@@ -323,7 +388,7 @@
 
             <li class="relative mb-8 flex items-center gap-5">
               <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#8fb58a] bg-[#eef6e8]">
-                <img src="icons/schedule-khanmak.png" alt="" class="h-14 w-14 object-contain" />
+                <img src="../assets/icons/schedule-khanmak.png" alt="" class="h-14 w-14 object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#3f7a4c]" data-i18n="t.nks.2.time">08:19 น.</p>
@@ -333,7 +398,7 @@
 
             <li class="relative mb-8 flex items-center gap-5">
               <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0b070] bg-[#fff0e0]">
-                <img src="icons/schedule-rings.png" alt="" class="h-12 w-14 object-contain" />
+                <img src="../assets/icons/schedule-rings.png" alt="" class="h-12 w-14 object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#e08a32]" data-i18n="t.nks.3.time">08:59 น.</p>
@@ -344,7 +409,7 @@
 
             <li class="relative flex items-center gap-5">
               <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center overflow-hidden rounded-full">
-                <img src="icons/schedule-meal.png?v=2" alt="" class="h-full w-full object-contain" />
+                <img src="../assets/icons/schedule-meal.png?v=2" alt="" class="h-full w-full object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#c4788c]" data-i18n="t.nks.4.time">11:30 น.</p>
@@ -373,7 +438,7 @@
 
             <li class="relative mb-8 flex items-center gap-5">
               <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f3d56a] bg-[#fff8d6]">
-                <img src="icons/schedule-tea.png?v=4" alt="" class="h-12 w-[66px] object-contain" />
+                <img src="../assets/icons/schedule-tea.png?v=4" alt="" class="h-12 w-[66px] object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#c9a227]" data-i18n="t.bkk.1.time">09:09 น.</p>
@@ -383,7 +448,7 @@
 
             <li class="relative flex items-center gap-5">
               <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0c4b0] bg-[#fff3ec]">
-                <img src="icons/schedule-pig.png" alt="" class="h-[52px] w-[64px] object-contain" />
+                <img src="../assets/icons/schedule-pig.png" alt="" class="h-[52px] w-[64px] object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#e08a72]" data-i18n="t.bkk.2.time">11:00 น.</p>
@@ -405,7 +470,7 @@
         <div class="mt-10 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
           <div class="relative">
             <img
-              src="phae-si-khwae.jpg"
+              src="../assets/venue/phae-si-khwae.jpg"
               alt="แพสี่แคว นครสวรรค์"
               data-i18n-alt="venue.nks.photo"
               class="venue-photo h-52 w-full object-cover sm:h-64"
@@ -437,7 +502,7 @@
 
         <div class="mt-6 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
           <img
-            src="la-moon.jpg"
+            src="../assets/venue/la-moon.jpg"
             alt="ลาร์-มูน กรุงเทพฯ"
             data-i18n-alt="venue.bkk.photo"
             class="h-52 w-full object-cover object-center sm:h-64"
@@ -451,7 +516,7 @@
               กรุงเทพฯ
             </p>
             <a
-              href="https://maps.app.goo.gl/ojubXaGfbwy4YJx29"
+              href="https://maps.app.goo.gl/cLyiqcfe6NTpzGp68"
               target="_blank"
               rel="noopener noreferrer"
               class="mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
@@ -522,7 +587,7 @@
 
         <div class="mx-auto mt-8 max-w-sm rounded-3xl bg-blush/70 px-5 py-6">
           <img
-            src="line-oa-qr.png"
+            src="../assets/qr/line-oa-qr.png"
             alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
             data-i18n-alt="rsvp.qr"
             width="220"
@@ -560,14 +625,14 @@
     </div>
 
     <audio id="bgm" loop preload="auto">
-      <source src="aik-khrueng-khong-hua-jai.mp3" type="audio/mpeg" />
+      <source src="../assets/audio/aik-khrueng-khong-hua-jai.mp3" type="audio/mpeg" />
     </audio>
 
-    <p class="fixed right-5 top-3 z-50 text-[11px] tracking-wide text-blush">v1.07</p>
+    <p id="card-version" class="fixed top-3 z-50 text-[11px] tracking-wide text-blush">v1.09</p>
     <button
       type="button"
       id="lang-toggle"
-      class="fixed right-5 top-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
+      class="fixed top-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
       aria-label="เปลี่ยนเป็นภาษาอังกฤษ"
     >
       EN
@@ -576,14 +641,14 @@
     <button
       type="button"
       id="music-toggle"
-      class="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
-      aria-label="ปิดเสียงเพลง"
-      aria-pressed="true"
+      class="fixed bottom-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
+      aria-label="เปิดเพลงประกอบ"
+      aria-pressed="false"
     >
-      <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
       </svg>
-      <svg id="icon-mute" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="icon-mute" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
       </svg>
@@ -684,6 +749,9 @@
           "status.bkk.done": "งานกรุงเทพฯ จบลงแล้ว",
           "music.on": "เปิดเพลงประกอบ",
           "music.off": "ปิดเสียงเพลง",
+          "loader.loading": "กำลังโหลดการ์ด...",
+          "loader.ready": "พร้อมแล้ว",
+          "loader.tap": "แตะเพื่อเปิดการ์ด",
           "cover.photo": "ดอกไม้ในงานแต่งงาน",
         },
         en: {
@@ -779,6 +847,9 @@
           "status.bkk.done": "The Bangkok celebration has ended",
           "music.on": "Play the music",
           "music.off": "Mute the music",
+          "loader.loading": "Loading the card...",
+          "loader.ready": "Ready",
+          "loader.tap": "Tap to open the card",
           "cover.photo": "Wedding flowers",
         },
       };
@@ -901,6 +972,13 @@
         if (musicToggle && bgm) {
           musicToggle.setAttribute("aria-label", bgm.paused ? copy["music.on"] : copy["music.off"]);
         }
+        const loaderStatus = document.getElementById("loader-status");
+        const loaderHint = document.getElementById("loader-hint");
+        const loader = document.getElementById("card-loader");
+        if (loaderStatus && loader) {
+          loaderStatus.textContent = loader.dataset.ready === "true" ? copy["loader.ready"] : copy["loader.loading"];
+        }
+        if (loaderHint) loaderHint.textContent = copy["loader.tap"];
       }
 
       document.getElementById("lang-toggle").addEventListener("click", function () {
@@ -1060,6 +1138,9 @@
       const musicToggle = document.getElementById("music-toggle");
       const iconPlay = document.getElementById("icon-play");
       const iconMute = document.getElementById("icon-mute");
+      const loader = document.getElementById("card-loader");
+      const loaderStatus = document.getElementById("loader-status");
+      const loaderHint = document.getElementById("loader-hint");
 
       function setMusicUi(playing) {
         musicToggle.setAttribute("aria-pressed", playing ? "true" : "false");
@@ -1069,30 +1150,216 @@
       }
 
       let musicOn = true;
+      let cardUnlocked = false;
+      const SCROLL_KEY = "pj-wedding-scroll";
+      const OPENED_KEY = "pj-wedding-opened";
+      let scrollSaveTick = 0;
 
-      function startMusic() {
-        const playPromise = bgm.play();
-        setMusicUi(true);
-        if (playPromise && playPromise.then) {
-          playPromise
-            .then(function () {
-              setMusicUi(true);
-            })
-            .catch(function () {
-              setMusicUi(true);
-            });
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      function currentScrollY() {
+        return window.scrollY || document.documentElement.scrollTop || 0;
+      }
+
+      function saveScrollPosition() {
+        try {
+          sessionStorage.setItem(SCROLL_KEY, String(Math.round(currentScrollY())));
+        } catch (err) {}
+      }
+
+      function readSavedScroll() {
+        try {
+          const value = parseInt(sessionStorage.getItem(SCROLL_KEY) || "", 10);
+          return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (err) {
+          return 0;
         }
       }
 
-      startMusic();
+      function wasCardOpenedBefore() {
+        try {
+          return sessionStorage.getItem(OPENED_KEY) === "1";
+        } catch (err) {
+          return false;
+        }
+      }
+
+      function markCardOpened() {
+        try {
+          sessionStorage.setItem(OPENED_KEY, "1");
+        } catch (err) {}
+      }
+
+      function restoreScrollPosition() {
+        const y = readSavedScroll();
+        if (y <= 0) return;
+        const apply = function () {
+          window.scrollTo(0, y);
+        };
+        apply();
+        requestAnimationFrame(apply);
+        setTimeout(apply, 50);
+        setTimeout(apply, 250);
+      }
+
+      function playMusic() {
+        if (!musicOn) return;
+        setMusicUi(true);
+        const playPromise = bgm.play();
+        if (playPromise && playPromise.catch) {
+          playPromise.catch(function () {
+            // ยังต้องการเปิดเพลงอยู่ แค่รอแตะครั้งถัดไป
+            setMusicUi(true);
+          });
+        }
+      }
+
+      function pauseMusicForLeave() {
+        if (!musicOn) return;
+        if (!bgm.paused) bgm.pause();
+        // ไม่สลับปุ่มเป็นปิด เพื่อให้กลับมาแล้วเล่นต่อได้
+        setMusicUi(true);
+      }
+
+      function resumeMusicAfterReturn() {
+        if (!cardUnlocked || !musicOn) return;
+        restoreScrollPosition();
+        playMusic();
+      }
+
+      function loadImage(src) {
+        return new Promise(function (resolve) {
+          const img = new Image();
+          img.onload = function () {
+            resolve();
+          };
+          img.onerror = function () {
+            resolve();
+          };
+          img.src = src;
+        });
+      }
+
+      function waitAudio(audio) {
+        return new Promise(function (resolve) {
+          if (audio.readyState >= 3) {
+            resolve();
+            return;
+          }
+          let settled = false;
+          function done() {
+            if (settled) return;
+            settled = true;
+            audio.removeEventListener("canplaythrough", done);
+            audio.removeEventListener("loadeddata", done);
+            audio.removeEventListener("error", done);
+            resolve();
+          }
+          audio.addEventListener("canplaythrough", done);
+          audio.addEventListener("loadeddata", done);
+          audio.addEventListener("error", done);
+          setTimeout(done, 12000);
+          try {
+            audio.load();
+          } catch (err) {}
+        });
+      }
+
+      function markLoaderReady() {
+        loader.dataset.ready = "true";
+        loaderStatus.textContent = strings[cardLang]["loader.ready"];
+        loaderStatus.classList.remove("loader-pulse");
+        loaderHint.textContent = strings[cardLang]["loader.tap"];
+        loaderHint.classList.remove("hidden");
+      }
+
+      function unlockCard() {
+        if (cardUnlocked || loader.dataset.ready !== "true") return;
+        cardUnlocked = true;
+        markCardOpened();
+        document.documentElement.classList.remove("card-locked");
+        loader.classList.add("is-gone");
+        setTimeout(function () {
+          if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
+        }, 500);
+        restoreScrollPosition();
+        playMusic();
+      }
+
+      function preloadSectionArt() {
+        ["2.png", "3.png", "4.png", "5.png", "6.png", "7.png"].forEach(function (src) {
+          loadImage(src);
+        });
+      }
+
+      Promise.all([
+        loadImage("../assets/cover/cover-cream-08.jpg"),
+        loadImage("../assets/logo/logo-master-v3.png"),
+        waitAudio(bgm),
+      ]).then(function () {
+        markLoaderReady();
+        preloadSectionArt();
+        if (wasCardOpenedBefore()) {
+          unlockCard();
+        }
+      });
+
+      loader.addEventListener("pointerdown", function () {
+        unlockCard();
+      });
+
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (!cardUnlocked) return;
+          if (scrollSaveTick) return;
+          scrollSaveTick = requestAnimationFrame(function () {
+            scrollSaveTick = 0;
+            saveScrollPosition();
+          });
+        },
+        { passive: true }
+      );
+
+      document.addEventListener(
+        "click",
+        function (event) {
+          const link = event.target.closest && event.target.closest('a[target="_blank"]');
+          if (!link) return;
+          saveScrollPosition();
+          markCardOpened();
+        },
+        true
+      );
+
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          saveScrollPosition();
+          pauseMusicForLeave();
+          return;
+        }
+        resumeMusicAfterReturn();
+      });
+
+      window.addEventListener("pagehide", function () {
+        saveScrollPosition();
+        pauseMusicForLeave();
+      });
+
+      window.addEventListener("pageshow", function () {
+        resumeMusicAfterReturn();
+      });
 
       document.addEventListener("pointerdown", function (event) {
+        if (!cardUnlocked) return;
         if (!musicOn || !bgm.paused) return;
         if (event.target.closest && event.target.closest("#music-toggle")) return;
-        bgm.play().then(function () {
-          setMusicUi(true);
-        }).catch(function () {});
+        playMusic();
       });
+
+      setMusicUi(false);
 
       musicToggle.addEventListener("click", function () {
         if (!bgm.paused) {
@@ -1102,15 +1369,9 @@
           return;
         }
         musicOn = true;
-        const playPromise = bgm.play();
-        setMusicUi(true);
-        if (playPromise && playPromise.catch) {
-          playPromise.catch(function () {
-            setMusicUi(false);
-            musicOn = false;
-          });
-        }
+        playMusic();
       });
     </script>
+    </div>
   </body>
 </html>

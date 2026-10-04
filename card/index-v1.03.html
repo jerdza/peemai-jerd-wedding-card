@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="th" class="card-locked">
+<html lang="th">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,11 +7,10 @@
     <title>ปีใหม่ &amp; เจิด — E-Wedding Card</title>
     <meta
       name="description"
-      content="ขอเชิญร่วมงานมงคลสมรส ปีใหม่  และ  เจิด วันอาทิตย์ที่ 27 ธันวาคม 2569 นครสวรรค์ และวันเสาร์ที่ 23 มกราคม 2570 กรุงเทพฯ"
+      content="ขอเชิญร่วมงานมงคลสมรส ปีใหม่ และ เจิด วันอาทิตย์ที่ 27 ธันวาคม 2569 นครสวรรค์ และวันเสาร์ที่ 23 มกราคม 2570 กรุงเทพฯ"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="logo-loader.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Prompt:wght@300;400;500;600&display=swap"
       rel="stylesheet"
@@ -24,10 +23,8 @@
             colors: {
               petal: "#F0DADA",
               blush: "#E5C2C6",
-              rose: "#E5C2C6",
               sage: "#C6D1B7",
               leaf: "#98A78E",
-              logo: "#889078",
               ink: "#3E4740",
               moss: "#5C675A",
             },
@@ -76,25 +73,6 @@
         }
       }
 
-      @keyframes scrollBlink {
-        0%,
-        49% {
-          color: #e5c2c6;
-          border-color: #e5c2c6;
-          background-color: rgb(229 194 198 / 0.15);
-        }
-        50%,
-        100% {
-          color: #98a78e;
-          border-color: #98a78e;
-          background-color: rgb(198 209 183 / 0.45);
-        }
-      }
-
-      a.scroll-blink {
-        animation: fadeUp 0.9s ease 0.6s forwards, scrollBlink 1.4s steps(1, end) 1.5s infinite;
-      }
-
       .timeline-line {
         background: linear-gradient(180deg, #e5c2c6 0%, #98a78e 50%, #c6d1b7 100%);
       }
@@ -103,200 +81,56 @@
         background: linear-gradient(180deg, #e6c97a 0%, #7eae78 36%, #f0a04a 68%, #ce8596 100%);
       }
 
-      /* เอา filter ที่เคยใส่ออกทั้งหมด */
       .venue-photo {
-        /* filter: sepia(0.22) saturate(0.78) contrast(0.96); */
-      }
-
-      #invite,
-      #countdown,
-      #schedule,
-      #location,
-      #gallery,
-      #rsvp {
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-      }
-
-      #invite {
-        background-image: url("2.png");
-      }
-
-      #countdown {
-        background-image: url("3.png");
-      }
-
-      #schedule {
-        background-image: url("4.png");
-      }
-
-      #location {
-        background-image: url("5.png");
-      }
-
-      #gallery {
-        background-image: url("6.png");
-      }
-
-      #rsvp {
-        background-image: url("7.png");
-      }
-
-      /* เปิดบนจอกว้างแล้วการ์ดกว้างไม่เกิน 1170px */
-      html {
-        background-color: #f0dada;
-      }
-
-      html.card-locked,
-      html.card-locked body {
-        overflow: hidden;
-        height: 100%;
-      }
-
-      #card-version,
-      #lang-toggle,
-      #music-toggle {
-        right: max(1.25rem, calc((100vw - 1170px) / 2 + 1.25rem));
-      }
-
-      #card-loader {
-        transition: opacity 0.45s ease;
-      }
-
-      #card-loader.is-gone {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      #loader-logo {
-        opacity: 0;
-        transition: opacity 0.45s ease;
-      }
-
-      #loader-logo.is-ready {
-        opacity: 0.9;
-      }
-
-      #resume-filter {
-        transition: opacity 0.35s ease;
-      }
-
-      #resume-filter.is-gone {
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      @keyframes loaderPulse {
-        0%,
-        100% {
-          opacity: 0.55;
-        }
-        50% {
-          opacity: 1;
-        }
-      }
-
-      .loader-pulse {
-        animation: loaderPulse 1.4s ease-in-out infinite;
+        filter: sepia(0.22) saturate(0.78) contrast(0.96);
       }
     </style>
   </head>
   <body class="bg-petal text-ink font-sans antialiased">
-    <div
-      id="card-loader"
-      class="fixed inset-0 z-[100] flex items-center justify-center bg-petal px-6 text-center"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="loader-status"
-    >
-      <div class="mx-auto flex w-full max-w-sm flex-col items-center">
-        <img
-          id="loader-logo"
-          src="logo-loader.png"
-          alt=""
-          width="200"
-          height="200"
-          decoding="async"
-          fetchpriority="high"
-          class="h-28 w-28 object-contain sm:h-32 sm:w-32"
-        />
-        <p id="loader-status" class="loader-pulse mt-8 font-sans text-sm tracking-[0.18em] text-moss">
-          กำลังโหลดการ์ด...
-        </p>
-        <p id="loader-hint" class="mt-4 hidden font-serif text-lg text-logo">แตะเพื่อเปิดการ์ด</p>
-      </div>
-    </div>
-
-    <div
-      id="resume-filter"
-      class="fixed inset-0 z-[95] hidden items-center justify-center bg-petal/80 px-6 text-center backdrop-blur-[2px]"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="resume-title"
-      aria-hidden="true"
-    >
-      <div class="mx-auto flex w-full max-w-xs flex-col items-center">
-        <img
-          src="logo-loader.png"
-          alt=""
-          width="96"
-          height="96"
-          class="h-16 w-16 object-contain opacity-90"
-        />
-        <p id="resume-title" class="mt-6 font-serif text-xl text-logo">แตะเพื่อเปิดการ์ดต่อ</p>
-      </div>
-    </div>
-
-    <div class="mx-auto w-full max-w-[1170px]">
     <!-- Cover -->
-    <section class="relative flex min-h-[100svh] flex-col overflow-hidden">
+    <section class="relative flex min-h-[100svh] items-start justify-center overflow-hidden">
       <img
-        id="cover-photo"
-        src="cover-cream-08.jpg"
+        src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=1600&h=2400&crop=focalpoint&fp-x=0.5&fp-y=0.22&q=80"
         alt="ดอกไม้ในงานแต่งงาน"
         data-i18n-alt="cover.photo"
         class="absolute inset-0 h-full w-full object-cover"
       />
 
-      <div class="relative z-10 flex min-h-[100svh] w-full flex-col px-6 pb-16 text-center text-ink">
-        <div class="flex flex-1 items-center justify-center">
-          <img
-            id="cover-logo"
-            src="Logo PJ 2000x2000 - Master v3.png"
-            alt=""
-            width="619"
-            height="621"
-            class="fade-up w-44 sm:w-52 h-auto -translate-y-[3%] drop-shadow-[0_6px_16px_rgba(30,36,32,0.35)]"
-          />
-        </div>
-        <p id="cover-kicker" class="fade-up delay-1 flex h-8 shrink-0 items-center justify-center font-sans text-base tracking-[0.06em] text-blush">
+      <div class="relative z-10 w-full px-6 pb-16 pt-[14vh] text-center text-white drop-shadow-[0_2px_12px_rgba(36,44,38,0.55)]">
+        <img
+          src="../assets/logo/logo.png"
+          alt=""
+          width="619"
+          height="621"
+          class="fade-up mx-auto h-auto w-44 drop-shadow-none sm:w-52"
+        />
+        <p id="cover-kicker" class="fade-up delay-1 mt-5 font-sans text-sm tracking-[0.06em]">
           โปรดบันทึกวันสำคัญของเรา
         </p>
-        <div class="fade-up delay-1 my-5 flex h-6 shrink-0 items-center justify-center gap-4">
-          <span class="h-px w-10 bg-leaf/70"></span>
-          <span class="text-leaf text-lg leading-none">✦</span>
-          <span class="h-px w-10 bg-leaf/70"></span>
+        <div class="fade-up delay-1 my-5 flex items-center justify-center gap-4">
+          <span class="h-px w-10 bg-white/70"></span>
+          <span class="text-lg">✦</span>
+          <span class="h-px w-10 bg-white/70"></span>
         </div>
-        <h1 id="cover-names" class="fade-up delay-2 flex h-24 shrink-0 items-center justify-center gap-x-4 font-script-th text-6xl leading-none sm:h-28 sm:gap-x-5 sm:text-7xl">
-          <span class="text-logo">ปีใหม่ </span> <span class="text-blush">และ</span> <span class="text-logo"> เจิด</span>
+        <h1 id="cover-names" class="fade-up delay-2 mt-1 font-script-th text-5xl leading-snug sm:text-6xl">
+          ปีใหม่ <span class="text-blush">และ</span> เจิด
         </h1>
 
-        <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-3 text-base text-moss">
+        <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-3 text-sm">
           <p>
             <span id="cover-nks-date">วันอาทิตย์ที่ 27 ธันวาคม 2569</span><br />
-            <span id="cover-nks-meta" class="text-ink/80">07:00–14:00 น. · นครสวรรค์</span>
+            <span id="cover-nks-meta">07:00–14:00 น. · นครสวรรค์</span>
           </p>
-          <p class="text-blush">♡</p>
+          <p>♡</p>
           <p>
             <span id="cover-bkk-date">วันเสาร์ที่ 23 มกราคม 2570</span><br />
-            <span id="cover-bkk-meta" class="text-ink/80">09:00–14:00 น. · กรุงเทพฯ</span>
+            <span id="cover-bkk-meta">09:00–14:00 น. · กรุงเทพฯ</span>
           </p>
         </div>
 
         <a
           href="#invite"
-          class="scroll-blink fade-up delay-4 mx-auto mt-10 inline-flex w-fit items-center justify-center gap-2 self-center rounded-full border border-blush bg-blush/15 px-5 py-2 text-xs tracking-widest text-blush"
+          class="fade-up delay-4 mx-auto mt-10 inline-flex items-center gap-2 rounded-full border border-white/70 px-5 py-2 text-xs uppercase tracking-widest transition hover:bg-white/10"
         >
           <span id="cover-scroll">เลื่อนลง</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -307,7 +141,7 @@
     </section>
 
     <!-- Invitation -->
-    <section id="invite" class="px-6 py-24 sm:px-16 sm:py-28">
+    <section id="invite" class="px-6 py-20 sm:py-24">
       <div class="mx-auto max-w-xl text-center">
         <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf" data-i18n="invite.eyebrow">คำเชิญ</p>
         <div class="mt-10 flex flex-col items-center gap-6">
@@ -318,13 +152,13 @@
             <p data-i18n="invite.groom.parent2">นางลีเซียม แซ่ชิ้ง</p>
           </div>
         </div>
-        <p class="mx-auto mt-10 max-w-[17rem] break-words text-sm leading-relaxed text-moss sm:max-w-md" data-i18n="invite.line">
+        <p class="mx-auto mt-10 max-w-md text-sm leading-relaxed text-moss" data-i18n="invite.line">
           มีความยินดีขอเรียนเชิญท่านเพื่อเป็นเกียรติเนื่องในพิธีมงคลสมรส
         </p>
         <p class="mt-4 text-xs tracking-[0.28em] text-leaf" data-i18n="invite.between">ระหว่าง</p>
-        <h2 class="couple-name mt-8 font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">นางสาวสมัณญา แพ่งเกษม</h2>
+        <h2 class="mt-8 font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">นางสาวสมัณญา แพ่งเกษม</h2>
         <p class="mt-6 mb-2 font-script text-5xl leading-none text-blush">&amp;</p>
-        <h2 class="couple-name font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">นายบรรเจิด ลิขิตธรรมานุกูล</h2>
+        <h2 class="font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">นายบรรเจิด ลิขิตธรรมานุกูล</h2>
       </div>
     </section>
 
@@ -346,7 +180,7 @@
           </div>
           <div id="grid-nks" class="mt-6 grid grid-cols-4 gap-2">
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
-              <p id="days-nks" class="font-serif text-4xl leading-none text-moss sm:text-5xl">00</p>
+              <p id="days-nks" class="font-serif text-2xl sm:text-3xl text-leaf">00</p>
               <p class="mt-1 text-[10px] tracking-widest uppercase text-moss" data-i18n="unit.days">วัน</p>
             </div>
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
@@ -376,7 +210,7 @@
           </div>
           <div id="grid-bkk" class="mt-6 grid grid-cols-4 gap-2">
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
-              <p id="days-bkk" class="font-serif text-4xl leading-none text-moss sm:text-5xl">00</p>
+              <p id="days-bkk" class="font-serif text-2xl sm:text-3xl text-leaf">00</p>
               <p class="mt-1 text-[10px] tracking-widest uppercase text-moss" data-i18n="unit.days">วัน</p>
             </div>
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
@@ -419,8 +253,13 @@
             <span class="timeline-nks absolute left-[45px] top-4 bottom-4 w-px"></span>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#e6c97a] bg-[#fff6d6]">
-                <img src="icons/schedule-monk.png" alt="" class="h-14 w-14 object-contain" />
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#e6c97a] bg-[#fff6d6] text-[#b8893a]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22c-4-4-6-8-6-12a6 6 0 0 1 12 0c0 4-2 8-6 12z" />
+                  <path d="M12 22c-2-4-3-8-3-12a3 3 0 0 1 6 0c0 4-1 8-3 12z" />
+                  <path d="M5.5 14C3 12 2 9.5 2 7.5a2.5 2.5 0 0 1 5 0c0 2 1.5 4 4.5 5.5" />
+                  <path d="M18.5 14c2.5-2 3.5-4.5 3.5-6.5a2.5 2.5 0 0 0-5 0c0 2-1.5 4-4.5 5.5" />
+                </svg>
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#b8893a]" data-i18n="t.nks.1.time">07:00 น.</p>
@@ -429,8 +268,13 @@
             </li>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#8fb58a] bg-[#eef6e8]">
-                <img src="icons/schedule-khanmak.png" alt="" class="h-14 w-14 object-contain" />
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#8fb58a] bg-[#eef6e8] text-[#3f7a4c]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="4" rx="1" />
+                  <path d="M12 8v13" />
+                  <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+                  <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
+                </svg>
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#3f7a4c]" data-i18n="t.nks.2.time">08:19 น.</p>
@@ -439,8 +283,13 @@
             </li>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0b070] bg-[#fff0e0]">
-                <img src="icons/schedule-rings.png" alt="" class="h-12 w-14 object-contain" />
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0b070] bg-[#fff0e0] text-[#e08a32]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="16" r="5" />
+                  <circle cx="15" cy="16" r="5" />
+                  <path d="M9 11 7.8 8.2 9 6l1.2 2.2L9 11z" />
+                  <path d="M15 11l-1.2-2.8L15 6l1.2 2.2L15 11z" />
+                </svg>
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#e08a32]" data-i18n="t.nks.3.time">08:59 น.</p>
@@ -450,8 +299,13 @@
             </li>
 
             <li class="relative flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center overflow-hidden rounded-full">
-                <img src="icons/schedule-meal.png?v=2" alt="" class="h-full w-full object-contain" />
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#c47788] bg-[#d68a9b] text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 3v6a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3V3" />
+                  <path d="M7 3v18" />
+                  <path d="M20 4v7a4 4 0 0 1-4 4h0V4a2 2 0 0 1 4 0z" />
+                  <path d="M16 15v6" />
+                </svg>
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#c4788c]" data-i18n="t.nks.4.time">11:30 น.</p>
@@ -479,18 +333,27 @@
             <span class="timeline-line absolute left-[45px] top-4 bottom-4 w-px"></span>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f3d56a] bg-[#fff8d6]">
-                <img src="icons/schedule-tea.png?v=4" alt="" class="h-12 w-[66px] object-contain" />
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#c5d2b0] bg-[#f3f6ee] text-[#6d8a4e]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M8 8h9" />
+                  <path d="M10 8V5.8A1.8 1.8 0 0 1 11.8 4h1.4A1.8 1.8 0 0 1 15 5.8V8" />
+                  <path d="M6 11h12.5A1.8 1.8 0 0 1 20.3 12.8v1.4A1.8 1.8 0 0 1 18.5 16H6a1.8 1.8 0 0 1-1.8-1.8v-1.4A1.8 1.8 0 0 1 6 11z" />
+                  <path d="M20.3 14.2h1.4a1.5 1.5 0 0 0 0-3h-1.4" />
+                  <path d="M9 20v-3" />
+                  <path d="M16 20v-3" />
+                </svg>
               </div>
               <div>
-                <p class="text-xs tracking-widest text-[#c9a227]" data-i18n="t.bkk.1.time">09:09 น.</p>
+                <p class="text-xs tracking-widest text-[#6d8a4e]" data-i18n="t.bkk.1.time">09:09 น.</p>
                 <h4 class="mt-1 font-serif text-xl" data-i18n="t.bkk.1.title">พิธียกน้ำชา</h4>
               </div>
             </li>
 
             <li class="relative flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0c4b0] bg-[#fff3ec]">
-                <img src="icons/schedule-pig.png" alt="" class="h-[52px] w-[64px] object-contain" />
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0c4b0] bg-[#fff3ec] text-[#e08a72]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19.5 5.6a4.6 4.6 0 0 0-6.5 0L12 6.6l-1-1a4.6 4.6 0 0 0-6.5 6.5l1 1L12 19.7l6.5-6.6 1-1a4.6 4.6 0 0 0 0-6.5z" />
+                </svg>
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#e08a72]" data-i18n="t.bkk.2.time">11:00 น.</p>
@@ -512,7 +375,7 @@
         <div class="mt-10 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
           <div class="relative">
             <img
-              src="phae-si-khwae.jpg"
+              src="../assets/venue/phae-si-khwae.jpg"
               alt="แพสี่แคว นครสวรรค์"
               data-i18n-alt="venue.nks.photo"
               class="venue-photo h-52 w-full object-cover sm:h-64"
@@ -527,29 +390,31 @@
               เวลา 07:00–14:00 น.<br />
               นครสวรรค์
             </p>
-            <button
-              type="button"
-              class="js-map-sheet mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
-              data-map-name-key="venue.nks.name"
-              data-map-embed="https://maps.google.com/maps?q=15.6832108,100.1092547&z=17&hl=th&output=embed"
-              data-map-external="https://maps.app.goo.gl/FrosBUxFHFye94wh7"
+            <a
+              href="https://maps.app.goo.gl/FrosBUxFHFye94wh7"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span data-i18n="venue.nks.map">เปิดแผนที่แพสี่แคว</span>
-            </button>
+            </a>
           </div>
         </div>
 
         <div class="mt-6 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
-          <img
-            src="la-moon.jpg"
-            alt="ลาร์-มูน กรุงเทพฯ"
-            data-i18n-alt="venue.bkk.photo"
-            class="h-52 w-full object-cover object-center sm:h-64"
-          />
+          <div class="relative">
+            <img
+              src="../assets/venue/la-moon.jpg"
+              alt="ลาร์-มูน กรุงเทพฯ"
+              data-i18n-alt="venue.bkk.photo"
+              class="venue-photo h-52 w-full object-cover object-center sm:h-64"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-blush/25 mix-blend-soft-light"></div>
+          </div>
           <div class="px-6 py-7">
             <p class="text-[11px] tracking-[0.25em] uppercase text-leaf" data-i18n="day.label2">วันที่ 2</p>
             <p class="venue-brand mt-2 font-script-th text-4xl leading-snug text-leaf" data-i18n="venue.bkk.name">ลาร์-มูน</p>
@@ -558,19 +423,18 @@
               เวลา 09:00–14:00 น.<br />
               กรุงเทพฯ
             </p>
-            <button
-              type="button"
-              class="js-map-sheet mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
-              data-map-name-key="venue.bkk.name"
-              data-map-embed="https://maps.google.com/maps?q=13.908262,100.5162569&z=17&hl=th&output=embed"
-              data-map-external="https://maps.app.goo.gl/cLyiqcfe6NTpzGp68"
+            <a
+              href="https://maps.app.goo.gl/ojubXaGfbwy4YJx29"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span data-i18n="venue.bkk.map">เปิดแผนที่ลาร์-มูน</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -581,39 +445,39 @@
       <div class="mx-auto max-w-4xl">
         <div class="text-center">
           <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf" data-i18n="gallery.eyebrow">แกลเลอรี</p>
-          <h2 class="mt-3 font-serif text-3xl sm:text-4xl" data-i18n="gallery.title">ความทรงจำของเรา</h2>
+          <h2 class="mt-3 font-serif text-3xl sm:text-4xl" data-i18n="gallery.title">รูปพรีเวดดิ้ง</h2>
           <p class="mt-3 text-sm text-moss" data-i18n="gallery.sub">ช่วงเวลาเล็ก ๆ ที่อยากเก็บไว้ด้วยกัน</p>
         </div>
 
         <div class="mt-10 columns-2 gap-3 md:columns-3 md:gap-4">
           <figure class="mb-3 break-inside-avoid md:mb-4">
-            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="gallery/01-engagement.jpg">
-              <img src="gallery/01-engagement-thumb.jpg" alt="ความทรงจำของเรา 1" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
+            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80">
+              <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="รูปพรีเวดดิ้ง 1" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
             </button>
           </figure>
           <figure class="mb-3 break-inside-avoid md:mb-4">
-            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="gallery/02-fuji.jpg">
-              <img src="gallery/02-fuji-thumb.jpg" alt="ความทรงจำของเรา 2" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1400&q=80">
+              <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="รูปพรีเวดดิ้ง 2" class="aspect-[4/5] w-full object-cover transition duration-300 hover:scale-105" />
             </button>
           </figure>
           <figure class="mb-3 break-inside-avoid md:mb-4">
-            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="gallery/03-sea.jpg">
-              <img src="gallery/03-sea-thumb.jpg" alt="ความทรงจำของเรา 3" width="900" height="900" loading="lazy" decoding="async" class="aspect-square w-full object-cover transition duration-300 hover:scale-105" />
+            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1400&q=80">
+              <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=800&q=80" alt="รูปพรีเวดดิ้ง 3" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
             </button>
           </figure>
           <figure class="mb-3 break-inside-avoid md:mb-4">
-            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="gallery/04-heart.jpg">
-              <img src="gallery/04-heart-thumb.jpg" alt="ความทรงจำของเรา 4" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
+            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=80">
+              <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="รูปพรีเวดดิ้ง 4" class="aspect-square w-full object-cover transition duration-300 hover:scale-105" />
             </button>
           </figure>
           <figure class="mb-3 break-inside-avoid md:mb-4">
-            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="gallery/05-lake.jpg">
-              <img src="gallery/05-lake-thumb.jpg" alt="ความทรงจำของเรา 5" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80">
+              <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=800&q=80" alt="รูปพรีเวดดิ้ง 5" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
             </button>
           </figure>
           <figure class="mb-3 break-inside-avoid md:mb-4">
-            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="gallery/06-garden.jpg">
-              <img src="gallery/06-garden-thumb.jpg" alt="ความทรงจำของเรา 6" width="900" height="896" loading="lazy" decoding="async" class="aspect-square w-full object-cover object-top transition duration-300 hover:scale-105" />
+            <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=1400&q=80">
+              <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=800&q=80" alt="รูปพรีเวดดิ้ง 6" class="aspect-[4/5] w-full object-cover transition duration-300 hover:scale-105" />
             </button>
           </figure>
         </div>
@@ -631,7 +495,7 @@
 
         <div class="mx-auto mt-8 max-w-sm rounded-3xl bg-blush/70 px-5 py-6">
           <img
-            src="line-oa-qr.png"
+            src="../assets/qr/line-oa-qr.png"
             alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
             data-i18n-alt="rsvp.qr"
             width="220"
@@ -665,53 +529,17 @@
       data-i18n-aria="lightbox.label"
     >
       <button type="button" id="lightbox-close" class="absolute right-4 top-4 rounded-full bg-petal/90 px-3 py-1 text-sm text-ink" data-i18n="lightbox.close">ปิด</button>
-      <img id="lightbox-img" src="" alt="ความทรงจำของเรา" data-i18n-alt="gallery.photo" class="max-h-[88vh] max-w-full rounded-2xl object-contain shadow-2xl" />
+      <img id="lightbox-img" src="" alt="รูปพรีเวดดิ้ง" data-i18n-alt="gallery.photo" class="max-h-[88vh] max-w-full rounded-2xl object-contain shadow-2xl" />
     </div>
 
-    <div
-      id="map-sheet"
-      class="fixed inset-0 z-[70] hidden items-end justify-center bg-ink/55 p-4 sm:items-center"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="map-sheet-title"
-    >
-      <div class="w-full max-w-xl overflow-hidden rounded-3xl bg-petal shadow-2xl ring-1 ring-blush">
-        <div class="flex items-center justify-between gap-3 px-5 py-4">
-          <h3 id="map-sheet-title" class="font-serif text-xl text-ink">แผนที่</h3>
-          <button type="button" id="map-sheet-close" class="rounded-full bg-blush/80 px-3 py-1 text-sm text-ink" data-i18n="map.close">ปิด</button>
-        </div>
-        <iframe
-          id="map-sheet-frame"
-          title="แผนที่สถานที่จัดงาน"
-          class="h-[48vh] w-full border-0 bg-white sm:h-[420px]"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          allowfullscreen
-        ></iframe>
-        <div class="space-y-3 px-5 py-4">
-          <a
-            id="map-sheet-external"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-leaf px-5 py-3 text-sm text-petal"
-            data-i18n="map.navigate"
-          >
-            เปิดนำทางใน Google Maps
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <audio id="bgm" loop preload="auto">
-      <source src="aik-khrueng-khong-hua-jai.mp3" type="audio/mpeg" />
+    <audio id="bgm" loop preload="none">
+      <source src="music.mp3" type="audio/mpeg" />
     </audio>
 
-    <p id="card-version" class="fixed top-3 z-50 text-[11px] tracking-wide text-blush">v1.10</p>
     <button
       type="button"
       id="lang-toggle"
-      class="fixed top-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
+      class="fixed top-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
       aria-label="เปลี่ยนเป็นภาษาอังกฤษ"
     >
       EN
@@ -720,14 +548,14 @@
     <button
       type="button"
       id="music-toggle"
-      class="fixed bottom-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
+      class="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
       aria-label="เปิดเพลงประกอบ"
       aria-pressed="false"
     >
-      <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
       </svg>
-      <svg id="icon-mute" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="icon-mute" xmlns="http://www.w3.org/2000/svg" class="hidden h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
       </svg>
@@ -736,8 +564,8 @@
     <script>
       const strings = {
         th: {
-          names: '<span class="text-logo">ปีใหม่</span> <span class="text-blush">และ</span> <span class="text-logo">เจิด</span>',
-          nameFont: ["font-script-th", "text-6xl", "sm:text-7xl", "leading-none"],
+          names: 'ปีใหม่ <span class="text-blush">และ</span> เจิด',
+          nameFont: ["font-script-th", "text-5xl", "sm:text-6xl", "leading-snug"],
           kicker: "โปรดบันทึกวันสำคัญของเรา",
           nksDate: "วันอาทิตย์ที่ 27 ธันวาคม 2569",
           nksMeta: "07:00–14:00 น. · นครสวรรค์",
@@ -807,9 +635,9 @@
           "venue.bkk.detail": "เวลา 09:00–14:00 น.<br />กรุงเทพฯ",
           "venue.bkk.map": "เปิดแผนที่ลาร์-มูน",
           "gallery.eyebrow": "แกลเลอรี",
-          "gallery.title": "ความทรงจำของเรา",
+          "gallery.title": "รูปพรีเวดดิ้ง",
           "gallery.sub": "ช่วงเวลาเล็ก ๆ ที่อยากเก็บไว้ด้วยกัน",
-          "gallery.photo": "ความทรงจำของเรา",
+          "gallery.photo": "รูปพรีเวดดิ้ง",
           "rsvp.eyebrow": "ตอบรับ",
           "rsvp.title": "ตอบรับเข้าร่วมงาน",
           "rsvp.sub": "กรุณาแจ้งกลับผ่าน LINE OA<br />เพื่อให้เราได้จัดเตรียมที่นั่งและความสะดวกให้ครบ",
@@ -828,23 +656,17 @@
           "status.bkk.done": "งานกรุงเทพฯ จบลงแล้ว",
           "music.on": "เปิดเพลงประกอบ",
           "music.off": "ปิดเสียงเพลง",
-          "loader.loading": "กำลังโหลดการ์ด...",
-          "loader.ready": "พร้อมแล้ว",
-          "loader.tap": "แตะเพื่อเปิดการ์ด",
-          "resume.title": "แตะเพื่อเปิดการ์ดต่อ",
-          "map.close": "ปิด",
-          "map.navigate": "เปิดนำทางใน Google Maps",
           "cover.photo": "ดอกไม้ในงานแต่งงาน",
         },
         en: {
-          names: '<span class="text-logo">Peemai</span> <span class="text-blush">&amp;</span> <span class="text-logo">Jerd</span>',
-          nameFont: ["font-script", "text-5xl", "sm:text-7xl", "leading-none"],
+          names: 'Peemai <span class="text-blush">&amp;</span> Jerd',
+          nameFont: ["font-script", "text-6xl", "sm:text-7xl", "leading-none"],
           kicker: "Save the Date",
           nksDate: "Sunday, 27 December 2026",
           nksMeta: "07:00–14:00 · Nakhon Sawan",
           bkkDate: "Saturday, 23 January 2027",
           bkkMeta: "09:00–14:00 · Bangkok",
-          scroll: "Scroll Down",
+          scroll: "Scroll down",
           button: "TH",
           label: "Switch to Thai",
           footerNames: "Peemai & Jerd",
@@ -908,9 +730,9 @@
           "venue.bkk.detail": "09:00–14:00<br />Bangkok",
           "venue.bkk.map": "Open the La-moon map",
           "gallery.eyebrow": "Gallery",
-          "gallery.title": "Our Memories",
+          "gallery.title": "Pre-wedding portraits",
           "gallery.sub": "Little moments we wanted to keep",
-          "gallery.photo": "Our memory",
+          "gallery.photo": "Pre-wedding photo",
           "rsvp.eyebrow": "RSVP",
           "rsvp.title": "Kindly reply",
           "rsvp.sub": "Please reply through our LINE account<br />so we can prepare your seats",
@@ -929,12 +751,6 @@
           "status.bkk.done": "The Bangkok celebration has ended",
           "music.on": "Play the music",
           "music.off": "Mute the music",
-          "loader.loading": "Loading the card...",
-          "loader.ready": "Ready",
-          "loader.tap": "Tap to open the card",
-          "resume.title": "Tap to continue",
-          "map.close": "Close",
-          "map.navigate": "Open directions in Google Maps",
           "cover.photo": "Wedding flowers",
         },
       };
@@ -943,11 +759,8 @@
         "font-script-th",
         "text-5xl",
         "text-6xl",
-        "text-7xl",
-        "text-8xl",
         "sm:text-6xl",
         "sm:text-7xl",
-        "sm:text-8xl",
         "leading-snug",
         "leading-none",
       ];
@@ -972,9 +785,9 @@
         });
         const kicker = document.getElementById("cover-kicker");
         kicker.textContent = copy.kicker;
-        kicker.classList.toggle("text-base", lang === "th");
+        kicker.classList.toggle("text-sm", lang === "th");
         kicker.classList.toggle("tracking-[0.06em]", lang === "th");
-        kicker.classList.toggle("text-sm", lang === "en");
+        kicker.classList.toggle("text-[11px]", lang === "en");
         kicker.classList.toggle("uppercase", lang === "en");
         kicker.classList.toggle("tracking-[0.35em]", lang === "en");
         document.getElementById("cover-nks-date").textContent = copy.nksDate;
@@ -1007,10 +820,6 @@
           el.classList.toggle("text-4xl", lang === "th");
           el.classList.toggle("font-serif", lang === "en");
           el.classList.toggle("text-3xl", lang === "en");
-        });
-        document.querySelectorAll(".couple-name").forEach(function (el) {
-          el.classList.toggle("text-2xl", lang === "th");
-          el.classList.toggle("text-xl", lang === "en");
         });
         document.querySelectorAll(".venue-brand").forEach(function (el) {
           el.classList.toggle("font-script-th", lang === "th");
@@ -1057,15 +866,6 @@
         if (musicToggle && bgm) {
           musicToggle.setAttribute("aria-label", bgm.paused ? copy["music.on"] : copy["music.off"]);
         }
-        const loaderStatus = document.getElementById("loader-status");
-        const loaderHint = document.getElementById("loader-hint");
-        const loader = document.getElementById("card-loader");
-        if (loaderStatus && loader) {
-          loaderStatus.textContent = loader.dataset.ready === "true" ? copy["loader.ready"] : copy["loader.loading"];
-        }
-        if (loaderHint) loaderHint.textContent = copy["loader.tap"];
-        const resumeTitle = document.getElementById("resume-title");
-        if (resumeTitle) resumeTitle.textContent = copy["resume.title"];
       }
 
       document.getElementById("lang-toggle").addEventListener("click", function () {
@@ -1225,442 +1025,30 @@
       const musicToggle = document.getElementById("music-toggle");
       const iconPlay = document.getElementById("icon-play");
       const iconMute = document.getElementById("icon-mute");
-      const loader = document.getElementById("card-loader");
-      const loaderStatus = document.getElementById("loader-status");
-      const loaderHint = document.getElementById("loader-hint");
-      const loaderLogo = document.getElementById("loader-logo");
-      const resumeFilter = document.getElementById("resume-filter");
-
-      function revealLoaderLogo() {
-        if (!loaderLogo) return;
-        loaderLogo.classList.add("is-ready");
-      }
-
-      function prepareLoaderLogo() {
-        if (!loaderLogo) return;
-        const show = function () {
-          if (loaderLogo.decode) {
-            loaderLogo.decode().then(revealLoaderLogo).catch(revealLoaderLogo);
-          } else {
-            revealLoaderLogo();
-          }
-        };
-        if (loaderLogo.complete && loaderLogo.naturalWidth) show();
-        else loaderLogo.addEventListener("load", show, { once: true });
-      }
-
-      prepareLoaderLogo();
 
       function setMusicUi(playing) {
         musicToggle.setAttribute("aria-pressed", playing ? "true" : "false");
         musicToggle.setAttribute("aria-label", playing ? strings[cardLang]["music.off"] : strings[cardLang]["music.on"]);
-        iconPlay.classList.toggle("hidden", !playing);
-        iconMute.classList.toggle("hidden", playing);
+        iconPlay.classList.toggle("hidden", playing);
+        iconMute.classList.toggle("hidden", !playing);
       }
 
-      const SCROLL_KEY = "pj-wedding-scroll";
-      const OPENED_KEY = "pj-wedding-opened";
-      const MUSIC_ON_KEY = "pj-wedding-music-on";
-      let cardUnlocked = false;
-      let scrollSaveTick = 0;
-
-      function readStoredMusicOn() {
-        try {
-          const value = sessionStorage.getItem(MUSIC_ON_KEY);
-          if (value === "0") return false;
-          if (value === "1") return true;
-        } catch (err) {}
-        return true;
-      }
-
-      let musicOn = readStoredMusicOn();
-
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
-      }
-
-      function currentScrollY() {
-        return window.scrollY || document.documentElement.scrollTop || 0;
-      }
-
-      function saveScrollPosition() {
-        try {
-          sessionStorage.setItem(SCROLL_KEY, String(Math.round(currentScrollY())));
-        } catch (err) {}
-      }
-
-      function readSavedScroll() {
-        try {
-          const value = parseInt(sessionStorage.getItem(SCROLL_KEY) || "", 10);
-          return Number.isFinite(value) && value > 0 ? value : 0;
-        } catch (err) {
-          return 0;
-        }
-      }
-
-      function wasCardOpenedBefore() {
-        try {
-          return sessionStorage.getItem(OPENED_KEY) === "1";
-        } catch (err) {
-          return false;
-        }
-      }
-
-      function markCardOpened() {
-        try {
-          sessionStorage.setItem(OPENED_KEY, "1");
-        } catch (err) {}
-      }
-
-      function saveMusicState() {
-        try {
-          sessionStorage.setItem(MUSIC_ON_KEY, musicOn ? "1" : "0");
-          sessionStorage.removeItem("pj-wedding-music-time");
-        } catch (err) {}
-      }
-
-      function resetMusicToStart() {
-        try {
-          bgm.currentTime = 0;
-        } catch (err) {}
-      }
-
-      let restoringScroll = false;
-      const NEED_RESUME_KEY = "pj-wedding-need-resume";
-
-      function restoreScrollPosition() {
-        const y = readSavedScroll();
-        if (y <= 0) return;
-        restoringScroll = true;
-        const apply = function () {
-          window.scrollTo(0, y);
-        };
-        apply();
-        requestAnimationFrame(apply);
-        setTimeout(apply, 50);
-        setTimeout(function () {
-          apply();
-          restoringScroll = false;
-        }, 280);
-      }
-
-      const mapSheet = document.getElementById("map-sheet");
-      const mapSheetTitle = document.getElementById("map-sheet-title");
-      const mapSheetFrame = document.getElementById("map-sheet-frame");
-      const mapSheetExternal = document.getElementById("map-sheet-external");
-      const mapSheetClose = document.getElementById("map-sheet-close");
-
-      function markNeedResume(need) {
-        try {
-          if (need) sessionStorage.setItem(NEED_RESUME_KEY, "1");
-          else sessionStorage.removeItem(NEED_RESUME_KEY);
-        } catch (err) {}
-      }
-
-      function needsResume() {
-        try {
-          return sessionStorage.getItem(NEED_RESUME_KEY) === "1";
-        } catch (err) {
-          return false;
-        }
-      }
-
-      function isResumeFilterVisible() {
-        return resumeFilter && !resumeFilter.classList.contains("hidden");
-      }
-
-      function showResumeFilter() {
-        if (!resumeFilter || !cardUnlocked) return;
-        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0") return;
-        if (!musicOn || !bgm.paused) return;
-        resumeFilter.classList.remove("hidden", "is-gone");
-        resumeFilter.classList.add("flex");
-        resumeFilter.setAttribute("aria-hidden", "false");
-      }
-
-      function hideResumeFilter() {
-        if (!resumeFilter || !isResumeFilterVisible()) return;
-        resumeFilter.classList.add("is-gone");
-        window.setTimeout(function () {
-          resumeFilter.classList.add("hidden");
-          resumeFilter.classList.remove("flex", "is-gone");
-          resumeFilter.setAttribute("aria-hidden", "true");
-        }, 320);
-      }
-
-      function playMusic(options) {
-        const opts = options || {};
-        if (!musicOn) return;
-        let playPromise;
-        try {
-          // play() ต้องมาก่อนทุกอย่าง — ห้าม seek/DOM ก่อน เพราะ LINE ทิ้ง gesture แล้วเพลงเงียบ
-          playPromise = bgm.play();
-        } catch (err) {
-          setMusicUi(true);
-          markNeedResume(true);
-          if (opts.showFilterOnFail) showResumeFilter();
-          return;
-        }
-        setMusicUi(true);
-        if (playPromise && playPromise.then) {
-          playPromise
-            .then(function () {
-              setMusicUi(true);
-              markNeedResume(false);
-              hideResumeFilter();
-              saveMusicState();
-            })
-            .catch(function () {
-              setMusicUi(true);
-              markNeedResume(true);
-              if (opts.showFilterOnFail) showResumeFilter();
-            });
-          return;
-        }
-        if (bgm.paused) {
-          markNeedResume(true);
-          if (opts.showFilterOnFail) showResumeFilter();
-        } else {
-          markNeedResume(false);
-          hideResumeFilter();
-          saveMusicState();
-        }
-      }
-
-      function pauseMusicForLeave() {
-        saveMusicState();
-        if (!musicOn) return;
-        if (!bgm.paused) bgm.pause();
-        // รีเซ็ตตอนออกจากหน้า — กลับมาแล้วเริ่มใหม่ ไม่ต่อจากเดิม
-        resetMusicToStart();
-        markNeedResume(true);
-        setMusicUi(true);
-      }
-
-      function resumeMusicAfterReturn() {
-        if (!cardUnlocked) return;
-        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0") {
-          musicOn = false;
-          markNeedResume(false);
-          hideResumeFilter();
-          return;
-        }
-        musicOn = true;
-        restoreScrollPosition();
-        playMusic({ showFilterOnFail: true });
-        window.setTimeout(function () {
-          if (musicOn && bgm.paused && needsResume()) showResumeFilter();
-        }, 400);
-      }
-
-      function dismissResumeFilter() {
-        if (!isResumeFilterVisible()) return;
-        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0") {
-          hideResumeFilter();
-          return;
-        }
-        // เล่นทันทีใน gesture ของการแตะ
-        musicOn = true;
-        playMusic({ showFilterOnFail: false });
-      }
-
-      function openMapSheet(button) {
-        const nameKey = button.getAttribute("data-map-name-key");
-        const embed = button.getAttribute("data-map-embed") || "";
-        const external = button.getAttribute("data-map-external") || "#";
-        mapSheetTitle.textContent = (nameKey && strings[cardLang][nameKey]) || "แผนที่";
-        mapSheetFrame.src = embed;
-        mapSheetExternal.href = external;
-        mapSheet.classList.remove("hidden");
-        mapSheet.classList.add("flex");
-      }
-
-      function closeMapSheet() {
-        mapSheet.classList.add("hidden");
-        mapSheet.classList.remove("flex");
-        mapSheetFrame.src = "";
-      }
-
-      function loadImage(src) {
-        return new Promise(function (resolve) {
-          const img = new Image();
-          img.onload = function () {
-            resolve();
-          };
-          img.onerror = function () {
-            resolve();
-          };
-          img.src = src;
-        });
-      }
-
-      function waitAudio(audio) {
-        return new Promise(function (resolve) {
-          if (audio.readyState >= 3) {
-            resolve();
-            return;
-          }
-          let settled = false;
-          function done() {
-            if (settled) return;
-            settled = true;
-            audio.removeEventListener("canplaythrough", done);
-            audio.removeEventListener("loadeddata", done);
-            audio.removeEventListener("error", done);
-            resolve();
-          }
-          audio.addEventListener("canplaythrough", done);
-          audio.addEventListener("loadeddata", done);
-          audio.addEventListener("error", done);
-          setTimeout(done, 12000);
-          try {
-            audio.load();
-          } catch (err) {}
-        });
-      }
-
-      function markLoaderReady() {
-        loader.dataset.ready = "true";
-        loaderStatus.textContent = strings[cardLang]["loader.ready"];
-        loaderStatus.classList.remove("loader-pulse");
-        loaderHint.textContent = strings[cardLang]["loader.tap"];
-        loaderHint.classList.remove("hidden");
-      }
-
-      function unlockCard(options) {
-        const opts = options || {};
-        if (cardUnlocked || loader.dataset.ready !== "true") return;
-        cardUnlocked = true;
-        if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
-          musicOn = true;
-        }
-        // ต้อง play() ก่อนงาน DOM/scroll — ไม่งั้น LINE ทิ้ง user gesture แล้วเพลงเงียบ
-        if (musicOn) {
-          playMusic({ showFilterOnFail: !!opts.fromAuto });
-        }
-        markCardOpened();
-        document.documentElement.classList.remove("card-locked");
-        loader.classList.add("is-gone");
-        setTimeout(function () {
-          if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
-        }, 500);
-        restoreScrollPosition();
-        window.setTimeout(function () {
-          if (!musicOn || !bgm.paused) return;
-          markNeedResume(true);
-          if (opts.fromAuto) showResumeFilter();
-        }, 500);
-      }
-
-      function preloadSectionArt() {
-        ["2.png", "3.png", "4.png", "5.png", "6.png", "7.png"].forEach(function (src) {
-          loadImage(src);
-        });
-        // โลโก้ปกแบบวาด (APNG) โหลดพื้นหลัง ไม่อั้นหน้าโหลด
-        loadImage("Logo PJ 2000x2000 - Master v3.png");
-      }
-
-      Promise.all([
-        loadImage("cover-cream-08.jpg"),
-        loadImage("logo-loader.png"),
-        waitAudio(bgm),
-      ]).then(function () {
-        revealLoaderLogo();
-        markLoaderReady();
-        preloadSectionArt();
-        if (wasCardOpenedBefore()) {
-          unlockCard({ fromAuto: true });
-        }
-      });
-
-      function onLoaderOpen(event) {
-        if (loader.dataset.ready !== "true" || cardUnlocked) return;
-        if (event) event.preventDefault();
-        unlockCard();
-      }
-
-      loader.addEventListener("pointerdown", onLoaderOpen, { passive: false });
-      loader.addEventListener("click", onLoaderOpen);
-
-      resumeFilter.addEventListener(
-        "pointerdown",
-        function (event) {
-          event.preventDefault();
-          dismissResumeFilter();
-        },
-        { passive: false }
-      );
-      resumeFilter.addEventListener("click", function (event) {
-        event.preventDefault();
-        dismissResumeFilter();
-      });
-
-      window.addEventListener(
-        "scroll",
-        function () {
-          if (!cardUnlocked) return;
-          if (scrollSaveTick) return;
-          scrollSaveTick = requestAnimationFrame(function () {
-            scrollSaveTick = 0;
-            saveScrollPosition();
-          });
-        },
-        { passive: true }
-      );
-
-      document.querySelectorAll(".js-map-sheet").forEach(function (button) {
-        button.addEventListener("click", function () {
-          openMapSheet(button);
-        });
-      });
-
-      mapSheetClose.addEventListener("click", closeMapSheet);
-      mapSheet.addEventListener("click", function (event) {
-        if (event.target === mapSheet) closeMapSheet();
-      });
-
-      mapSheetExternal.addEventListener("click", function () {
-        saveScrollPosition();
-        saveMusicState();
-        markCardOpened();
-      });
-
-      document.addEventListener("visibilitychange", function () {
-        if (document.hidden) {
-          saveScrollPosition();
-          pauseMusicForLeave();
-          return;
-        }
-        resumeMusicAfterReturn();
-      });
-
-      window.addEventListener("pagehide", function () {
-        saveScrollPosition();
-        pauseMusicForLeave();
-      });
-
-      window.addEventListener("pageshow", function () {
-        resumeMusicAfterReturn();
-      });
-
-      setMusicUi(musicOn && !bgm.paused);
+      setMusicUi(false);
 
       musicToggle.addEventListener("click", function () {
-        if (!bgm.paused) {
-          musicOn = false;
+        if (bgm.paused) {
+          const playPromise = bgm.play();
+          if (playPromise && playPromise.catch) {
+            playPromise.catch(function () {
+              setMusicUi(false);
+            });
+          }
+          setMusicUi(true);
+        } else {
           bgm.pause();
-          saveMusicState();
-          markNeedResume(false);
-          hideResumeFilter();
           setMusicUi(false);
-          return;
         }
-        musicOn = true;
-        saveMusicState();
-        playMusic({ showFilterOnFail: false });
-        hideResumeFilter();
       });
     </script>
-    </div>
   </body>
 </html>

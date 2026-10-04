@@ -88,40 +88,43 @@
   </head>
   <body class="bg-petal text-ink font-sans antialiased">
     <!-- Cover -->
-    <section class="relative flex min-h-[100svh] items-start justify-center overflow-hidden">
+    <section class="relative min-h-[100svh] flex items-end overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=1600&h=2400&crop=focalpoint&fp-x=0.5&fp-y=0.22&q=80"
+        src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80"
         alt="ดอกไม้ในงานแต่งงาน"
         data-i18n-alt="cover.photo"
         class="absolute inset-0 h-full w-full object-cover"
       />
+      <div class="absolute inset-0 bg-black/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-ink/45 via-ink/62 to-[#1c2420]/90"></div>
+      <div class="grain absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"></div>
 
-      <div class="relative z-10 w-full px-6 pb-16 pt-[14vh] text-center text-white drop-shadow-[0_2px_12px_rgba(36,44,38,0.55)]">
+      <div class="relative z-10 w-full px-6 pb-16 pt-16 text-center text-white">
         <img
-          src="logo.png"
+          src="../assets/logo/logo.png"
           alt=""
           width="619"
           height="621"
-          class="fade-up mx-auto h-auto w-44 drop-shadow-none sm:w-52"
+          class="fade-up mx-auto w-44 sm:w-52 h-auto drop-shadow-[0_6px_16px_rgba(30,36,32,0.35)]"
         />
-        <p id="cover-kicker" class="fade-up delay-1 mt-5 font-sans text-sm tracking-[0.06em]">
+        <p id="cover-kicker" class="fade-up delay-1 mt-5 font-sans text-sm tracking-[0.06em] text-white drop-shadow-xl">
           โปรดบันทึกวันสำคัญของเรา
         </p>
         <div class="fade-up delay-1 my-5 flex items-center justify-center gap-4">
-          <span class="h-px w-10 bg-white/70"></span>
-          <span class="text-lg">✦</span>
-          <span class="h-px w-10 bg-white/70"></span>
+          <span class="h-px w-10 bg-leaf/70"></span>
+          <span class="text-leaf text-lg">✦</span>
+          <span class="h-px w-10 bg-leaf/70"></span>
         </div>
-        <h1 id="cover-names" class="fade-up delay-2 mt-1 font-script-th text-5xl leading-snug sm:text-6xl">
+        <h1 id="cover-names" class="fade-up delay-2 mt-1 font-script-th text-5xl leading-snug drop-shadow-lg sm:text-6xl">
           ปีใหม่ <span class="text-blush">และ</span> เจิด
         </h1>
 
-        <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-3 text-sm">
+        <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-3 text-sm text-white drop-shadow-xl">
           <p>
             <span id="cover-nks-date">วันอาทิตย์ที่ 27 ธันวาคม 2569</span><br />
             <span id="cover-nks-meta">07:00–14:00 น. · นครสวรรค์</span>
           </p>
-          <p>♡</p>
+          <p class="text-petal">♡</p>
           <p>
             <span id="cover-bkk-date">วันเสาร์ที่ 23 มกราคม 2570</span><br />
             <span id="cover-bkk-meta">09:00–14:00 น. · กรุงเทพฯ</span>
@@ -130,7 +133,7 @@
 
         <a
           href="#invite"
-          class="fade-up delay-4 mx-auto mt-10 inline-flex items-center gap-2 rounded-full border border-white/70 px-5 py-2 text-xs uppercase tracking-widest transition hover:bg-white/10"
+          class="fade-up delay-4 mt-10 inline-flex items-center gap-2 rounded-full border border-petal/40 bg-petal/15 px-5 py-2 text-xs tracking-widest uppercase text-petal backdrop-blur-sm hover:bg-petal/25 transition"
         >
           <span id="cover-scroll">เลื่อนลง</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -375,7 +378,7 @@
         <div class="mt-10 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
           <div class="relative">
             <img
-              src="phae-si-khwae.jpg"
+              src="../assets/venue/phae-si-khwae.jpg"
               alt="แพสี่แคว นครสวรรค์"
               data-i18n-alt="venue.nks.photo"
               class="venue-photo h-52 w-full object-cover sm:h-64"
@@ -408,7 +411,7 @@
         <div class="mt-6 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
           <div class="relative">
             <img
-              src="la-moon.jpg"
+              src="../assets/venue/la-moon.jpg"
               alt="ลาร์-มูน กรุงเทพฯ"
               data-i18n-alt="venue.bkk.photo"
               class="venue-photo h-52 w-full object-cover object-center sm:h-64"
@@ -495,7 +498,7 @@
 
         <div class="mx-auto mt-8 max-w-sm rounded-3xl bg-blush/70 px-5 py-6">
           <img
-            src="line-oa-qr.png"
+            src="../assets/qr/line-oa-qr.png"
             alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
             data-i18n-alt="rsvp.qr"
             width="220"

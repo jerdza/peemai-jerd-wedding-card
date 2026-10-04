@@ -7,7 +7,7 @@
     <title>ปีใหม่ &amp; เจิด — E-Wedding Card</title>
     <meta
       name="description"
-      content="ขอเชิญร่วมงานมงคลสมรส ปีใหม่ และ เจิด วันอาทิตย์ที่ 27 ธันวาคม 2569 นครสวรรค์ และวันเสาร์ที่ 23 มกราคม 2570 กรุงเทพฯ"
+      content="ขอเชิญร่วมงานมงคลสมรส ปีใหม่  และ  เจิด วันอาทิตย์ที่ 27 ธันวาคม 2569 นครสวรรค์ และวันเสาร์ที่ 23 มกราคม 2570 กรุงเทพฯ"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,8 +23,10 @@
             colors: {
               petal: "#F0DADA",
               blush: "#E5C2C6",
+              rose: "#E5C2C6",
               sage: "#C6D1B7",
               leaf: "#98A78E",
+              logo: "#889078",
               ink: "#3E4740",
               moss: "#5C675A",
             },
@@ -73,6 +75,25 @@
         }
       }
 
+      @keyframes scrollBlink {
+        0%,
+        49% {
+          color: #e5c2c6;
+          border-color: #e5c2c6;
+          background-color: rgb(229 194 198 / 0.15);
+        }
+        50%,
+        100% {
+          color: #98a78e;
+          border-color: #98a78e;
+          background-color: rgb(198 209 183 / 0.45);
+        }
+      }
+
+      a.scroll-blink {
+        animation: fadeUp 0.9s ease 0.6s forwards, scrollBlink 1.4s steps(1, end) 1.5s infinite;
+      }
+
       .timeline-line {
         background: linear-gradient(180deg, #e5c2c6 0%, #98a78e 50%, #c6d1b7 100%);
       }
@@ -81,66 +102,106 @@
         background: linear-gradient(180deg, #e6c97a 0%, #7eae78 36%, #f0a04a 68%, #ce8596 100%);
       }
 
+      /* เอา filter ที่เคยใส่ออกทั้งหมด */
       .venue-photo {
-        filter: sepia(0.22) saturate(0.78) contrast(0.96);
+        /* filter: sepia(0.22) saturate(0.78) contrast(0.96); */
+      }
+
+      #invite,
+      #countdown,
+      #schedule,
+      #location,
+      #gallery,
+      #rsvp {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+      }
+
+      #invite {
+        background-image: url("2.png");
+      }
+
+      #countdown {
+        background-image: url("3.png");
+      }
+
+      #schedule {
+        background-image: url("4.png");
+      }
+
+      #location {
+        background-image: url("5.png");
+      }
+
+      #gallery {
+        background-image: url("6.png");
+      }
+
+      #rsvp {
+        background-image: url("7.png");
+      }
+
+      /* เปิดบนจอกว้างแล้วการ์ดกว้างไม่เกิน 1170px */
+      html {
+        background-color: #f0dada;
+      }
+
+      #card-version,
+      #lang-toggle,
+      #music-toggle {
+        right: max(1.25rem, calc((100vw - 1170px) / 2 + 1.25rem));
       }
     </style>
   </head>
   <body class="bg-petal text-ink font-sans antialiased">
+    <div class="mx-auto w-full max-w-[1170px]">
     <!-- Cover -->
-    <section class="relative flex min-h-[100svh] items-center overflow-hidden">
+    <section class="relative flex min-h-[100svh] flex-col overflow-hidden">
       <img
-        src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80"
+        src="../assets/cover/cover-cream-08.jpg"
         alt="ดอกไม้ในงานแต่งงาน"
         data-i18n-alt="cover.photo"
         class="absolute inset-0 h-full w-full object-cover"
       />
-      <div class="grain absolute inset-0 opacity-20 mix-blend-overlay pointer-events-none"></div>
 
-      <div class="relative z-10 w-full px-6 py-16 text-center text-white [text-shadow:_0_2px_4px_rgb(0_0_0_/_50%)]">
-        <img
-          src="logo.png"
-          alt=""
-          width="619"
-          height="621"
-          class="fade-up mx-auto h-auto w-44 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)] sm:w-52"
-        />
-        <p id="cover-kicker" class="fade-up delay-1 mt-5 font-sans text-sm tracking-[0.06em] text-white">
+      <div class="relative z-10 flex min-h-[100svh] w-full flex-col px-6 pb-16 text-center text-ink">
+        <div class="flex flex-1 items-center justify-center">
+          <img
+            src="../assets/logo/logo-master-v3.png"
+            alt=""
+            width="619"
+            height="621"
+            class="fade-up w-44 sm:w-52 h-auto -translate-y-[3%] drop-shadow-[0_6px_16px_rgba(30,36,32,0.35)]"
+          />
+        </div>
+        <p id="cover-kicker" class="fade-up delay-1 flex h-8 shrink-0 items-center justify-center font-sans text-base tracking-[0.06em] text-blush">
           โปรดบันทึกวันสำคัญของเรา
         </p>
-        <div class="fade-up delay-1 my-5 flex items-center justify-center gap-4">
-          <span class="h-px w-10 bg-white/80"></span>
-          <span class="text-lg text-white">✦</span>
-          <span class="h-px w-10 bg-white/80"></span>
+        <div class="fade-up delay-1 my-5 flex h-6 shrink-0 items-center justify-center gap-4">
+          <span class="h-px w-10 bg-leaf/70"></span>
+          <span class="text-leaf text-lg leading-none">✦</span>
+          <span class="h-px w-10 bg-leaf/70"></span>
         </div>
-        <div class="fade-up delay-2 relative mt-1">
-          <svg class="pointer-events-none absolute left-1/2 top-1/2 z-0 h-[145vh] w-auto max-w-none -translate-x-1/2 translate-y-[calc(-50%+12vh)]" viewBox="-18 16 276 276" fill="none" aria-hidden="true">
-            <path
-              fill="#E5C2C6"
-              fill-opacity="0.38"
-              d="M120 268C18 188 2 118 40 76 70 42 108 52 120 90 132 52 170 42 200 76 238 118 222 188 120 268Z"
-            />
-          </svg>
-          <h1 id="cover-names" class="relative z-10 font-script-th text-5xl leading-snug sm:text-6xl">
-            ปีใหม่ <span class="text-blush">และ</span> เจิด
-          </h1>
-        </div>
+        <h1 id="cover-names" class="fade-up delay-2 flex h-24 shrink-0 items-center justify-center gap-x-4 font-script-th text-6xl leading-none sm:h-28 sm:gap-x-5 sm:text-7xl">
+          <span class="text-logo">ปีใหม่ </span> <span class="text-blush">และ</span> <span class="text-logo"> เจิด</span>
+        </h1>
 
-        <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-3 text-sm text-white">
+        <div class="fade-up delay-3 mx-auto mt-8 max-w-sm space-y-3 text-base text-moss">
           <p>
             <span id="cover-nks-date">วันอาทิตย์ที่ 27 ธันวาคม 2569</span><br />
-            <span id="cover-nks-meta">07:00–14:00 น. · นครสวรรค์</span>
+            <span id="cover-nks-meta" class="text-ink/80">07:00–14:00 น. · นครสวรรค์</span>
           </p>
-          <p class="text-petal">♡</p>
+          <p class="text-blush">♡</p>
           <p>
             <span id="cover-bkk-date">วันเสาร์ที่ 23 มกราคม 2570</span><br />
-            <span id="cover-bkk-meta">09:00–14:00 น. · กรุงเทพฯ</span>
+            <span id="cover-bkk-meta" class="text-ink/80">09:00–14:00 น. · กรุงเทพฯ</span>
           </p>
         </div>
 
         <a
           href="#invite"
-          class="fade-up delay-4 mt-10 inline-flex items-center gap-2 rounded-full border border-white/70 px-5 py-2 text-xs uppercase tracking-widest text-white transition hover:bg-white/10"
+          class="scroll-blink fade-up delay-4 mx-auto mt-10 inline-flex w-fit items-center justify-center gap-2 self-center rounded-full border border-blush bg-blush/15 px-5 py-2 text-xs tracking-widest text-blush"
         >
           <span id="cover-scroll">เลื่อนลง</span>
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -151,7 +212,7 @@
     </section>
 
     <!-- Invitation -->
-    <section id="invite" class="px-6 py-20 sm:py-24">
+    <section id="invite" class="px-6 py-24 sm:px-16 sm:py-28">
       <div class="mx-auto max-w-xl text-center">
         <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf" data-i18n="invite.eyebrow">คำเชิญ</p>
         <div class="mt-10 flex flex-col items-center gap-6">
@@ -162,13 +223,13 @@
             <p data-i18n="invite.groom.parent2">นางลีเซียม แซ่ชิ้ง</p>
           </div>
         </div>
-        <p class="mx-auto mt-10 max-w-md text-sm leading-relaxed text-moss" data-i18n="invite.line">
+        <p class="mx-auto mt-10 max-w-[17rem] break-words text-sm leading-relaxed text-moss sm:max-w-md" data-i18n="invite.line">
           มีความยินดีขอเรียนเชิญท่านเพื่อเป็นเกียรติเนื่องในพิธีมงคลสมรส
         </p>
         <p class="mt-4 text-xs tracking-[0.28em] text-leaf" data-i18n="invite.between">ระหว่าง</p>
-        <h2 class="mt-8 font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">นางสาวสมัณญา แพ่งเกษม</h2>
+        <h2 class="couple-name mt-8 font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.bride">นางสาวสมัณญา แพ่งเกษม</h2>
         <p class="mt-6 mb-2 font-script text-5xl leading-none text-blush">&amp;</p>
-        <h2 class="font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">นายบรรเจิด ลิขิตธรรมานุกูล</h2>
+        <h2 class="couple-name font-serif text-2xl leading-snug text-ink sm:text-3xl" data-i18n="invite.groom">นายบรรเจิด ลิขิตธรรมานุกูล</h2>
       </div>
     </section>
 
@@ -190,7 +251,7 @@
           </div>
           <div id="grid-nks" class="mt-6 grid grid-cols-4 gap-2">
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
-              <p id="days-nks" class="font-serif text-2xl sm:text-3xl text-leaf">00</p>
+              <p id="days-nks" class="font-serif text-4xl leading-none text-moss sm:text-5xl">00</p>
               <p class="mt-1 text-[10px] tracking-widest uppercase text-moss" data-i18n="unit.days">วัน</p>
             </div>
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
@@ -220,7 +281,7 @@
           </div>
           <div id="grid-bkk" class="mt-6 grid grid-cols-4 gap-2">
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
-              <p id="days-bkk" class="font-serif text-2xl sm:text-3xl text-leaf">00</p>
+              <p id="days-bkk" class="font-serif text-4xl leading-none text-moss sm:text-5xl">00</p>
               <p class="mt-1 text-[10px] tracking-widest uppercase text-moss" data-i18n="unit.days">วัน</p>
             </div>
             <div class="rounded-2xl bg-petal px-2 py-4 text-center shadow-sm">
@@ -263,13 +324,8 @@
             <span class="timeline-nks absolute left-[45px] top-4 bottom-4 w-px"></span>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#e6c97a] bg-[#fff6d6] text-[#b8893a]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 22c-4-4-6-8-6-12a6 6 0 0 1 12 0c0 4-2 8-6 12z" />
-                  <path d="M12 22c-2-4-3-8-3-12a3 3 0 0 1 6 0c0 4-1 8-3 12z" />
-                  <path d="M5.5 14C3 12 2 9.5 2 7.5a2.5 2.5 0 0 1 5 0c0 2 1.5 4 4.5 5.5" />
-                  <path d="M18.5 14c2.5-2 3.5-4.5 3.5-6.5a2.5 2.5 0 0 0-5 0c0 2-1.5 4-4.5 5.5" />
-                </svg>
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#e6c97a] bg-[#fff6d6]">
+                <img src="../assets/icons/schedule-monk.png" alt="" class="h-14 w-14 object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#b8893a]" data-i18n="t.nks.1.time">07:00 น.</p>
@@ -278,13 +334,8 @@
             </li>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#8fb58a] bg-[#eef6e8] text-[#3f7a4c]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="8" width="18" height="4" rx="1" />
-                  <path d="M12 8v13" />
-                  <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
-                  <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" />
-                </svg>
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#8fb58a] bg-[#eef6e8]">
+                <img src="../assets/icons/schedule-khanmak.png" alt="" class="h-14 w-14 object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#3f7a4c]" data-i18n="t.nks.2.time">08:19 น.</p>
@@ -293,13 +344,8 @@
             </li>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0b070] bg-[#fff0e0] text-[#e08a32]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="9" cy="16" r="5" />
-                  <circle cx="15" cy="16" r="5" />
-                  <path d="M9 11 7.8 8.2 9 6l1.2 2.2L9 11z" />
-                  <path d="M15 11l-1.2-2.8L15 6l1.2 2.2L15 11z" />
-                </svg>
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0b070] bg-[#fff0e0]">
+                <img src="../assets/icons/schedule-rings.png" alt="" class="h-12 w-14 object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#e08a32]" data-i18n="t.nks.3.time">08:59 น.</p>
@@ -309,13 +355,8 @@
             </li>
 
             <li class="relative flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#c47788] bg-[#d68a9b] text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 3v6a3 3 0 0 0 3 3h0a3 3 0 0 0 3-3V3" />
-                  <path d="M7 3v18" />
-                  <path d="M20 4v7a4 4 0 0 1-4 4h0V4a2 2 0 0 1 4 0z" />
-                  <path d="M16 15v6" />
-                </svg>
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center overflow-hidden rounded-full">
+                <img src="../assets/icons/schedule-meal.png?v=2" alt="" class="h-full w-full object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#c4788c]" data-i18n="t.nks.4.time">11:30 น.</p>
@@ -343,27 +384,18 @@
             <span class="timeline-line absolute left-[45px] top-4 bottom-4 w-px"></span>
 
             <li class="relative mb-8 flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#c5d2b0] bg-[#f3f6ee] text-[#6d8a4e]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M8 8h9" />
-                  <path d="M10 8V5.8A1.8 1.8 0 0 1 11.8 4h1.4A1.8 1.8 0 0 1 15 5.8V8" />
-                  <path d="M6 11h12.5A1.8 1.8 0 0 1 20.3 12.8v1.4A1.8 1.8 0 0 1 18.5 16H6a1.8 1.8 0 0 1-1.8-1.8v-1.4A1.8 1.8 0 0 1 6 11z" />
-                  <path d="M20.3 14.2h1.4a1.5 1.5 0 0 0 0-3h-1.4" />
-                  <path d="M9 20v-3" />
-                  <path d="M16 20v-3" />
-                </svg>
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f3d56a] bg-[#fff8d6]">
+                <img src="../assets/icons/schedule-tea.png?v=4" alt="" class="h-12 w-[66px] object-contain" />
               </div>
               <div>
-                <p class="text-xs tracking-widest text-[#6d8a4e]" data-i18n="t.bkk.1.time">09:09 น.</p>
+                <p class="text-xs tracking-widest text-[#c9a227]" data-i18n="t.bkk.1.time">09:09 น.</p>
                 <h4 class="mt-1 font-serif text-xl" data-i18n="t.bkk.1.title">พิธียกน้ำชา</h4>
               </div>
             </li>
 
             <li class="relative flex items-center gap-5">
-              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0c4b0] bg-[#fff3ec] text-[#e08a72]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M19.5 5.6a4.6 4.6 0 0 0-6.5 0L12 6.6l-1-1a4.6 4.6 0 0 0-6.5 6.5l1 1L12 19.7l6.5-6.6 1-1a4.6 4.6 0 0 0 0-6.5z" />
-                </svg>
+              <div class="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-full border border-[#f0c4b0] bg-[#fff3ec]">
+                <img src="../assets/icons/schedule-pig.png" alt="" class="h-[52px] w-[64px] object-contain" />
               </div>
               <div>
                 <p class="text-xs tracking-widest text-[#e08a72]" data-i18n="t.bkk.2.time">11:00 น.</p>
@@ -385,7 +417,7 @@
         <div class="mt-10 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
           <div class="relative">
             <img
-              src="phae-si-khwae.jpg"
+              src="../assets/venue/phae-si-khwae.jpg"
               alt="แพสี่แคว นครสวรรค์"
               data-i18n-alt="venue.nks.photo"
               class="venue-photo h-52 w-full object-cover sm:h-64"
@@ -416,15 +448,12 @@
         </div>
 
         <div class="mt-6 overflow-hidden rounded-3xl bg-blush/70 shadow-md ring-1 ring-blush text-left">
-          <div class="relative">
-            <img
-              src="la-moon.jpg"
-              alt="ลาร์-มูน กรุงเทพฯ"
-              data-i18n-alt="venue.bkk.photo"
-              class="venue-photo h-52 w-full object-cover object-center sm:h-64"
-            />
-            <div class="pointer-events-none absolute inset-0 bg-blush/25 mix-blend-soft-light"></div>
-          </div>
+          <img
+            src="../assets/venue/la-moon.jpg"
+            alt="ลาร์-มูน กรุงเทพฯ"
+            data-i18n-alt="venue.bkk.photo"
+            class="h-52 w-full object-cover object-center sm:h-64"
+          />
           <div class="px-6 py-7">
             <p class="text-[11px] tracking-[0.25em] uppercase text-leaf" data-i18n="day.label2">วันที่ 2</p>
             <p class="venue-brand mt-2 font-script-th text-4xl leading-snug text-leaf" data-i18n="venue.bkk.name">ลาร์-มูน</p>
@@ -434,7 +463,7 @@
               กรุงเทพฯ
             </p>
             <a
-              href="https://maps.app.goo.gl/ojubXaGfbwy4YJx29"
+              href="https://maps.app.goo.gl/cLyiqcfe6NTpzGp68"
               target="_blank"
               rel="noopener noreferrer"
               class="mt-6 inline-flex items-center gap-2 rounded-full bg-leaf px-6 py-3 text-sm text-petal shadow-sm hover:bg-[#7e8d75] transition"
@@ -455,7 +484,7 @@
       <div class="mx-auto max-w-4xl">
         <div class="text-center">
           <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-leaf" data-i18n="gallery.eyebrow">แกลเลอรี</p>
-          <h2 class="mt-3 font-serif text-3xl sm:text-4xl" data-i18n="gallery.title">รูปพรีเวดดิ้ง</h2>
+          <h2 class="mt-3 font-serif text-3xl sm:text-4xl" data-i18n="gallery.title">ความทรงจำของเรา</h2>
           <p class="mt-3 text-sm text-moss" data-i18n="gallery.sub">ช่วงเวลาเล็ก ๆ ที่อยากเก็บไว้ด้วยกัน</p>
         </div>
 
@@ -505,7 +534,7 @@
 
         <div class="mx-auto mt-8 max-w-sm rounded-3xl bg-blush/70 px-5 py-6">
           <img
-            src="line-oa-qr.png"
+            src="../assets/qr/line-oa-qr.png"
             alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
             data-i18n-alt="rsvp.qr"
             width="220"
@@ -542,14 +571,15 @@
       <img id="lightbox-img" src="" alt="รูปพรีเวดดิ้ง" data-i18n-alt="gallery.photo" class="max-h-[88vh] max-w-full rounded-2xl object-contain shadow-2xl" />
     </div>
 
-    <audio id="bgm" loop preload="none">
-      <source src="music.mp3" type="audio/mpeg" />
+    <audio id="bgm" loop preload="auto">
+      <source src="../assets/audio/aik-khrueng-khong-hua-jai.mp3" type="audio/mpeg" />
     </audio>
 
+    <p id="card-version" class="fixed top-3 z-50 text-[11px] tracking-wide text-blush">v1.08</p>
     <button
       type="button"
       id="lang-toggle"
-      class="fixed top-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
+      class="fixed top-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
       aria-label="เปลี่ยนเป็นภาษาอังกฤษ"
     >
       EN
@@ -558,9 +588,9 @@
     <button
       type="button"
       id="music-toggle"
-      class="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
-      aria-label="เปิดเพลงประกอบ"
-      aria-pressed="false"
+      class="fixed bottom-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-blush text-leaf shadow-lg ring-1 ring-leaf/30 hover:bg-petal transition"
+      aria-label="ปิดเสียงเพลง"
+      aria-pressed="true"
     >
       <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
@@ -574,8 +604,8 @@
     <script>
       const strings = {
         th: {
-          names: 'ปีใหม่ <span class="text-blush">และ</span> เจิด',
-          nameFont: ["font-script-th", "text-5xl", "sm:text-6xl", "leading-snug"],
+          names: '<span class="text-logo">ปีใหม่</span> <span class="text-blush">และ</span> <span class="text-logo">เจิด</span>',
+          nameFont: ["font-script-th", "text-6xl", "sm:text-7xl", "leading-none"],
           kicker: "โปรดบันทึกวันสำคัญของเรา",
           nksDate: "วันอาทิตย์ที่ 27 ธันวาคม 2569",
           nksMeta: "07:00–14:00 น. · นครสวรรค์",
@@ -669,14 +699,14 @@
           "cover.photo": "ดอกไม้ในงานแต่งงาน",
         },
         en: {
-          names: 'Peemai <span class="text-blush">&amp;</span> Jerd',
-          nameFont: ["font-script", "text-6xl", "sm:text-7xl", "leading-none"],
+          names: '<span class="text-logo">Peemai</span> <span class="text-blush">&amp;</span> <span class="text-logo">Jerd</span>',
+          nameFont: ["font-script", "text-5xl", "sm:text-7xl", "leading-none"],
           kicker: "Save the Date",
           nksDate: "Sunday, 27 December 2026",
           nksMeta: "07:00–14:00 · Nakhon Sawan",
           bkkDate: "Saturday, 23 January 2027",
           bkkMeta: "09:00–14:00 · Bangkok",
-          scroll: "Scroll down",
+          scroll: "Scroll Down",
           button: "TH",
           label: "Switch to Thai",
           footerNames: "Peemai & Jerd",
@@ -740,7 +770,7 @@
           "venue.bkk.detail": "09:00–14:00<br />Bangkok",
           "venue.bkk.map": "Open the La-moon map",
           "gallery.eyebrow": "Gallery",
-          "gallery.title": "Pre-wedding portraits",
+          "gallery.title": "Our Memories",
           "gallery.sub": "Little moments we wanted to keep",
           "gallery.photo": "Pre-wedding photo",
           "rsvp.eyebrow": "RSVP",
@@ -769,8 +799,11 @@
         "font-script-th",
         "text-5xl",
         "text-6xl",
+        "text-7xl",
+        "text-8xl",
         "sm:text-6xl",
         "sm:text-7xl",
+        "sm:text-8xl",
         "leading-snug",
         "leading-none",
       ];
@@ -795,9 +828,9 @@
         });
         const kicker = document.getElementById("cover-kicker");
         kicker.textContent = copy.kicker;
-        kicker.classList.toggle("text-sm", lang === "th");
+        kicker.classList.toggle("text-base", lang === "th");
         kicker.classList.toggle("tracking-[0.06em]", lang === "th");
-        kicker.classList.toggle("text-[11px]", lang === "en");
+        kicker.classList.toggle("text-sm", lang === "en");
         kicker.classList.toggle("uppercase", lang === "en");
         kicker.classList.toggle("tracking-[0.35em]", lang === "en");
         document.getElementById("cover-nks-date").textContent = copy.nksDate;
@@ -830,6 +863,10 @@
           el.classList.toggle("text-4xl", lang === "th");
           el.classList.toggle("font-serif", lang === "en");
           el.classList.toggle("text-3xl", lang === "en");
+        });
+        document.querySelectorAll(".couple-name").forEach(function (el) {
+          el.classList.toggle("text-2xl", lang === "th");
+          el.classList.toggle("text-xl", lang === "en");
         });
         document.querySelectorAll(".venue-brand").forEach(function (el) {
           el.classList.toggle("font-script-th", lang === "th");
@@ -1039,26 +1076,54 @@
       function setMusicUi(playing) {
         musicToggle.setAttribute("aria-pressed", playing ? "true" : "false");
         musicToggle.setAttribute("aria-label", playing ? strings[cardLang]["music.off"] : strings[cardLang]["music.on"]);
-        iconPlay.classList.toggle("hidden", playing);
-        iconMute.classList.toggle("hidden", !playing);
+        iconPlay.classList.toggle("hidden", !playing);
+        iconMute.classList.toggle("hidden", playing);
       }
 
-      setMusicUi(false);
+      let musicOn = true;
+
+      function startMusic() {
+        const playPromise = bgm.play();
+        setMusicUi(true);
+        if (playPromise && playPromise.then) {
+          playPromise
+            .then(function () {
+              setMusicUi(true);
+            })
+            .catch(function () {
+              setMusicUi(true);
+            });
+        }
+      }
+
+      startMusic();
+
+      document.addEventListener("pointerdown", function (event) {
+        if (!musicOn || !bgm.paused) return;
+        if (event.target.closest && event.target.closest("#music-toggle")) return;
+        bgm.play().then(function () {
+          setMusicUi(true);
+        }).catch(function () {});
+      });
 
       musicToggle.addEventListener("click", function () {
-        if (bgm.paused) {
-          const playPromise = bgm.play();
-          if (playPromise && playPromise.catch) {
-            playPromise.catch(function () {
-              setMusicUi(false);
-            });
-          }
-          setMusicUi(true);
-        } else {
+        if (!bgm.paused) {
+          musicOn = false;
           bgm.pause();
           setMusicUi(false);
+          return;
+        }
+        musicOn = true;
+        const playPromise = bgm.play();
+        setMusicUi(true);
+        if (playPromise && playPromise.catch) {
+          playPromise.catch(function () {
+            setMusicUi(false);
+            musicOn = false;
+          });
         }
       });
     </script>
+    </div>
   </body>
 </html>
