@@ -155,8 +155,7 @@
 
       #card-version,
       #lang-toggle,
-      #music-toggle,
-      #music-resume-hint {
+      #music-toggle {
         right: max(1.25rem, calc((100vw - 1170px) / 2 + 1.25rem));
       }
 
@@ -648,7 +647,6 @@
           allowfullscreen
         ></iframe>
         <div class="space-y-3 px-5 py-4">
-          <p class="text-sm text-moss" data-i18n="map.stay">ดูตำแหน่งในหน้านี้ได้เลย เพลงจะไม่สะดุด</p>
           <a
             id="map-sheet-external"
             href="#"
@@ -666,14 +664,6 @@
     <audio id="bgm" loop preload="auto">
       <source src="aik-khrueng-khong-hua-jai.mp3" type="audio/mpeg" />
     </audio>
-
-    <button
-      type="button"
-      id="music-resume-hint"
-      class="fixed bottom-20 z-50 hidden rounded-full bg-ink px-4 py-2 text-xs tracking-wide text-petal shadow-lg"
-    >
-      แตะเพื่อเล่นเพลงต่อ
-    </button>
 
     <p id="card-version" class="fixed top-3 z-50 text-[11px] tracking-wide text-blush">v1.10</p>
     <button
@@ -800,9 +790,7 @@
           "loader.ready": "พร้อมแล้ว",
           "loader.tap": "แตะเพื่อเปิดการ์ด",
           "map.close": "ปิด",
-          "map.stay": "ดูตำแหน่งในหน้านี้ได้เลย เพลงจะไม่สะดุด",
           "map.navigate": "เปิดนำทางใน Google Maps",
-          "music.resume": "แตะเพื่อเล่นเพลงต่อ",
           "cover.photo": "ดอกไม้ในงานแต่งงาน",
         },
         en: {
@@ -902,9 +890,7 @@
           "loader.ready": "Ready",
           "loader.tap": "Tap to open the card",
           "map.close": "Close",
-          "map.stay": "Preview the place here so the music keeps playing",
           "map.navigate": "Open directions in Google Maps",
-          "music.resume": "Tap to resume the music",
           "cover.photo": "Wedding flowers",
         },
       };
@@ -1034,8 +1020,6 @@
           loaderStatus.textContent = loader.dataset.ready === "true" ? copy["loader.ready"] : copy["loader.loading"];
         }
         if (loaderHint) loaderHint.textContent = copy["loader.tap"];
-        const musicResumeHintLang = document.getElementById("music-resume-hint");
-        if (musicResumeHintLang) musicResumeHintLang.textContent = copy["music.resume"];
       }
 
       document.getElementById("lang-toggle").addEventListener("click", function () {
@@ -1306,33 +1290,21 @@
         setTimeout(apply, 250);
       }
 
-      const musicResumeHint = document.getElementById("music-resume-hint");
       const mapSheet = document.getElementById("map-sheet");
       const mapSheetTitle = document.getElementById("map-sheet-title");
       const mapSheetFrame = document.getElementById("map-sheet-frame");
       const mapSheetExternal = document.getElementById("map-sheet-external");
       const mapSheetClose = document.getElementById("map-sheet-close");
 
-      function showMusicResumeHint(show) {
-        if (!musicResumeHint) return;
-        musicResumeHint.textContent = strings[cardLang]["music.resume"];
-        musicResumeHint.classList.toggle("hidden", !show);
-      }
-
       function playMusic() {
         if (!musicOn) return;
         restoreMusicTime();
         setMusicUi(true);
         const playPromise = bgm.play();
-        if (playPromise && playPromise.then) {
-          playPromise
-            .then(function () {
-              showMusicResumeHint(false);
-            })
-            .catch(function () {
-              setMusicUi(true);
-              showMusicResumeHint(true);
-            });
+        if (playPromise && playPromise.catch) {
+          playPromise.catch(function () {
+            setMusicUi(true);
+          });
         }
       }
 
@@ -1454,6 +1426,9 @@
         "scroll",
         function () {
           if (!cardUnlocked) return;
+          if (musicOn && bgm.paused) {
+            playMusic();
+          }
           if (scrollSaveTick) return;
           scrollSaveTick = requestAnimationFrame(function () {
             scrollSaveTick = 0;
@@ -1514,16 +1489,7 @@
         playMusic();
       });
 
-      if (musicResumeHint) {
-        musicResumeHint.addEventListener("click", function () {
-          musicOn = true;
-          saveMusicState();
-          playMusic();
-        });
-      }
-
       setMusicUi(false);
-      showMusicResumeHint(false);
 
       musicToggle.addEventListener("click", function () {
         if (!bgm.paused) {
@@ -1531,7 +1497,6 @@
           bgm.pause();
           saveMusicState();
           setMusicUi(false);
-          showMusicResumeHint(false);
           return;
         }
         musicOn = true;
