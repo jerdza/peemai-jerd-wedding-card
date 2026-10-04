@@ -25,6 +25,8 @@
             colors: {
               paper: "#FDFBF7",
               blush: "#E5C2C6",
+              "blush-soft": "#F3E6E8",
+              "blush-deep": "#B88990",
               sage: "#98A78E",
               ink: "#2F342F",
               mute: "#6B7269",
@@ -323,60 +325,60 @@
           </h2>
           <p class="mt-3 text-sm text-mute" data-i18n="countdown.sub">นับถอยหลังสู่วันสำคัญทั้งสองงาน</p>
 
-          <article class="mt-14 text-left">
-            <div class="flex items-baseline justify-between gap-3">
+          <article class="mt-14 rounded-3xl bg-sage/45 px-4 py-8 text-left sm:px-8">
+            <div class="flex items-start justify-between gap-3">
               <div>
-                <p class="text-[11px] tracking-[0.25em] uppercase text-blush" data-i18n="day.label1">วันที่ 1</p>
-                <h3 class="mt-1 font-serif text-2xl" data-i18n="place.nks">นครสวรรค์</h3>
+                <p class="text-[11px] tracking-[0.25em] uppercase text-sage" data-i18n="day.label1">วันที่ 1</p>
+                <h3 class="mt-1 font-serif text-2xl text-ink" data-i18n="place.nks">นครสวรรค์</h3>
                 <p class="mt-1 text-sm text-mute" data-i18n="countdown.nks.when">อา. 27 ธ.ค. 2569 · 07:00–14:00 น.</p>
               </div>
-              <span class="font-serif text-sm text-sage">07:00</span>
+              <span class="rounded-full bg-paper px-3 py-1 text-xs text-sage">07:00</span>
             </div>
-            <div id="grid-nks" class="mt-6 grid grid-cols-4 gap-2 sm:gap-3">
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="days-nks" class="font-serif text-3xl text-ink sm:text-4xl">00</p>
+            <div id="grid-nks" class="mt-6 grid grid-cols-4 gap-2">
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="days-nks" class="font-serif text-3xl leading-none text-ink sm:text-4xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.days">วัน</p>
               </div>
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="hours-nks" class="font-serif text-2xl text-ink sm:text-3xl">00</p>
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="hours-nks" class="font-serif text-2xl text-sage sm:text-3xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.hours">ชม.</p>
               </div>
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="minutes-nks" class="font-serif text-2xl text-ink sm:text-3xl">00</p>
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="minutes-nks" class="font-serif text-2xl text-sage sm:text-3xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.mins">นาที</p>
               </div>
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="seconds-nks" class="font-serif text-2xl text-ink sm:text-3xl">00</p>
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="seconds-nks" class="font-serif text-2xl text-sage sm:text-3xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.secs">วินาที</p>
               </div>
             </div>
             <p id="status-nks" class="mt-4 hidden text-center font-serif text-lg text-sage"></p>
           </article>
 
-          <article class="mt-12 text-left">
-            <div class="flex items-baseline justify-between gap-3">
+          <article class="mt-5 rounded-3xl bg-blush-soft px-4 py-8 text-left sm:px-8">
+            <div class="flex items-start justify-between gap-3">
               <div>
-                <p class="text-[11px] tracking-[0.25em] uppercase text-blush" data-i18n="day.label2">วันที่ 2</p>
-                <h3 class="mt-1 font-serif text-2xl" data-i18n="place.bkk">กรุงเทพฯ</h3>
+                <p class="text-[11px] tracking-[0.25em] uppercase text-sage" data-i18n="day.label2">วันที่ 2</p>
+                <h3 class="mt-1 font-serif text-2xl text-ink" data-i18n="place.bkk">กรุงเทพฯ</h3>
                 <p class="mt-1 text-sm text-mute" data-i18n="countdown.bkk.when">ส. 23 ม.ค. 2570 · 09:00–14:00 น.</p>
               </div>
-              <span class="font-serif text-sm text-sage">09:00</span>
+              <span class="rounded-full bg-paper px-3 py-1 text-xs text-sage">09:00</span>
             </div>
-            <div id="grid-bkk" class="mt-6 grid grid-cols-4 gap-2 sm:gap-3">
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="days-bkk" class="font-serif text-3xl text-ink sm:text-4xl">00</p>
+            <div id="grid-bkk" class="mt-6 grid grid-cols-4 gap-2">
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="days-bkk" class="font-serif text-3xl leading-none text-ink sm:text-4xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.days">วัน</p>
               </div>
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="hours-bkk" class="font-serif text-2xl text-ink sm:text-3xl">00</p>
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="hours-bkk" class="font-serif text-2xl text-sage sm:text-3xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.hours">ชม.</p>
               </div>
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="minutes-bkk" class="font-serif text-2xl text-ink sm:text-3xl">00</p>
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="minutes-bkk" class="font-serif text-2xl text-sage sm:text-3xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.mins">นาที</p>
               </div>
-              <div class="rounded-xl border border-line px-1 py-4 text-center">
-                <p id="seconds-bkk" class="font-serif text-2xl text-ink sm:text-3xl">00</p>
+              <div class="rounded-2xl bg-paper px-2 py-4 text-center shadow-sm">
+                <p id="seconds-bkk" class="font-serif text-2xl text-sage sm:text-3xl">00</p>
                 <p class="mt-1 text-[10px] tracking-widest uppercase text-mute" data-i18n="unit.secs">วินาที</p>
               </div>
             </div>
@@ -434,7 +436,7 @@
               </li>
               <li class="flex items-center gap-5">
                 <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-paper">
-                  <img src="assets/icons/schedule-meal-blush.png" alt="" class="h-11 w-11 object-contain" />
+                  <img src="assets/icons/schedule-meal-blush.png?v=8" alt="" class="h-14 w-14 object-contain" />
                 </div>
                 <div>
                   <p class="text-xs tracking-[0.18em] text-sage" data-i18n="t.nks.4.time">11:30 น.</p>
@@ -470,7 +472,7 @@
               </li>
               <li class="flex items-center gap-5">
                 <div class="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-paper">
-                  <img src="assets/icons/schedule-pig.png" alt="" class="h-11 w-14 object-contain" />
+                  <img src="assets/icons/schedule-pig.png?v=3" alt="" class="h-11 w-14 object-contain" />
                 </div>
                 <div>
                   <p class="text-xs tracking-[0.18em] text-sage" data-i18n="t.bkk.2.time">11:00 น.</p>
@@ -485,32 +487,33 @@
       <!-- Location -->
       <section id="location" class="px-6 py-28 sm:px-10 sm:py-32">
         <div class="mx-auto max-w-md text-center">
-          <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="venue.eyebrow">สถานที่</p>
-          <h2 class="mt-4 font-serif text-3xl tracking-wide sm:text-4xl" data-i18n="venue.title">สถานที่จัดงาน</h2>
+          <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="venue.eyebrow">สถานที่</p>
+          <h2 class="mt-3 font-serif text-3xl sm:text-4xl" data-i18n="venue.title">สถานที่จัดงาน</h2>
           <p class="mt-3 text-sm text-mute" data-i18n="venue.sub">สองจังหวัด สองวันแห่งความสุข</p>
           <div class="mx-auto mt-8 accent-rule w-10"></div>
 
-          <article class="mt-14 text-left">
-            <div class="photo-frame aspect-[16/10]">
+          <article class="mt-14 overflow-hidden rounded-3xl bg-sage/45 text-left">
+            <div class="aspect-[16/10] overflow-hidden">
               <img
                 src="assets/venue/phae-si-khwae.jpg"
                 alt="แพสี่แคว นครสวรรค์"
                 data-i18n-alt="venue.nks.photo"
                 loading="lazy"
                 decoding="async"
+                class="h-full w-full object-cover"
               />
             </div>
-            <div class="mt-7">
-              <p class="text-[11px] tracking-[0.25em] uppercase text-blush" data-i18n="day.label1">วันที่ 1</p>
-              <p class="venue-brand mt-2 font-serif text-2xl text-ink" data-i18n="venue.nks.name">แพสี่แคว สาขา 1</p>
-              <p class="mt-1 text-sm text-mute" data-i18n="date.nks.long">วันอาทิตย์ที่ 27 ธันวาคม 2569</p>
+            <div class="px-4 py-8 sm:px-8">
+              <p class="text-[11px] tracking-[0.25em] uppercase text-sage" data-i18n="day.label1">วันที่ 1</p>
+              <p class="venue-brand mt-2 font-script-th text-4xl leading-snug text-ink" data-i18n="venue.nks.name">แพสี่แคว สาขา 1</p>
+              <p class="mt-1 font-serif text-lg text-ink" data-i18n="date.nks.long">วันอาทิตย์ที่ 27 ธันวาคม 2569</p>
               <p class="mt-3 text-sm leading-relaxed text-mute" data-i18n-html="venue.nks.detail">
                 เวลา 07:00–14:00 น.<br />
                 นครสวรรค์
               </p>
               <button
                 type="button"
-                class="js-map-sheet mt-6 inline-flex items-center gap-2 border border-sage px-6 py-2.5 text-sm text-sage transition hover:bg-sage hover:text-paper"
+                class="js-map-sheet mt-6 inline-flex items-center gap-2 rounded-full bg-sage px-6 py-3 text-sm text-paper shadow-sm transition hover:bg-[#87997e]"
                 data-map-name-key="venue.nks.name"
                 data-map-embed="https://maps.google.com/maps?q=15.6832108,100.1092547&z=17&hl=th&output=embed"
                 data-map-external="https://maps.app.goo.gl/FrosBUxFHFye94wh7"
@@ -524,28 +527,28 @@
             </div>
           </article>
 
-          <article class="mt-16 text-left">
-            <div class="photo-frame aspect-[16/10]">
+          <article class="mt-5 overflow-hidden rounded-3xl bg-blush-soft text-left">
+            <div class="aspect-[16/10] overflow-hidden">
               <img
                 src="assets/venue/la-moon.jpg"
                 alt="ลาร์-มูน กรุงเทพฯ"
                 data-i18n-alt="venue.bkk.photo"
                 loading="lazy"
                 decoding="async"
-                class="object-center"
+                class="h-full w-full object-cover object-center"
               />
             </div>
-            <div class="mt-7">
-              <p class="text-[11px] tracking-[0.25em] uppercase text-blush" data-i18n="day.label2">วันที่ 2</p>
-              <p class="venue-brand mt-2 font-serif text-2xl text-ink" data-i18n="venue.bkk.name">ลาร์-มูน</p>
-              <p class="mt-1 text-sm text-mute" data-i18n="date.bkk.long">วันเสาร์ที่ 23 มกราคม 2570</p>
+            <div class="px-4 py-8 sm:px-8">
+              <p class="text-[11px] tracking-[0.25em] uppercase text-sage" data-i18n="day.label2">วันที่ 2</p>
+              <p class="venue-brand mt-2 font-script-th text-4xl leading-snug text-ink" data-i18n="venue.bkk.name">ลาร์-มูน</p>
+              <p class="mt-1 font-serif text-lg text-ink" data-i18n="date.bkk.long">วันเสาร์ที่ 23 มกราคม 2570</p>
               <p class="mt-3 text-sm leading-relaxed text-mute" data-i18n-html="venue.bkk.detail">
                 เวลา 09:00–14:00 น.<br />
                 กรุงเทพฯ
               </p>
               <button
                 type="button"
-                class="js-map-sheet mt-6 inline-flex items-center gap-2 border border-sage px-6 py-2.5 text-sm text-sage transition hover:bg-sage hover:text-paper"
+                class="js-map-sheet mt-6 inline-flex items-center gap-2 rounded-full bg-blush-deep px-6 py-3 text-sm text-paper shadow-sm transition hover:bg-[#A6757C]"
                 data-map-name-key="venue.bkk.name"
                 data-map-embed="https://maps.google.com/maps?q=13.908262,100.5162569&z=17&hl=th&output=embed"
                 data-map-external="https://maps.app.goo.gl/cLyiqcfe6NTpzGp68"
@@ -564,37 +567,33 @@
       <!-- Dress Code -->
       <section id="dress-code" class="px-6 py-28 sm:px-10 sm:py-32">
         <div class="mx-auto max-w-md text-center">
-          <p class="text-[11px] tracking-[0.32em] uppercase text-sage">Dress Code</p>
+          <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="dress.eyebrow">การแต่งกาย</p>
           <div class="mx-auto mt-6 accent-rule w-10"></div>
 
-          <ul class="mt-12 flex flex-wrap items-start justify-center gap-8" aria-label="Dress Code">
-            <li class="flex flex-col items-center gap-2">
-              <span class="h-10 w-10 rounded-full border border-line bg-[#F0DADA]" aria-hidden="true"></span>
-              <span class="text-xs text-mute" data-i18n="dress.petal">ชมพูอ่อน</span>
+          <ul class="mt-12 flex flex-wrap items-start justify-center gap-6 sm:gap-8" aria-label="การแต่งกาย">
+            <li class="flex w-16 flex-col items-center gap-2 sm:w-[4.5rem]">
+              <span class="h-12 w-12 rounded-full border border-line bg-[#F0DADA] sm:h-14 sm:w-14" aria-hidden="true"></span>
+              <span class="min-h-[2.5rem] w-full text-center text-xs leading-snug text-mute" data-i18n="dress.petal">ชมพูอ่อน</span>
             </li>
-            <li class="flex flex-col items-center gap-2">
-              <span class="h-10 w-10 rounded-full border border-line bg-blush" aria-hidden="true"></span>
-              <span class="text-xs text-mute" data-i18n="dress.blush">บลัช</span>
+            <li class="flex w-16 flex-col items-center gap-2 sm:w-[4.5rem]">
+              <span class="h-12 w-12 rounded-full border border-line bg-blush sm:h-14 sm:w-14" aria-hidden="true"></span>
+              <span class="min-h-[2.5rem] w-full text-center text-xs leading-snug text-mute" data-i18n="dress.blush">บลัช</span>
             </li>
-            <li class="flex flex-col items-center gap-2">
-              <span class="h-10 w-10 rounded-full border border-line bg-[#C6D1B7]" aria-hidden="true"></span>
-              <span class="text-xs text-mute" data-i18n="dress.sage">เขียวเสจ</span>
+            <li class="flex w-16 flex-col items-center gap-2 sm:w-[4.5rem]">
+              <span class="h-12 w-12 rounded-full border border-line bg-[#C6D1B7] sm:h-14 sm:w-14" aria-hidden="true"></span>
+              <span class="min-h-[2.5rem] w-full text-center text-xs leading-snug text-mute" data-i18n="dress.sage">เขียวเสจ</span>
             </li>
-            <li class="flex flex-col items-center gap-2">
-              <span class="h-10 w-10 rounded-full border border-line bg-sage" aria-hidden="true"></span>
-              <span class="text-xs text-mute" data-i18n="dress.leaf">เขียวใบไม้</span>
+            <li class="flex w-16 flex-col items-center gap-2 sm:w-[4.5rem]">
+              <span class="h-12 w-12 rounded-full border border-line bg-sage sm:h-14 sm:w-14" aria-hidden="true"></span>
+              <span class="min-h-[2.5rem] w-full text-center text-xs leading-snug text-mute" data-i18n="dress.leaf">เขียวใบไม้</span>
             </li>
           </ul>
-
-          <p class="mx-auto mt-10 max-w-sm text-sm leading-relaxed text-mute" data-i18n="dress.tip">
-            ชุดสุภาพ โทนชมพู หรือเขียวใบไม้อ่อน
-          </p>
         </div>
       </section>
 
       <!-- Gallery -->
       <section id="gallery" class="px-6 py-28 sm:px-10 sm:py-32">
-        <div class="mx-auto max-w-lg">
+        <div class="mx-auto max-w-4xl">
           <div class="text-center">
             <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="gallery.eyebrow">แกลเลอรี</p>
             <h2 class="mt-4 font-serif text-3xl tracking-wide sm:text-4xl" data-i18n="gallery.title">
@@ -604,35 +603,35 @@
             <div class="mx-auto mt-8 accent-rule w-10"></div>
           </div>
 
-          <div class="mt-14 columns-2 gap-3 md:columns-3 md:gap-4">
+          <div class="mt-10 columns-2 gap-3 md:columns-3 md:gap-4">
             <figure class="mb-3 break-inside-avoid md:mb-4">
-              <button type="button" class="gallery-item photo-frame block w-full" data-full="assets/gallery/01-engagement.jpg">
-                <img src="assets/gallery/01-engagement-thumb.jpg" alt="ความทรงจำของเรา 1" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4]" />
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/01-engagement.jpg">
+                <img src="assets/gallery/01-engagement-thumb.jpg" alt="ความทรงจำของเรา 1" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
               </button>
             </figure>
             <figure class="mb-3 break-inside-avoid md:mb-4">
-              <button type="button" class="gallery-item photo-frame block w-full" data-full="assets/gallery/02-fuji.jpg">
-                <img src="assets/gallery/02-fuji-thumb.jpg" alt="ความทรงจำของเรา 2" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3]" />
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/06-garden.jpg">
+                <img src="assets/gallery/06-garden-thumb.jpg" alt="ความทรงจำของเรา 2" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover object-top transition duration-300 hover:scale-105" />
               </button>
             </figure>
             <figure class="mb-3 break-inside-avoid md:mb-4">
-              <button type="button" class="gallery-item photo-frame block w-full" data-full="assets/gallery/03-sea.jpg">
-                <img src="assets/gallery/03-sea-thumb.jpg" alt="ความทรงจำของเรา 3" width="900" height="900" loading="lazy" decoding="async" class="aspect-square" />
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/05-lake.jpg">
+                <img src="assets/gallery/05-lake-thumb.jpg" alt="ความทรงจำของเรา 3" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
               </button>
             </figure>
             <figure class="mb-3 break-inside-avoid md:mb-4">
-              <button type="button" class="gallery-item photo-frame block w-full" data-full="assets/gallery/04-heart.jpg">
-                <img src="assets/gallery/04-heart-thumb.jpg" alt="ความทรงจำของเรา 4" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4]" />
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/03-sea.jpg">
+                <img src="assets/gallery/03-sea-thumb.jpg" alt="ความทรงจำของเรา 4" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
               </button>
             </figure>
             <figure class="mb-3 break-inside-avoid md:mb-4">
-              <button type="button" class="gallery-item photo-frame block w-full" data-full="assets/gallery/05-lake.jpg">
-                <img src="assets/gallery/05-lake-thumb.jpg" alt="ความทรงจำของเรา 5" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3]" />
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/02-fuji.jpg">
+                <img src="assets/gallery/02-fuji-thumb.jpg" alt="ความทรงจำของเรา 5" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
               </button>
             </figure>
             <figure class="mb-3 break-inside-avoid md:mb-4">
-              <button type="button" class="gallery-item photo-frame block w-full" data-full="assets/gallery/06-garden.jpg">
-                <img src="assets/gallery/06-garden-thumb.jpg" alt="ความทรงจำของเรา 6" width="900" height="896" loading="lazy" decoding="async" class="aspect-square object-top" />
+              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="assets/gallery/04-heart.jpg">
+                <img src="assets/gallery/04-heart-thumb.jpg" alt="ความทรงจำของเรา 6" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
               </button>
             </figure>
           </div>
@@ -640,33 +639,30 @@
       </section>
 
       <!-- RSVP -->
-      <section id="rsvp" class="px-6 py-28 sm:px-10 sm:py-32">
-        <div class="mx-auto max-w-md text-center">
-          <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="rsvp.eyebrow">ตอบรับ</p>
-          <h2 class="mt-4 font-serif text-3xl tracking-wide sm:text-4xl" data-i18n="rsvp.title">ตอบรับเข้าร่วมงาน</h2>
+      <section id="rsvp" class="px-6 py-20 sm:px-10 sm:py-24">
+        <div class="mx-auto max-w-xl text-center">
+          <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="rsvp.eyebrow">ตอบรับ</p>
+          <h2 class="mt-3 font-serif text-3xl sm:text-4xl" data-i18n="rsvp.title">ตอบรับเข้าร่วมงาน</h2>
           <p class="mt-3 text-sm leading-relaxed text-mute" data-i18n-html="rsvp.sub">
             กรุณาแจ้งกลับผ่าน LINE OA<br />เพื่อให้เราได้จัดเตรียมที่นั่งและความสะดวกให้ครบ
           </p>
-          <div class="mx-auto mt-8 accent-rule w-10"></div>
 
-          <div class="mx-auto mt-12 max-w-xs">
-            <div class="mx-auto w-48 rounded-2xl border border-line bg-white p-3">
-              <img
-                src="assets/qr/line-oa-qr.png"
-                alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
-                data-i18n-alt="rsvp.qr"
-                width="180"
-                height="180"
-                class="h-full w-full object-contain"
-              />
-            </div>
-            <p class="mt-6 text-sm text-mute" data-i18n="rsvp.scan">ใน LINE ให้สแกน QR นี้ หรือค้นหาไอดี</p>
-            <p class="mt-2 font-serif text-2xl tracking-wide text-ink">@389twmwk</p>
-            <div class="mt-7 grid grid-cols-2 gap-3">
+          <div class="mx-auto mt-8 max-w-sm rounded-3xl bg-blush/70 px-5 py-6">
+            <img
+              src="assets/qr/line-oa-qr.png"
+              alt="QR เพิ่มเพื่อน LINE OA งานแต่ง"
+              data-i18n-alt="rsvp.qr"
+              width="220"
+              height="220"
+              class="mx-auto rounded-2xl bg-white p-2"
+            />
+            <p class="mt-4 text-sm text-mute" data-i18n="rsvp.scan">ใน LINE ให้สแกน QR นี้ หรือค้นหาไอดี</p>
+            <p class="mt-1 font-serif text-2xl text-ink">@389twmwk</p>
+            <div class="mt-5 grid grid-cols-2 gap-3">
               <button
                 type="button"
                 id="copy-oa-id"
-                class="w-full border border-ink px-3 py-2.5 text-sm text-ink transition hover:bg-ink hover:text-paper"
+                class="w-full whitespace-nowrap rounded-full bg-ink px-3 py-2.5 text-sm text-paper shadow-sm transition hover:bg-[#2c332f]"
                 data-i18n="rsvp.copy"
               >
                 คัดลอกไอดี
@@ -674,7 +670,7 @@
               <button
                 type="button"
                 id="copy-line-link"
-                class="w-full border border-sage bg-sage px-3 py-2.5 text-sm text-paper transition hover:bg-[#87997e]"
+                class="w-full whitespace-nowrap rounded-full bg-ink px-3 py-2.5 text-sm text-paper shadow-sm transition hover:bg-[#2c332f]"
                 data-i18n="rsvp.link"
               >
                 คัดลอกลิงก์
@@ -684,16 +680,12 @@
         </div>
       </section>
 
-      <footer class="px-6 pb-28 text-center">
-        <div class="mx-auto flex max-w-xs items-center justify-center gap-4">
-          <span class="h-px w-8 bg-line"></span>
-          <p id="footer-names" class="font-serif text-lg tracking-wide text-ink">ปีใหม่ และ เจิด</p>
-          <span class="h-px w-8 bg-line"></span>
+      <footer class="px-6 pb-24 text-center">
+        <div class="mx-auto flex max-w-xs items-center justify-center gap-3 text-sage">
+          <span class="h-px w-8 bg-sage/50"></span>
+          <span>♡</span>
+          <span class="h-px w-8 bg-sage/50"></span>
         </div>
-        <p class="mt-4 text-xs leading-relaxed text-mute" data-i18n-html="footer.dates">
-          27.12.2569 · นครสวรรค์<br />
-          23.01.2570 · กรุงเทพฯ
-        </p>
       </footer>
     </div>
 
@@ -724,18 +716,18 @@
 
     <div
       id="map-sheet"
-      class="fixed inset-0 z-[70] hidden items-end justify-center bg-ink/40 p-4 sm:items-center"
+      class="fixed inset-0 z-[70] hidden items-end justify-center bg-ink/55 p-4 sm:items-center"
       role="dialog"
       aria-modal="true"
       aria-labelledby="map-sheet-title"
     >
-      <div class="w-full max-w-xl overflow-hidden rounded-2xl bg-paper shadow-lg ring-1 ring-line">
+      <div class="w-full max-w-xl overflow-hidden rounded-3xl bg-paper shadow-2xl ring-1 ring-blush">
         <div class="flex items-center justify-between gap-3 px-5 py-4">
           <h3 id="map-sheet-title" class="font-serif text-xl text-ink">แผนที่</h3>
           <button
             type="button"
             id="map-sheet-close"
-            class="border border-line px-3 py-1 text-sm text-mute transition hover:border-ink hover:text-ink"
+            class="rounded-full bg-blush/80 px-3 py-1 text-sm text-ink"
             data-i18n="map.close"
           >
             ปิด
@@ -749,13 +741,13 @@
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen
         ></iframe>
-        <div class="px-5 py-4">
+        <div class="space-y-3 px-5 py-4">
           <a
             id="map-sheet-external"
             href="#"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex w-full items-center justify-center border border-sage bg-sage px-5 py-3 text-sm text-paper transition hover:bg-[#87997e]"
+            class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sage px-5 py-3 text-sm text-paper transition hover:bg-[#87997e]"
             data-i18n="map.navigate"
           >
             เปิดนำทางใน Google Maps
@@ -772,7 +764,7 @@
     <button
       type="button"
       id="lang-toggle"
-      class="fixed top-8 z-50 flex h-11 w-11 items-center justify-center border border-line bg-paper text-xs font-medium tracking-wide text-ink transition hover:border-sage hover:text-sage"
+      class="fixed top-8 z-[110] flex h-12 w-12 items-center justify-center rounded-full bg-blush text-xs font-medium tracking-wide text-sage shadow-lg ring-1 ring-sage/30 transition hover:bg-paper"
       aria-label="เปลี่ยนเป็นภาษาอังกฤษ"
     >
       EN
@@ -864,11 +856,11 @@
           "venue.bkk.name": "ลาร์-มูน",
           "venue.bkk.detail": "เวลา 09:00–14:00 น.<br />กรุงเทพฯ",
           "venue.bkk.map": "เปิดแผนที่ลาร์-มูน",
+          "dress.eyebrow": "การแต่งกาย",
           "dress.petal": "ชมพูอ่อน",
           "dress.blush": "บลัช",
           "dress.sage": "เขียวเสจ",
           "dress.leaf": "เขียวใบไม้",
-          "dress.tip": "ชุดสุภาพ โทนชมพู หรือเขียวใบไม้อ่อน",
           "gallery.eyebrow": "แกลเลอรี",
           "gallery.title": "ความทรงจำของเรา",
           "gallery.sub": "ช่วงเวลาเล็ก ๆ ที่อยากเก็บไว้ด้วยกัน",
@@ -895,7 +887,7 @@
           "music.on": "เปิดเพลงประกอบ",
           "music.off": "ปิดเสียงเพลง",
           "loader.loading": "กำลังโหลดการ์ด...",
-          "loader.ready": "พร้อมแล้ว",
+          "loader.ready": "แตะเพื่อเปิดการ์ด",
           "loader.tap": "แตะเพื่อเปิดการ์ด",
           "resume.title": "แตะเพื่อเปิดการ์ดต่อ",
           "map.close": "ปิด",
@@ -969,11 +961,11 @@
           "venue.bkk.name": "La-moon",
           "venue.bkk.detail": "09:00–14:00<br />Bangkok",
           "venue.bkk.map": "Open the La-moon map",
+          "dress.eyebrow": "Dress Code",
           "dress.petal": "Soft pink",
           "dress.blush": "Blush",
           "dress.sage": "Sage",
           "dress.leaf": "Leaf green",
-          "dress.tip": "Smart casual in soft pink or light leafy green",
           "gallery.eyebrow": "Gallery",
           "gallery.title": "Our Memories",
           "gallery.sub": "Little moments we wanted to keep",
@@ -1000,7 +992,7 @@
           "music.on": "Play the music",
           "music.off": "Mute the music",
           "loader.loading": "Loading the card...",
-          "loader.ready": "Ready",
+          "loader.ready": "Tap to open the card",
           "loader.tap": "Tap to open the card",
           "resume.title": "Tap to continue",
           "map.close": "Close",
@@ -1081,9 +1073,10 @@
           el.classList.toggle("text-xl", lang === "en");
           el.classList.toggle("sm:text-2xl", lang === "en");
         });
-
-        const footerNames = document.getElementById("footer-names");
-        if (footerNames) footerNames.textContent = copy.footerNames;
+        document.querySelectorAll(".venue-brand").forEach(function (el) {
+          el.classList.toggle("font-script-th", lang === "th");
+          el.classList.toggle("font-script", lang === "en");
+        });
 
         events[0].live = copy["status.nks.live"];
         events[0].done = copy["status.nks.done"];
@@ -1113,12 +1106,21 @@
           loaderStatus.textContent =
             loader.dataset.ready === "true" ? copy["loader.ready"] : copy["loader.loading"];
         }
-        if (loaderHint) loaderHint.textContent = copy["loader.tap"];
+        if (loaderHint) {
+          loaderHint.textContent = copy["loader.tap"];
+          if (loader && loader.dataset.ready === "true") loaderHint.classList.add("hidden");
+        }
         const resumeTitle = document.getElementById("resume-title");
         if (resumeTitle) resumeTitle.textContent = copy["resume.title"];
       }
 
-      document.getElementById("lang-toggle").addEventListener("click", function () {
+      const langToggleBtn = document.getElementById("lang-toggle");
+      langToggleBtn.addEventListener("pointerdown", function (event) {
+        event.stopPropagation();
+      });
+      langToggleBtn.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
         applyLang(cardLang === "th" ? "en" : "th");
       });
 
@@ -1535,17 +1537,18 @@
         loader.dataset.ready = "true";
         loaderStatus.textContent = strings[cardLang]["loader.ready"];
         loaderStatus.classList.remove("loader-pulse");
-        loaderHint.textContent = strings[cardLang]["loader.tap"];
-        loaderHint.classList.remove("hidden");
+        if (loaderHint) loaderHint.classList.add("hidden");
       }
 
       function unlockCard(options) {
         const opts = options || {};
         if (cardUnlocked || loader.dataset.ready !== "true") return;
         cardUnlocked = true;
+        // แตะเปิดการ์ด = เปิดเพลงทันที (ยกเว้นผู้ใช้เคยปิดเสียงไว้)
         if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
           musicOn = true;
         }
+        // play() ต้องมาก่อนงาน DOM — ไม่งั้น LINE ทิ้ง user gesture แล้วเพลงเงียบ
         if (musicOn) {
           playMusic({ showFilterOnFail: !!opts.fromAuto });
         }
