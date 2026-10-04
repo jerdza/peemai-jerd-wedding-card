@@ -11,6 +11,7 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="logo-loader.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Prompt:wght@300;400;500;600&display=swap"
       rel="stylesheet"
@@ -168,6 +169,24 @@
         pointer-events: none;
       }
 
+      #loader-logo {
+        opacity: 0;
+        transition: opacity 0.45s ease;
+      }
+
+      #loader-logo.is-ready {
+        opacity: 0.9;
+      }
+
+      #resume-filter {
+        transition: opacity 0.35s ease;
+      }
+
+      #resume-filter.is-gone {
+        opacity: 0;
+        pointer-events: none;
+      }
+
       @keyframes loaderPulse {
         0%,
         100% {
@@ -193,16 +212,40 @@
     >
       <div class="mx-auto flex w-full max-w-sm flex-col items-center">
         <img
-          src="Logo PJ 2000x2000 - Master v3.png"
+          id="loader-logo"
+          src="logo-loader.png"
           alt=""
           width="200"
           height="200"
-          class="h-28 w-28 object-contain opacity-90 sm:h-32 sm:w-32"
+          decoding="async"
+          fetchpriority="high"
+          class="h-28 w-28 object-contain sm:h-32 sm:w-32"
         />
         <p id="loader-status" class="loader-pulse mt-8 font-sans text-sm tracking-[0.18em] text-moss">
           กำลังโหลดการ์ด...
         </p>
         <p id="loader-hint" class="mt-4 hidden font-serif text-lg text-logo">แตะเพื่อเปิดการ์ด</p>
+      </div>
+    </div>
+
+    <div
+      id="resume-filter"
+      class="fixed inset-0 z-[95] hidden items-center justify-center bg-petal/80 px-6 text-center backdrop-blur-[2px]"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="resume-title"
+      aria-hidden="true"
+    >
+      <div class="mx-auto flex w-full max-w-xs flex-col items-center">
+        <img
+          src="logo-loader.png"
+          alt=""
+          width="96"
+          height="96"
+          class="h-16 w-16 object-contain opacity-90"
+        />
+        <p id="resume-title" class="mt-6 font-serif text-xl text-logo">แตะเพื่อเปิดการ์ดต่อ</p>
+        <p id="resume-sub" class="mt-2 font-sans text-sm tracking-wide text-moss">เพลงจะเล่นต่อจากเดิม</p>
       </div>
     </div>
 
@@ -789,6 +832,8 @@
           "loader.loading": "กำลังโหลดการ์ด...",
           "loader.ready": "พร้อมแล้ว",
           "loader.tap": "แตะเพื่อเปิดการ์ด",
+          "resume.title": "แตะเพื่อเปิดการ์ดต่อ",
+          "resume.sub": "เพลงจะเล่นต่อจากเดิม",
           "map.close": "ปิด",
           "map.navigate": "เปิดนำทางใน Google Maps",
           "cover.photo": "ดอกไม้ในงานแต่งงาน",
@@ -889,6 +934,8 @@
           "loader.loading": "Loading the card...",
           "loader.ready": "Ready",
           "loader.tap": "Tap to open the card",
+          "resume.title": "Tap to continue",
+          "resume.sub": "The music will resume",
           "map.close": "Close",
           "map.navigate": "Open directions in Google Maps",
           "cover.photo": "Wedding flowers",
@@ -1020,6 +1067,10 @@
           loaderStatus.textContent = loader.dataset.ready === "true" ? copy["loader.ready"] : copy["loader.loading"];
         }
         if (loaderHint) loaderHint.textContent = copy["loader.tap"];
+        const resumeTitle = document.getElementById("resume-title");
+        const resumeSub = document.getElementById("resume-sub");
+        if (resumeTitle) resumeTitle.textContent = copy["resume.title"];
+        if (resumeSub) resumeSub.textContent = copy["resume.sub"];
       }
 
       document.getElementById("lang-toggle").addEventListener("click", function () {
@@ -1182,6 +1233,28 @@
       const loader = document.getElementById("card-loader");
       const loaderStatus = document.getElementById("loader-status");
       const loaderHint = document.getElementById("loader-hint");
+      const loaderLogo = document.getElementById("loader-logo");
+      const resumeFilter = document.getElementById("resume-filter");
+
+      function revealLoaderLogo() {
+        if (!loaderLogo) return;
+        loaderLogo.classList.add("is-ready");
+      }
+
+      function prepareLoaderLogo() {
+        if (!loaderLogo) return;
+        const show = function () {
+          if (loaderLogo.decode) {
+            loaderLogo.decode().then(revealLoaderLogo).catch(revealLoaderLogo);
+          } else {
+            revealLoaderLogo();
+          }
+        };
+        if (loaderLogo.complete && loaderLogo.naturalWidth) show();
+        else loaderLogo.addEventListener("load", show, { once: true });
+      }
+
+      prepareLoaderLogo();
 
       function setMusicUi(playing) {
         musicToggle.setAttribute("aria-pressed", playing ? "true" : "false");
@@ -1318,7 +1391,31 @@
         }
       }
 
-      function playMusic() {
+      function isResumeFilterVisible() {
+        return resumeFilter && !resumeFilter.classList.contains("hidden");
+      }
+
+      function showResumeFilter() {
+        if (!resumeFilter || !cardUnlocked) return;
+        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0") return;
+        if (!musicOn || !bgm.paused) return;
+        resumeFilter.classList.remove("hidden", "is-gone");
+        resumeFilter.classList.add("flex");
+        resumeFilter.setAttribute("aria-hidden", "false");
+      }
+
+      function hideResumeFilter() {
+        if (!resumeFilter || !isResumeFilterVisible()) return;
+        resumeFilter.classList.add("is-gone");
+        window.setTimeout(function () {
+          resumeFilter.classList.add("hidden");
+          resumeFilter.classList.remove("flex", "is-gone");
+          resumeFilter.setAttribute("aria-hidden", "true");
+        }, 320);
+      }
+
+      function playMusic(options) {
+        const opts = options || {};
         if (!musicOn) return;
         restoreMusicTime();
         setMusicUi(true);
@@ -1327,6 +1424,7 @@
           playPromise = bgm.play();
         } catch (err) {
           markNeedResume(true);
+          if (opts.showFilterOnFail) showResumeFilter();
           return;
         }
         if (playPromise && playPromise.then) {
@@ -1334,15 +1432,22 @@
             .then(function () {
               setMusicUi(true);
               markNeedResume(false);
+              hideResumeFilter();
             })
             .catch(function () {
               setMusicUi(true);
               markNeedResume(true);
+              if (opts.showFilterOnFail) showResumeFilter();
             });
           return;
         }
-        if (bgm.paused) markNeedResume(true);
-        else markNeedResume(false);
+        if (bgm.paused) {
+          markNeedResume(true);
+          if (opts.showFilterOnFail) showResumeFilter();
+        } else {
+          markNeedResume(false);
+          hideResumeFilter();
+        }
       }
 
       function pauseMusicForLeave() {
@@ -1355,25 +1460,27 @@
 
       function resumeMusicAfterReturn() {
         if (!cardUnlocked) return;
-        if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
-          musicOn = true;
-        }
-        if (!musicOn) return;
-        restoreScrollPosition();
-        playMusic();
-      }
-
-      function tryResumeFromUserGesture(event) {
-        if (!cardUnlocked || !bgm.paused) return;
-        if (event && event.target && event.target.closest && event.target.closest("#music-toggle")) {
-          return;
-        }
-        // ถ้าผู้ใช้ปิดเพลงเองไว้ ไม่ฝืนเปิด
-        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0" && !needsResume() && !musicOn) {
+        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0") {
+          musicOn = false;
+          markNeedResume(false);
+          hideResumeFilter();
           return;
         }
         musicOn = true;
-        // เรียก play ทันทีในจังหวะนิ้วลง/นิ้วขึ้น เพื่อให้ LINE นับเป็น gesture
+        restoreScrollPosition();
+        playMusic({ showFilterOnFail: true });
+        window.setTimeout(function () {
+          if (musicOn && bgm.paused && needsResume()) showResumeFilter();
+        }, 400);
+      }
+
+      function dismissResumeFilter() {
+        if (!isResumeFilterVisible()) return;
+        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0") {
+          hideResumeFilter();
+          return;
+        }
+        musicOn = true;
         restoreMusicTime();
         setMusicUi(true);
         let playPromise;
@@ -1388,13 +1495,17 @@
             .then(function () {
               markNeedResume(false);
               saveMusicState();
+              hideResumeFilter();
             })
             .catch(function () {
               markNeedResume(true);
             });
-        } else if (!bgm.paused) {
+          return;
+        }
+        if (!bgm.paused) {
           markNeedResume(false);
           saveMusicState();
+          hideResumeFilter();
         }
       }
 
@@ -1461,7 +1572,8 @@
         loaderHint.classList.remove("hidden");
       }
 
-      function unlockCard() {
+      function unlockCard(options) {
+        const opts = options || {};
         if (cardUnlocked || loader.dataset.ready !== "true") return;
         cardUnlocked = true;
         markCardOpened();
@@ -1474,10 +1586,12 @@
         if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
           musicOn = true;
         }
-        playMusic();
-        // หลังโหลดใหม่จาก Map: ถ้าเล่นไม่ติด ให้รอ gesture นิ้วลงครั้งถัดไป
+        // แตะจากหน้าโหลด = gesture จริง / auto จาก session เดิมอาจเล่นไม่ติด
+        playMusic({ showFilterOnFail: !!opts.fromAuto });
         window.setTimeout(function () {
-          if (musicOn && bgm.paused) markNeedResume(true);
+          if (!musicOn || !bgm.paused) return;
+          markNeedResume(true);
+          if (opts.fromAuto) showResumeFilter();
         }, 500);
       }
 
@@ -1485,23 +1599,35 @@
         ["2.png", "3.png", "4.png", "5.png", "6.png", "7.png"].forEach(function (src) {
           loadImage(src);
         });
+        // โลโก้ปกแบบวาด (APNG) โหลดพื้นหลัง ไม่อั้นหน้าโหลด
+        loadImage("Logo PJ 2000x2000 - Master v3.png");
       }
 
       Promise.all([
         loadImage("cover-cream-08.jpg"),
-        loadImage("Logo PJ 2000x2000 - Master v3.png"),
+        loadImage("logo-loader.png"),
         waitAudio(bgm),
       ]).then(function () {
+        revealLoaderLogo();
         markLoaderReady();
         preloadSectionArt();
         if (wasCardOpenedBefore()) {
-          unlockCard();
+          unlockCard({ fromAuto: true });
         }
       });
 
       loader.addEventListener("pointerdown", function () {
         unlockCard();
       });
+
+      resumeFilter.addEventListener(
+        "pointerdown",
+        function (event) {
+          event.preventDefault();
+          dismissResumeFilter();
+        },
+        { passive: false }
+      );
 
       window.addEventListener(
         "scroll",
@@ -1562,11 +1688,6 @@
         resumeMusicAfterReturn();
       });
 
-      // นิ้วลง/นิ้วขึ้นตอนจะเลื่อนหรือแตะหน้า = gesture ที่ LINE ยอมให้เปิดเสียง
-      ["touchstart", "touchend", "pointerdown", "pointerup", "click"].forEach(function (type) {
-        window.addEventListener(type, tryResumeFromUserGesture, { passive: true, capture: true });
-      });
-
       setMusicUi(musicOn && !bgm.paused);
 
       musicToggle.addEventListener("click", function () {
@@ -1575,12 +1696,14 @@
           bgm.pause();
           saveMusicState();
           markNeedResume(false);
+          hideResumeFilter();
           setMusicUi(false);
           return;
         }
         musicOn = true;
         saveMusicState();
-        playMusic();
+        playMusic({ showFilterOnFail: false });
+        hideResumeFilter();
       });
     </script>
     </div>
