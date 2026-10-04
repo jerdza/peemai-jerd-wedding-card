@@ -1279,7 +1279,7 @@
       }
 
       let restoringScroll = false;
-      let resumeCatcher = null;
+      const NEED_RESUME_KEY = "pj-wedding-need-resume";
 
       function restoreScrollPosition() {
         const y = readSavedScroll();
@@ -1303,56 +1303,53 @@
       const mapSheetExternal = document.getElementById("map-sheet-external");
       const mapSheetClose = document.getElementById("map-sheet-close");
 
-      function removeResumeCatcher() {
-        if (!resumeCatcher) return;
-        if (resumeCatcher.parentNode) resumeCatcher.parentNode.removeChild(resumeCatcher);
-        resumeCatcher = null;
+      function markNeedResume(need) {
+        try {
+          if (need) sessionStorage.setItem(NEED_RESUME_KEY, "1");
+          else sessionStorage.removeItem(NEED_RESUME_KEY);
+        } catch (err) {}
       }
 
-      function armResumeCatcher() {
-        if (!cardUnlocked || !musicOn || resumeCatcher || !bgm.paused) return;
-        resumeCatcher = document.createElement("div");
-        resumeCatcher.setAttribute("aria-hidden", "true");
-        resumeCatcher.style.cssText =
-          "position:fixed;inset:0;z-index:80;touch-action:pan-y;background:transparent;-webkit-tap-highlight-color:transparent;";
-        const unlock = function () {
-          musicOn = true;
-          restoreMusicTime();
-          setMusicUi(true);
-          const playPromise = bgm.play();
-          if (playPromise && playPromise.catch) {
-            playPromise.catch(function () {});
-          }
-          removeResumeCatcher();
-        };
-        // นิ้ววางลงเพื่อเลื่อนหรือแตะ = gesture จริง จะปลดล็อกเสียงใน LINE ได้
-        resumeCatcher.addEventListener("touchstart", unlock, { passive: true });
-        resumeCatcher.addEventListener("pointerdown", unlock, { passive: true });
-        document.body.appendChild(resumeCatcher);
+      function needsResume() {
+        try {
+          return sessionStorage.getItem(NEED_RESUME_KEY) === "1";
+        } catch (err) {
+          return false;
+        }
       }
 
       function playMusic() {
         if (!musicOn) return;
         restoreMusicTime();
         setMusicUi(true);
-        const playPromise = bgm.play();
+        let playPromise;
+        try {
+          playPromise = bgm.play();
+        } catch (err) {
+          markNeedResume(true);
+          return;
+        }
         if (playPromise && playPromise.then) {
           playPromise
             .then(function () {
               setMusicUi(true);
-              removeResumeCatcher();
+              markNeedResume(false);
             })
             .catch(function () {
               setMusicUi(true);
-              armResumeCatcher();
+              markNeedResume(true);
             });
+          return;
         }
+        if (bgm.paused) markNeedResume(true);
+        else markNeedResume(false);
       }
 
       function pauseMusicForLeave() {
         saveMusicState();
         if (!musicOn) return;
         if (!bgm.paused) bgm.pause();
+        markNeedResume(true);
         setMusicUi(true);
       }
 
@@ -1364,9 +1361,6 @@
         if (!musicOn) return;
         restoreScrollPosition();
         playMusic();
-        window.setTimeout(function () {
-          if (musicOn && bgm.paused) armResumeCatcher();
-        }, 400);
       }
 
       function tryResumeFromUserGesture(event) {
@@ -1374,19 +1368,33 @@
         if (event && event.target && event.target.closest && event.target.closest("#music-toggle")) {
           return;
         }
-        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0" && !musicOn) return;
+        // ถ้าผู้ใช้ปิดเพลงเองไว้ ไม่ฝืนเปิด
+        if (sessionStorage.getItem(MUSIC_ON_KEY) === "0" && !needsResume() && !musicOn) {
+          return;
+        }
         musicOn = true;
+        // เรียก play ทันทีในจังหวะนิ้วลง/นิ้วขึ้น เพื่อให้ LINE นับเป็น gesture
         restoreMusicTime();
         setMusicUi(true);
-        const playPromise = bgm.play();
+        let playPromise;
+        try {
+          playPromise = bgm.play();
+        } catch (err) {
+          markNeedResume(true);
+          return;
+        }
         if (playPromise && playPromise.then) {
           playPromise
             .then(function () {
-              removeResumeCatcher();
+              markNeedResume(false);
+              saveMusicState();
             })
             .catch(function () {
-              armResumeCatcher();
+              markNeedResume(true);
             });
+        } else if (!bgm.paused) {
+          markNeedResume(false);
+          saveMusicState();
         }
       }
 
@@ -1463,7 +1471,14 @@
           if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
         }, 500);
         restoreScrollPosition();
+        if (sessionStorage.getItem(MUSIC_ON_KEY) !== "0") {
+          musicOn = true;
+        }
         playMusic();
+        // หลังโหลดใหม่จาก Map: ถ้าเล่นไม่ติด ให้รอ gesture นิ้วลงครั้งถัดไป
+        window.setTimeout(function () {
+          if (musicOn && bgm.paused) markNeedResume(true);
+        }, 500);
       }
 
       function preloadSectionArt() {
@@ -1492,10 +1507,8 @@
         "scroll",
         function () {
           if (!cardUnlocked) return;
-          // เลื่อนด้วยนิ้วหลังกลับมา: ใช้คู่กับ touchmove ด้านล่าง
-          if (!restoringScroll && musicOn && bgm.paused) {
-            playMusic();
-          }
+          // scroll event อย่างเดียวปลดล็อกเสียงใน LINE ไม่ได้
+          // การเล่นต่อใช้ touchstart/touchend ตอนเริ่มเลื่อนแทน
           if (scrollSaveTick) return;
           scrollSaveTick = requestAnimationFrame(function () {
             scrollSaveTick = 0;
@@ -1549,8 +1562,8 @@
         resumeMusicAfterReturn();
       });
 
-      // แตะ/เริ่มเลื่อนด้วยนิ้ว เพื่อเล่นเพลงต่อหลังกลับจากแผนที่
-      ["pointerdown", "touchstart", "touchend", "click"].forEach(function (type) {
+      // นิ้วลง/นิ้วขึ้นตอนจะเลื่อนหรือแตะหน้า = gesture ที่ LINE ยอมให้เปิดเสียง
+      ["touchstart", "touchend", "pointerdown", "pointerup", "click"].forEach(function (type) {
         window.addEventListener(type, tryResumeFromUserGesture, { passive: true, capture: true });
       });
 
@@ -1561,8 +1574,8 @@
           musicOn = false;
           bgm.pause();
           saveMusicState();
+          markNeedResume(false);
           setMusicUi(false);
-          removeResumeCatcher();
           return;
         }
         musicOn = true;
