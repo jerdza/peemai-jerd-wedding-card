@@ -1151,6 +1151,58 @@
 
       let musicOn = true;
       let cardUnlocked = false;
+      const SCROLL_KEY = "pj-wedding-scroll";
+      const OPENED_KEY = "pj-wedding-opened";
+      let scrollSaveTick = 0;
+
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      function currentScrollY() {
+        return window.scrollY || document.documentElement.scrollTop || 0;
+      }
+
+      function saveScrollPosition() {
+        try {
+          sessionStorage.setItem(SCROLL_KEY, String(Math.round(currentScrollY())));
+        } catch (err) {}
+      }
+
+      function readSavedScroll() {
+        try {
+          const value = parseInt(sessionStorage.getItem(SCROLL_KEY) || "", 10);
+          return Number.isFinite(value) && value > 0 ? value : 0;
+        } catch (err) {
+          return 0;
+        }
+      }
+
+      function wasCardOpenedBefore() {
+        try {
+          return sessionStorage.getItem(OPENED_KEY) === "1";
+        } catch (err) {
+          return false;
+        }
+      }
+
+      function markCardOpened() {
+        try {
+          sessionStorage.setItem(OPENED_KEY, "1");
+        } catch (err) {}
+      }
+
+      function restoreScrollPosition() {
+        const y = readSavedScroll();
+        if (y <= 0) return;
+        const apply = function () {
+          window.scrollTo(0, y);
+        };
+        apply();
+        requestAnimationFrame(apply);
+        setTimeout(apply, 50);
+        setTimeout(apply, 250);
+      }
 
       function playMusic() {
         if (!musicOn) return;
@@ -1223,11 +1275,13 @@
       function unlockCard() {
         if (cardUnlocked || loader.dataset.ready !== "true") return;
         cardUnlocked = true;
+        markCardOpened();
         document.documentElement.classList.remove("card-locked");
         loader.classList.add("is-gone");
         setTimeout(function () {
           if (loader && loader.parentNode) loader.parentNode.removeChild(loader);
         }, 500);
+        restoreScrollPosition();
         playMusic();
       }
 
@@ -1244,20 +1298,57 @@
       ]).then(function () {
         markLoaderReady();
         preloadSectionArt();
+        if (wasCardOpenedBefore()) {
+          unlockCard();
+        }
       });
 
       loader.addEventListener("pointerdown", function () {
         unlockCard();
       });
 
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (!cardUnlocked) return;
+          if (scrollSaveTick) return;
+          scrollSaveTick = requestAnimationFrame(function () {
+            scrollSaveTick = 0;
+            saveScrollPosition();
+          });
+        },
+        { passive: true }
+      );
+
+      document.addEventListener(
+        "click",
+        function (event) {
+          const link = event.target.closest && event.target.closest('a[target="_blank"]');
+          if (!link) return;
+          saveScrollPosition();
+          markCardOpened();
+        },
+        true
+      );
+
       document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
+          saveScrollPosition();
           pauseMusicForLeave();
+          return;
         }
+        if (cardUnlocked) restoreScrollPosition();
       });
 
       window.addEventListener("pagehide", function () {
+        saveScrollPosition();
         pauseMusicForLeave();
+      });
+
+      window.addEventListener("pageshow", function (event) {
+        if (event.persisted && cardUnlocked) {
+          restoreScrollPosition();
+        }
       });
 
       document.addEventListener("pointerdown", function (event) {
