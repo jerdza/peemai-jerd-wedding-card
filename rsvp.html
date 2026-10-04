@@ -35,7 +35,7 @@
     </script>
   </head>
   <body class="min-h-screen bg-petal font-sans text-ink">
-    <p class="fixed right-5 top-3 z-50 text-[11px] tracking-wide text-blush">v1.03</p>
+    <p class="fixed right-5 top-3 z-50 text-[11px] tracking-wide text-blush">v1.04</p>
     <button
       type="button"
       id="lang-toggle"
@@ -125,28 +125,40 @@
           <div id="plan-card" class="hidden rounded-2xl bg-white px-4 py-4 shadow-sm">
             <p class="mb-3 text-xs font-semibold text-moss" data-i18n="plan.q">มาวันไหน?</p>
             <div class="grid gap-2">
-              <button type="button" data-plan="นครสวรรค์" data-i18n="plan.nks" class="plan-btn rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
-                นครสวรรค์ · อา. 27 ธ.ค. 2569
-              </button>
-              <button type="button" data-plan="กรุงเทพฯ" data-i18n="plan.bkk" class="plan-btn rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
-                กรุงเทพฯ · ส. 23 ม.ค. 2570
-              </button>
-              <button type="button" data-plan="ทั้งสองวัน" data-i18n="plan.both" class="plan-btn rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
-                ทั้งสองวัน
-              </button>
+              <div>
+                <button type="button" data-plan="นครสวรรค์" data-i18n="plan.nks" class="plan-btn w-full rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
+                  นครสวรรค์ · อา. 27 ธ.ค. 2569
+                </button>
+                <div id="guests-nks" class="mt-2 hidden rounded-xl bg-petal/70 px-3 py-3">
+                  <label class="mb-2 block text-xs font-semibold text-moss" for="count-nks" data-i18n="guests.nks">จำนวนคนที่มา (รวมตัวเอง) ที่นครสวรรค์</label>
+                  <input id="count-nks" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                </div>
+              </div>
+              <div>
+                <button type="button" data-plan="กรุงเทพฯ" data-i18n="plan.bkk" class="plan-btn w-full rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
+                  กรุงเทพฯ · ส. 23 ม.ค. 2570
+                </button>
+                <div id="guests-bkk" class="mt-2 hidden rounded-xl bg-petal/70 px-3 py-3">
+                  <label class="mb-2 block text-xs font-semibold text-moss" for="count-bkk" data-i18n="guests.bkk">จำนวนคนที่มา (รวมตัวเอง) ที่กรุงเทพฯ</label>
+                  <input id="count-bkk" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                </div>
+              </div>
+              <div>
+                <button type="button" data-plan="ทั้งสองวัน" data-i18n="plan.both" class="plan-btn w-full rounded-xl border-2 border-sage px-3 py-2.5 text-left text-sm font-semibold text-moss">
+                  ทั้งสองวัน
+                </button>
+                <div id="guests-both" class="mt-2 hidden space-y-3 rounded-xl bg-petal/70 px-3 py-3">
+                  <div>
+                    <label class="mb-2 block text-xs font-semibold text-moss" for="count-both-nks" data-i18n="guests.nks">จำนวนคนที่มา (รวมตัวเอง) ที่นครสวรรค์</label>
+                    <input id="count-both-nks" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-white/80 bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                  </div>
+                  <div>
+                    <label class="mb-2 block text-xs font-semibold text-moss" for="count-both-bkk" data-i18n="guests.bkk">จำนวนคนที่มา (รวมตัวเอง) ที่กรุงเทพฯ</label>
+                    <input id="count-both-bkk" type="number" min="1" value="1" inputmode="numeric" class="guest-count w-full border-b border-white/80 bg-transparent pb-1.5 text-base outline-none focus:border-leaf" />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div id="guests-card" class="hidden rounded-2xl bg-white px-4 py-4 shadow-sm">
-            <label class="mb-2 block text-xs font-semibold text-moss" for="guests" data-i18n="guests.label">จำนวนคนที่มา (รวมตัวเอง)</label>
-            <input
-              id="guests"
-              name="guests"
-              type="number"
-              min="1"
-              value="1"
-              class="w-full border-b border-sage bg-transparent pb-1.5 text-base outline-none focus:border-leaf"
-            />
           </div>
 
           <div class="rounded-2xl bg-white px-4 py-4 shadow-sm">
@@ -195,9 +207,10 @@
       const submitBtn = document.getElementById("submit-btn");
       const errorEl = document.getElementById("error");
       const planCard = document.getElementById("plan-card");
-      const guestsCard = document.getElementById("guests-card");
       let attending = "";
       let plan = "";
+      let guestsNks = "1";
+      let guestsBkk = "1";
       let editToken = "";
       let saveId = "";
       let saving = false;
@@ -229,7 +242,8 @@
           "plan.nks": "นครสวรรค์ · อา. 27 ธ.ค. 2569",
           "plan.bkk": "กรุงเทพฯ · ส. 23 ม.ค. 2570",
           "plan.both": "ทั้งสองวัน",
-          "guests.label": "จำนวนคนที่มา (รวมตัวเอง)",
+          "guests.nks": "จำนวนคนที่มา (รวมตัวเอง) ที่นครสวรรค์",
+          "guests.bkk": "จำนวนคนที่มา (รวมตัวเอง) ที่กรุงเทพฯ",
           "message.label": "ฝากข้อความถึงเรา (ไม่บังคับ)",
           "message.placeholder": "ฝากคำอวยพร...",
           submit: "บันทึก",
@@ -239,6 +253,8 @@
           "hint.phone": "ใส่เบอร์อย่างน้อย 9 หลัก",
           "hint.attend": "เลือกสะดวกหรือไม่สะดวก",
           "hint.plan": "เลือกวันงาน",
+          "hint.guestsNks": "ใส่จำนวนคนที่นครสวรรค์",
+          "hint.guestsBkk": "ใส่จำนวนคนที่กรุงเทพฯ",
           "error.incomplete": "กรอกชื่อ-นามสกุล ชื่อที่รู้จัก เบอร์ติดต่อ เลือกความสะดวก และวันงานให้ครบนะคะ",
           "error.network": "เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ ลองอีกครั้งนะคะ",
           "error.save": "บันทึกไม่สำเร็จ ลองกดบันทึกอีกครั้งนะคะ",
@@ -282,7 +298,8 @@
           "plan.nks": "Nakhon Sawan · Sun 27 Dec 2026",
           "plan.bkk": "Bangkok · Sat 23 Jan 2027",
           "plan.both": "Both days",
-          "guests.label": "Number of guests (including you)",
+          "guests.nks": "Number of guests in Nakhon Sawan (including you)",
+          "guests.bkk": "Number of guests in Bangkok (including you)",
           "message.label": "A note for us (optional)",
           "message.placeholder": "Leave a blessing...",
           submit: "Save",
@@ -292,6 +309,8 @@
           "hint.phone": "Enter at least 9 digits",
           "hint.attend": "Choose whether you can attend",
           "hint.plan": "Choose the day",
+          "hint.guestsNks": "Enter the Nakhon Sawan guest count",
+          "hint.guestsBkk": "Enter the Bangkok guest count",
           "error.incomplete": "Please complete your name, the name we know you by, phone, attendance, and the day.",
           "error.network": "Could not reach the server. Please try again.",
           "error.save": "Could not save. Please try again.",
@@ -383,6 +402,31 @@
           : "bg-white text-moss border-sage";
       }
 
+      function setCount(id, value) {
+        const field = document.getElementById(id);
+        if (document.activeElement === field) return;
+        if (field.value !== value) field.value = value;
+      }
+
+      function countOk(value) {
+        const count = Math.floor(Number(String(value).trim()));
+        return String(value).trim() !== "" && Number.isFinite(count) && count >= 1 && count <= 9999;
+      }
+
+      function needsNks() {
+        return plan === "นครสวรรค์" || plan === "ทั้งสองวัน";
+      }
+
+      function needsBkk() {
+        return plan === "กรุงเทพฯ" || plan === "ทั้งสองวัน";
+      }
+
+      function partyCounts() {
+        const nks = attending === "yes" && needsNks() && countOk(guestsNks) ? String(Math.floor(Number(guestsNks))) : "0";
+        const bkk = attending === "yes" && needsBkk() && countOk(guestsBkk) ? String(Math.floor(Number(guestsBkk))) : "0";
+        return { nks: nks, bkk: bkk, total: String(Number(nks) + Number(bkk)) };
+      }
+
       function renderChoices() {
         document.querySelectorAll(".attend-btn").forEach(function (btn) {
           btn.className =
@@ -391,22 +435,32 @@
         });
         document.querySelectorAll(".plan-btn").forEach(function (btn) {
           btn.className =
-            "plan-btn rounded-xl border-2 px-3 py-2.5 text-left text-sm font-semibold transition " +
+            "plan-btn w-full rounded-xl border-2 px-3 py-2.5 text-left text-sm font-semibold transition " +
             selectedClass(btn.getAttribute("data-plan") === plan);
         });
         const coming = attending === "yes";
         planCard.classList.toggle("hidden", !coming);
-        guestsCard.classList.toggle("hidden", !coming);
+        document.getElementById("guests-nks").classList.toggle("hidden", !(coming && plan === "นครสวรรค์"));
+        document.getElementById("guests-bkk").classList.toggle("hidden", !(coming && plan === "กรุงเทพฯ"));
+        document.getElementById("guests-both").classList.toggle("hidden", !(coming && plan === "ทั้งสองวัน"));
+        setCount("count-nks", guestsNks);
+        setCount("count-both-nks", guestsNks);
+        setCount("count-bkk", guestsBkk);
+        setCount("count-both-bkk", guestsBkk);
         const nameOk = Boolean(document.getElementById("name").value.trim());
         const knownOk = Boolean(document.getElementById("known-name").value.trim());
         const phoneOk = document.getElementById("phone").value.replace(/\D/g, "").length >= 9;
-        const ready = nameOk && knownOk && phoneOk && attending && (!coming || plan);
+        const nksOk = !coming || !needsNks() || countOk(guestsNks);
+        const bkkOk = !coming || !needsBkk() || countOk(guestsBkk);
+        const ready = nameOk && knownOk && phoneOk && attending && (!coming || plan) && nksOk && bkkOk;
         const missing = [];
         if (!nameOk) missing.push(t("hint.name"));
         if (!knownOk) missing.push(t("hint.known"));
         if (!phoneOk) missing.push(t("hint.phone"));
         if (!attending) missing.push(t("hint.attend"));
         else if (coming && !plan) missing.push(t("hint.plan"));
+        else if (coming && needsNks() && !countOk(guestsNks)) missing.push(t("hint.guestsNks"));
+        else if (coming && needsBkk() && !countOk(guestsBkk)) missing.push(t("hint.guestsBkk"));
         const hint = document.getElementById("need-hint");
         hint.textContent = saving ? "" : missing.join(" · ");
         if (saving) {
@@ -425,7 +479,7 @@
       }
 
       function lockForm(locked) {
-        ["name", "known-name", "phone", "guests", "message"].forEach(function (id) {
+        ["name", "known-name", "phone", "count-nks", "count-bkk", "count-both-nks", "count-both-bkk", "message"].forEach(function (id) {
           document.getElementById(id).disabled = locked;
         });
         document.querySelectorAll(".attend-btn, .plan-btn").forEach(function (btn) {
@@ -453,6 +507,22 @@
       document.getElementById("name").addEventListener("input", renderChoices);
       document.getElementById("known-name").addEventListener("input", renderChoices);
       document.getElementById("phone").addEventListener("input", renderChoices);
+      document.getElementById("count-nks").addEventListener("input", function (event) {
+        guestsNks = event.target.value;
+        renderChoices();
+      });
+      document.getElementById("count-both-nks").addEventListener("input", function (event) {
+        guestsNks = event.target.value;
+        renderChoices();
+      });
+      document.getElementById("count-bkk").addEventListener("input", function (event) {
+        guestsBkk = event.target.value;
+        renderChoices();
+      });
+      document.getElementById("count-both-bkk").addEventListener("input", function (event) {
+        guestsBkk = event.target.value;
+        renderChoices();
+      });
 
       function summaryRow(label, value) {
         const row = document.createElement("div");
@@ -480,7 +550,13 @@
           summaryRow(t("sum.status"), entry.coming ? t("sum.yes") : t("sum.no"))
         );
         if (entry.coming) {
-          summary.append(summaryRow(t("sum.plan"), planLabel(entry.plan)), summaryRow(t("sum.guests"), guestText(entry.guests)));
+          summary.append(summaryRow(t("sum.plan"), planLabel(entry.plan)));
+          if (entry.plan === "นครสวรรค์" || entry.plan === "ทั้งสองวัน") {
+            summary.append(summaryRow(t("sum.nks"), guestText(entry.guestsNks)));
+          }
+          if (entry.plan === "กรุงเทพฯ" || entry.plan === "ทั้งสองวัน") {
+            summary.append(summaryRow(t("sum.bkk"), guestText(entry.guestsBkk)));
+          }
         }
         if (entry.note) summary.append(summaryRow(t("sum.note"), entry.note));
         document.getElementById("form-view").classList.add("hidden");
@@ -515,9 +591,10 @@
         const name = document.getElementById("name").value.trim();
         const knownName = document.getElementById("known-name").value.trim();
         const phone = document.getElementById("phone").value.trim();
-        const guests = attending === "yes" ? document.getElementById("guests").value.trim() || "1" : "0";
+        const counts = partyCounts();
         const note = document.getElementById("message").value.trim();
-        if (!name || !knownName || phone.replace(/\D/g, "").length < 9 || !attending || (attending === "yes" && !plan)) {
+        const countsReady = attending !== "yes" || (countOk(needsNks() ? guestsNks : "1") && countOk(needsBkk() ? guestsBkk : "1"));
+        if (!name || !knownName || phone.replace(/\D/g, "").length < 9 || !attending || (attending === "yes" && !plan) || !countsReady) {
           errorEl.textContent = t("error.incomplete");
           errorEl.classList.remove("hidden");
           return;
@@ -540,7 +617,9 @@
               phone: phone,
               coming: attending === "yes",
               plan: plan,
-              guests: guests,
+              guests: counts.total,
+              guestsNks: counts.nks,
+              guestsBkk: counts.bkk,
               note: note,
             });
           }, 700);
@@ -560,7 +639,9 @@
               phone: phone,
               attending: attending === "yes" ? "สะดวก" : "ไม่สะดวก",
               plan: attending === "yes" ? plan : "-",
-              guests: guests,
+              guests: counts.total,
+              guestsNks: counts.nks,
+              guestsBkk: counts.bkk,
               note: note || "-",
             }),
           });
@@ -578,7 +659,9 @@
             phone: phone,
             coming: attending === "yes",
             plan: plan,
-            guests: guests,
+            guests: counts.total,
+            guestsNks: counts.nks,
+            guestsBkk: counts.bkk,
             note: note,
           });
         } catch (error) {

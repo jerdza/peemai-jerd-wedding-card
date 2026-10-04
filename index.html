@@ -1206,24 +1206,27 @@
 
       function playMusic() {
         if (!musicOn) return;
+        setMusicUi(true);
         const playPromise = bgm.play();
-        if (playPromise && playPromise.then) {
-          playPromise
-            .then(function () {
-              setMusicUi(true);
-            })
-            .catch(function () {
-              setMusicUi(false);
-            });
-        } else {
-          setMusicUi(!bgm.paused);
+        if (playPromise && playPromise.catch) {
+          playPromise.catch(function () {
+            // ยังต้องการเปิดเพลงอยู่ แค่รอแตะครั้งถัดไป
+            setMusicUi(true);
+          });
         }
       }
 
       function pauseMusicForLeave() {
-        if (bgm.paused) return;
-        bgm.pause();
-        setMusicUi(false);
+        if (!musicOn) return;
+        if (!bgm.paused) bgm.pause();
+        // ไม่สลับปุ่มเป็นปิด เพื่อให้กลับมาแล้วเล่นต่อได้
+        setMusicUi(true);
+      }
+
+      function resumeMusicAfterReturn() {
+        if (!cardUnlocked || !musicOn) return;
+        restoreScrollPosition();
+        playMusic();
       }
 
       function loadImage(src) {
@@ -1337,7 +1340,7 @@
           pauseMusicForLeave();
           return;
         }
-        if (cardUnlocked) restoreScrollPosition();
+        resumeMusicAfterReturn();
       });
 
       window.addEventListener("pagehide", function () {
@@ -1345,10 +1348,8 @@
         pauseMusicForLeave();
       });
 
-      window.addEventListener("pageshow", function (event) {
-        if (event.persisted && cardUnlocked) {
-          restoreScrollPosition();
-        }
+      window.addEventListener("pageshow", function () {
+        resumeMusicAfterReturn();
       });
 
       document.addEventListener("pointerdown", function (event) {
