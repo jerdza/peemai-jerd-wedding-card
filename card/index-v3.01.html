@@ -208,7 +208,7 @@
       }
 
       #scroll-nav {
-        left: max(1.25rem, calc((100vw - 720px) / 2 + 1.25rem));
+        right: max(1.25rem, calc((100vw - 720px) / 2 + 1.25rem));
         bottom: 1.25rem;
         width: auto;
         max-width: calc(100vw - 2.5rem);
@@ -670,40 +670,58 @@
             <p class="mt-1 text-sm text-mute" data-i18n="gallery.sub">ช่วงเวลาเล็ก ๆ ที่อยากเก็บไว้ด้วยกัน</p>
           </div>
 
-          <div id="gallery-top" class="scroll-waypoint mt-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-            <figure>
-              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/01-engagement.jpg">
-                <img src="../assets/gallery/01-engagement-thumb.jpg" alt="ความทรงจำของเรา 1" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
-              </button>
-            </figure>
-            <figure>
-              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/06-garden.jpg">
-                <img src="../assets/gallery/06-garden-thumb.jpg" alt="ความทรงจำของเรา 2" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover object-top transition duration-300 hover:scale-105" />
-              </button>
-            </figure>
-            <figure>
-              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/05-lake.jpg">
-                <img src="../assets/gallery/05-lake-thumb.jpg" alt="ความทรงจำของเรา 3" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
-              </button>
-            </figure>
+          <div id="gallery-top" class="scroll-waypoint mt-4 grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-3">
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/01-engagement.jpg">
+                  <img src="../assets/gallery/01-engagement-thumb.jpg" alt="ความทรงจำของเรา 1" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/09-maple.jpg">
+                  <img src="../assets/gallery/09-maple-thumb.jpg" alt="ความทรงจำของเรา 3" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+            </div>
+            <div class="flex flex-col gap-3">
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/05-lake.jpg">
+                  <img src="../assets/gallery/05-lake-thumb.jpg" alt="ความทรงจำของเรา 2" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/07-greenhouse.jpg">
+                  <img src="../assets/gallery/07-greenhouse-thumb.jpg" alt="ความทรงจำของเรา 4" width="900" height="1200" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover object-[center_30%] transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+            </div>
           </div>
 
-          <div id="gallery-bottom" class="scroll-waypoint mt-3 grid grid-cols-2 gap-3 md:mt-4 md:grid-cols-3 md:gap-4">
-            <figure>
-              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/03-sea.jpg">
-                <img src="../assets/gallery/03-sea-thumb.jpg" alt="ความทรงจำของเรา 4" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
-              </button>
-            </figure>
-            <figure>
-              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/02-fuji.jpg">
-                <img src="../assets/gallery/02-fuji-thumb.jpg" alt="ความทรงจำของเรา 5" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
-              </button>
-            </figure>
-            <figure>
-              <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/04-heart.jpg">
-                <img src="../assets/gallery/04-heart-thumb.jpg" alt="ความทรงจำของเรา 6" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
-              </button>
-            </figure>
+          <div id="gallery-bottom" class="scroll-waypoint mt-3 grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-3">
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/04-heart.jpg">
+                  <img src="../assets/gallery/04-heart-thumb.jpg" alt="ความทรงจำของเรา 5" width="675" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/08-sakura.jpg">
+                  <img src="../assets/gallery/08-sakura-thumb.jpg" alt="ความทรงจำของเรา 7" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+            </div>
+            <div class="flex flex-col gap-3">
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/02-fuji.jpg">
+                  <img src="../assets/gallery/02-fuji-thumb.jpg" alt="ความทรงจำของเรา 6" width="900" height="675" loading="lazy" decoding="async" class="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+              <figure>
+                <button type="button" class="gallery-item block w-full overflow-hidden rounded-2xl shadow-sm" data-full="../assets/gallery/03-sea.jpg">
+                  <img src="../assets/gallery/03-sea-thumb.jpg" alt="ความทรงจำของเรา 8" width="900" height="900" loading="lazy" decoding="async" class="aspect-[3/4] w-full object-cover object-[center_40%] transition duration-300 hover:scale-105" />
+                </button>
+              </figure>
+            </div>
           </div>
         </div>
       </section>
