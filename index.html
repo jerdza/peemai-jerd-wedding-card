@@ -11,7 +11,6 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="image" href="assets/cover/cover-cream-08.jpg" />
     <link rel="preload" as="image" href="assets/logo/logo-loader.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Prompt:wght@300;400;500&display=swap"
@@ -493,37 +492,7 @@
 
     <div class="mx-auto w-full max-w-[720px]">
       <!-- Cover -->
-      <section id="cover" class="scroll-waypoint relative flex min-h-[100svh] flex-col overflow-hidden">
-        <img
-          id="cover-photo"
-          src="assets/cover/cover-cream-08.jpg"
-          alt="ดอกไม้ในงานแต่งงาน"
-          data-i18n-alt="cover.photo"
-          class="absolute inset-0 h-full w-full object-cover"
-        />
-        <div class="cover-veil absolute inset-0"></div>
-
-        <div class="deco-cat deco-cat-lg left-2 top-[16%] z-10 opacity-90 sm:left-4" aria-hidden="true">
-          <div class="cat-anim-float">
-            <img src="assets/Cats/clear/cats-48-07-loaf.png" alt="" width="192" height="192" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md right-2 top-[20%] z-10 opacity-90 sm:right-4" aria-hidden="true">
-          <div class="cat-anim-sway cat-delay-1">
-            <img src="assets/Cats/clear/cats-48-09-sleepy.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-lg bottom-8 left-3 z-10 opacity-90" aria-hidden="true">
-          <div class="cat-anim-bob">
-            <img src="assets/Cats/clear/cats-48-35-profile-sit.png" alt="" width="192" height="192" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md bottom-10 right-3 z-10 opacity-90" aria-hidden="true">
-          <div class="cat-anim-wiggle cat-delay-2">
-            <img src="assets/Cats/clear/cats-48-21-tail-up.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-
+      <section id="cover" class="scroll-waypoint relative flex min-h-[100svh] flex-col overflow-hidden bg-paper">
         <div class="relative z-10 flex min-h-[100svh] w-full flex-col px-6 pb-24 text-center text-ink">
           <div class="flex flex-1 items-center justify-center">
             <img
@@ -532,7 +501,7 @@
               alt=""
               width="619"
               height="621"
-              class="fade-up h-auto w-44 -translate-y-[3%] drop-shadow-[0_6px_16px_rgba(30,36,32,0.35)] sm:w-52"
+              class="fade-up h-auto w-44 -translate-y-[3%] sm:w-52"
             />
           </div>
           <p
@@ -568,22 +537,7 @@
       </section>
 
       <!-- Invitation -->
-      <section id="invite" class="zone-cats scroll-waypoint overflow-hidden px-6 pb-28 pt-16 sm:px-10 sm:pb-32 sm:pt-20">
-        <div class="deco-cat deco-cat-md -left-1 top-24 opacity-85" aria-hidden="true">
-          <div class="cat-anim-peek-l">
-            <img src="assets/Cats/clear/cats-48-03-look-left.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md -right-1 top-40 opacity-85" aria-hidden="true">
-          <div class="cat-anim-peek-r cat-delay-2">
-            <img src="assets/Cats/clear/cats-48-02-look-right.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-lg bottom-6 left-1/2 -translate-x-1/2 opacity-90" aria-hidden="true">
-          <div class="cat-anim-float">
-            <img src="assets/Cats/clear/cats-48-48-nose-touch.png" alt="" width="192" height="192" loading="lazy" decoding="async" />
-          </div>
-        </div>
+      <section id="invite" class="scroll-waypoint px-6 pb-28 pt-16 sm:px-10 sm:pb-32 sm:pt-20">
         <div class="mx-auto max-w-xl text-center">
           <p class="text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="invite.eyebrow">คำเชิญ</p>
 
@@ -616,17 +570,7 @@
       </section>
 
       <!-- Countdown -->
-      <section id="countdown" class="zone-cats scroll-waypoint overflow-hidden px-6 py-16 sm:px-10 sm:py-20">
-        <div class="deco-cat deco-cat-sm left-3 top-10 opacity-80" aria-hidden="true">
-          <div class="cat-anim-bob">
-            <img src="assets/Cats/clear/cats-48-34-look-up.png" alt="" width="104" height="104" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md right-2 bottom-8 opacity-85" aria-hidden="true">
-          <div class="cat-anim-sway cat-delay-1">
-            <img src="assets/Cats/clear/cats-48-12-curl-sleep.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
+      <section id="countdown" class="zone-cats scroll-waypoint px-6 py-16 sm:px-10 sm:py-20">
         <div class="mx-auto max-w-md text-center">
           <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="countdown.eyebrow">นับถอยหลัง</p>
           <h2 class="mt-2 font-serif text-2xl tracking-wide sm:text-3xl" data-i18n="countdown.title">
@@ -664,7 +608,20 @@
             <p id="status-nks" class="mt-3 hidden text-center font-serif text-lg text-sage"></p>
           </article>
 
-          <article class="mt-3 rounded-3xl bg-blush-soft px-4 py-5 text-left sm:px-6">
+          <article class="relative mt-3 rounded-3xl bg-blush-soft px-4 py-5 text-left sm:px-6">
+            <div class="pointer-events-none absolute -bottom-2 -right-1 z-10 w-[4.25rem] opacity-95" aria-hidden="true">
+              <div class="cat-anim-sway">
+                <img
+                  src="assets/Cats/clear/cats-48-12-curl-sleep.png"
+                  alt=""
+                  width="136"
+                  height="136"
+                  loading="lazy"
+                  decoding="async"
+                  class="h-auto w-full"
+                />
+              </div>
+            </div>
             <div class="flex items-start justify-between gap-3">
               <div>
                 <p class="text-[11px] tracking-[0.25em] uppercase text-sage" data-i18n="day.label2">วันที่ 2</p>
@@ -698,19 +655,24 @@
 
       <!-- Timeline -->
       <section id="schedule" class="zone-cats px-6 py-16 sm:px-10 sm:py-20">
-        <div class="deco-cat deco-cat-sm right-3 top-[8.5rem] opacity-80" aria-hidden="true">
-          <div class="cat-anim-wiggle">
-            <img src="assets/Cats/clear/cats-48-08-yawn.png" alt="" width="104" height="104" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md left-2 bottom-6 opacity-85" aria-hidden="true">
-          <div class="cat-anim-bob cat-delay-2">
-            <img src="assets/Cats/clear/cats-48-45-sit-and-loaf.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
         <div class="mx-auto max-w-md">
           <div class="zone-sticky-head text-center">
-            <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="schedule.eyebrow">กำหนดการ</p>
+            <p class="relative inline-block text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="schedule.eyebrow">
+              กำหนดการ
+              <span class="pointer-events-none absolute left-[calc(100%+0.35rem)] top-1/2 w-[4.75rem] -translate-y-1/2 opacity-95" aria-hidden="true">
+                <span class="cat-anim-bob block">
+                  <img
+                    src="assets/Cats/clear/cats-48-45-sit-and-loaf.png"
+                    alt=""
+                    width="152"
+                    height="152"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-auto w-full"
+                  />
+                </span>
+              </span>
+            </p>
             <h2 class="mt-2 font-serif text-2xl tracking-wide sm:text-3xl" data-i18n="schedule.title">
               กำหนดการทั้งสองวัน
             </h2>
@@ -766,7 +728,7 @@
             </ol>
           </div>
 
-          <div id="schedule-bkk" class="scroll-waypoint mt-5 rounded-3xl bg-blush-soft px-5 py-6">
+          <div id="schedule-bkk" class="scroll-waypoint relative mt-5 rounded-3xl bg-blush-soft px-5 py-6">
             <p class="text-[11px] tracking-[0.25em] uppercase text-ink" data-i18n="schedule.bkk.label">
               วันที่ 2 · กรุงเทพฯ
             </p>
@@ -787,9 +749,16 @@
                 <div class="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border border-line bg-paper">
                   <img src="assets/icons/schedule-pig.png?v=3" alt="" class="h-8 w-11 object-contain" />
                 </div>
-                <div>
+                <div class="min-w-0">
                   <p class="text-xs tracking-[0.18em] text-ink" data-i18n="t.bkk.2.time">11:00 น.</p>
-                  <h4 class="mt-0.5 font-serif text-lg" data-i18n="t.bkk.2.title">ฉลองมงคลสมรส</h4>
+                  <div class="mt-0.5 flex items-center gap-2">
+                    <h4 class="font-serif text-lg" data-i18n="t.bkk.2.title">ฉลองมงคลสมรส</h4>
+                    <div class="pointer-events-none w-[4.25rem] shrink-0 opacity-95" aria-hidden="true">
+                      <div class="cat-anim-wiggle">
+                        <img src="assets/Cats/clear/cats-48-08-yawn.png" alt="" width="136" height="136" loading="lazy" decoding="async" class="h-auto w-full" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </li>
             </ol>
@@ -798,17 +767,7 @@
       </section>
 
       <!-- Location -->
-      <section id="location" class="zone-cats px-6 py-16 sm:px-10 sm:py-20">
-        <div class="deco-cat deco-cat-md left-2 bottom-10 opacity-80" aria-hidden="true">
-          <div class="cat-anim-walk-r">
-            <img src="assets/Cats/clear/cats-48-17-walk-right.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-sm -right-1 top-[9rem] opacity-80" aria-hidden="true">
-          <div class="cat-anim-peek-r cat-delay-1">
-            <img src="assets/Cats/clear/cats-48-22-look-back.png" alt="" width="104" height="104" loading="lazy" decoding="async" />
-          </div>
-        </div>
+      <section id="location" class="px-6 py-16 sm:px-10 sm:py-20">
         <div class="mx-auto max-w-md text-center">
           <div class="zone-sticky-head text-center">
             <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="venue.eyebrow">สถานที่</p>
@@ -889,17 +848,7 @@
       </section>
 
       <!-- Dress Code -->
-      <section id="dress-code" class="zone-cats scroll-waypoint overflow-hidden px-6 py-28 sm:px-10 sm:py-32">
-        <div class="deco-cat deco-cat-md left-4 bottom-16 opacity-85" aria-hidden="true">
-          <div class="cat-anim-hop">
-            <img src="assets/Cats/clear/cats-48-32-paw-up.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md right-3 top-20 opacity-85" aria-hidden="true">
-          <div class="cat-anim-float cat-delay-2">
-            <img src="assets/Cats/clear/cats-48-33-reach-up.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
+      <section id="dress-code" class="scroll-waypoint px-6 py-28 sm:px-10 sm:py-32">
         <div class="mx-auto max-w-md text-center">
           <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="dress.eyebrow">การแต่งกาย</p>
           <div class="mx-auto mt-6 accent-rule w-10"></div>
@@ -926,22 +875,7 @@
       </section>
 
       <!-- Gallery -->
-      <section id="gallery" class="zone-cats px-6 py-16 sm:px-10 sm:py-20">
-        <div class="deco-cat deco-cat-sm -left-1 top-[11rem] opacity-80" aria-hidden="true">
-          <div class="cat-anim-peek-l">
-            <img src="assets/Cats/clear/cats-48-23-crouch.png" alt="" width="104" height="104" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-sm right-2 top-[12rem] opacity-80" aria-hidden="true">
-          <div class="cat-anim-hop cat-delay-1">
-            <img src="assets/Cats/clear/cats-48-25-hop.png" alt="" width="104" height="104" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md right-2 bottom-4 opacity-75" aria-hidden="true">
-          <div class="cat-anim-walk-l">
-            <img src="assets/Cats/clear/cats-48-18-walk-left.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
+      <section id="gallery" class="px-6 py-16 sm:px-10 sm:py-20">
         <div class="mx-auto max-w-4xl">
           <div class="zone-sticky-head text-center">
             <p class="text-[11px] tracking-[0.32em] uppercase text-sage" data-i18n="gallery.eyebrow">แกลเลอรี</p>
@@ -1009,21 +943,6 @@
 
       <!-- RSVP + Footer -->
       <section id="rsvp" class="zone-cats zone-head-offset scroll-waypoint overflow-hidden px-6 pb-28 pt-16 sm:px-10">
-        <div class="deco-cat deco-cat-md left-2 top-14 opacity-85" aria-hidden="true">
-          <div class="cat-anim-float">
-            <img src="assets/Cats/clear/cats-48-37-hug.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-md right-2 top-20 opacity-85" aria-hidden="true">
-          <div class="cat-anim-sway cat-delay-1">
-            <img src="assets/Cats/clear/cats-48-43-close-sit.png" alt="" width="144" height="144" loading="lazy" decoding="async" />
-          </div>
-        </div>
-        <div class="deco-cat deco-cat-lg left-1/2 bottom-6 -translate-x-1/2 opacity-90" aria-hidden="true">
-          <div class="cat-anim-bob cat-delay-2">
-            <img src="assets/Cats/clear/cats-48-42-tails-together.png" alt="" width="192" height="192" loading="lazy" decoding="async" />
-          </div>
-        </div>
         <div class="relative z-[7] mx-auto max-w-xl text-center">
           <p class="font-sans text-[11px] tracking-[0.3em] uppercase text-sage" data-i18n="rsvp.eyebrow">ตอบรับ</p>
           <h2 class="mt-2 font-serif text-2xl sm:text-3xl" data-i18n="rsvp.title">ตอบรับเข้าร่วมงาน</h2>
@@ -1062,7 +981,21 @@
             </div>
           </div>
 
-          <footer class="mt-5 text-center">
+          <div class="mx-auto mt-3 w-20 -translate-x-1 opacity-90" aria-hidden="true">
+            <div class="cat-anim-bob">
+              <img
+                src="assets/Cats/clear/cats-48-34-look-up.png"
+                alt=""
+                width="144"
+                height="144"
+                loading="lazy"
+                decoding="async"
+                class="mx-auto h-auto w-full"
+              />
+            </div>
+          </div>
+
+          <footer class="mt-3 text-center">
             <div class="mx-auto flex max-w-xs items-center justify-center gap-3 text-sage">
               <span class="h-px w-8 bg-sage/50"></span>
               <span>♡</span>
@@ -2003,7 +1936,6 @@
       }
 
       Promise.all([
-        loadImage("assets/cover/cover-cream-08.jpg"),
         loadImage("assets/logo/logo-loader.png"),
         waitAudio(bgm),
       ]).then(function () {
