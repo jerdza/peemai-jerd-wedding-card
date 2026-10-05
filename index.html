@@ -409,6 +409,32 @@
         animation: catWalkLeft 18s linear infinite alternate;
       }
 
+      @keyframes catWalkVanish {
+        0% {
+          transform: translateX(0);
+          opacity: 0;
+        }
+        6% {
+          opacity: 1;
+        }
+        62% {
+          transform: translateX(9.5rem);
+          opacity: 1;
+        }
+        78% {
+          transform: translateX(11rem);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(11rem);
+          opacity: 0;
+        }
+      }
+
+      .cat-anim-walk-vanish {
+        animation: catWalkVanish 10s linear infinite;
+      }
+
       .cat-anim-hop {
         animation: catHop 2.8s ease-in-out infinite;
       }
@@ -437,6 +463,7 @@
         .cat-anim-peek-r,
         .cat-anim-walk-r,
         .cat-anim-walk-l,
+        .cat-anim-walk-vanish,
         .cat-anim-hop,
         .cat-anim-wiggle {
           animation: none;
@@ -665,7 +692,7 @@
           </div>
 
           <div id="schedule-nks" class="scroll-waypoint relative mt-4 rounded-3xl bg-sage/45 px-5 py-6">
-            <div class="pointer-events-none absolute right-3 top-8 z-10 w-[5.5rem] opacity-95 sm:right-4 sm:top-10 sm:w-[6.25rem]" aria-hidden="true">
+            <div class="pointer-events-none absolute bottom-2 right-3 z-10 w-[5.5rem] opacity-95 sm:right-4 sm:w-[6.25rem]" aria-hidden="true">
               <div class="cat-anim-bob">
                 <img
                   src="assets/Cats/clear/cats-48-45-sit-and-loaf.png"
@@ -822,7 +849,7 @@
           </article>
 
           <article id="location-bkk" class="scroll-waypoint mt-5 overflow-hidden rounded-3xl bg-blush-soft text-left">
-            <div class="aspect-[16/10] overflow-hidden">
+            <div class="relative aspect-[16/10] overflow-hidden">
               <img
                 src="assets/venue/la-moon.jpg"
                 alt="ลาร์-มูน กรุงเทพฯ"
@@ -831,6 +858,19 @@
                 decoding="async"
                 class="h-full w-full object-cover object-center"
               />
+              <div class="pointer-events-none absolute left-[54%] top-[64%] z-10 w-[3.25rem] -translate-x-1/2 opacity-95 sm:w-[3.5rem]" aria-hidden="true">
+                <div class="cat-anim-bob">
+                  <img
+                    src="assets/Cats/clear/cats-48-33-reach-up.png"
+                    alt=""
+                    width="112"
+                    height="112"
+                    loading="lazy"
+                    decoding="async"
+                    class="h-auto w-full"
+                  />
+                </div>
+              </div>
             </div>
             <div class="px-4 py-6 sm:px-8">
               <p class="text-[11px] tracking-[0.25em] uppercase text-sage" data-i18n="day.label2">วันที่ 2</p>
